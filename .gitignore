@@ -1,0 +1,33 @@
+# Credentials (NEVER commit)
+.env
+.cookies.json
+service_account.json
+*.pem
+*.key
+
+# Chrome session
+.chrome_session/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+venv/
+.venv/
+
+# Output data (too large for git)
+output/
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# OS
+Thumbs.db

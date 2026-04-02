@@ -1,0 +1,11 @@
+# Core
+python-dotenv>=1.0.0
+
+# Browser automation for chat scraping
+selenium>=4.15.0
+
+# Google Services (for future export)
+google-auth>=2.25.0
+google-auth-oauthlib>=1.2.0
+google-api-python-client>=2.110.0
+gspread>=6.0.0

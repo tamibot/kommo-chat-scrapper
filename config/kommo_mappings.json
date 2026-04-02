@@ -1,0 +1,2172 @@
+{
+  "account_id": 30050693,
+  "subdomain": "propertamibotcom",
+  "amojo_id": "46db3794-cd6c-4506-a0a6-6205b2f546e9",
+  "pipelines": {
+    "10131524": {
+      "name": "MASIVOS",
+      "sort": 1,
+      "is_main": true,
+      "stages": {
+        "77755860": {
+          "name": "Incoming leads",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "78572156": {
+          "name": "BBDD",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "103391551": {
+          "name": "EVENTO 23.03",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "103394395": {
+          "name": "DERIVADOS EVENTO 24.03",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "101575091": {
+          "name": "EVENTO 18 FEB",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "101575203": {
+          "name": "DERIVADOS EVENTO 18 FEB",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "90873528": {
+          "name": "EVENTO 26.11.25",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "77755872": {
+          "name": "Tomar decisión",
+          "sort": 80,
+          "color": "#ffcc66"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "8874156": {
+      "name": "Pruebas MVO",
+      "sort": 2,
+      "is_main": false,
+      "stages": {
+        "69395708": {
+          "name": "Incoming leads",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "69395712": {
+          "name": "BACKUP",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "101959003": {
+          "name": "LEADS - ASESORES_IA",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "96388008": {
+          "name": "LEAD NUEVO",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "99948007": {
+          "name": "META ADS FORM",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "97504460": {
+          "name": "CLASIFICACION",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "99685027": {
+          "name": "SEGUIMIENTO",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "99685031": {
+          "name": "DESCARTADO",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "99685035": {
+          "name": "CASO ESPECIAL",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "97504464": {
+          "name": "INV: DATOS (LOOP)",
+          "sort": 100,
+          "color": "#99ccff"
+        },
+        "97504468": {
+          "name": "INV: EVALUACION",
+          "sort": 110,
+          "color": "#99ccff"
+        },
+        "97504472": {
+          "name": "INV: ASIGNADO",
+          "sort": 120,
+          "color": "#99ccff"
+        },
+        "98000340": {
+          "name": "RENTAS: IDENTIFICADO",
+          "sort": 130,
+          "color": "#99ccff"
+        },
+        "99685039": {
+          "name": "RENTAS: DERIVADO",
+          "sort": 140,
+          "color": "#99ccff"
+        },
+        "99685043": {
+          "name": "PROP: IDENTIFICADO",
+          "sort": 150,
+          "color": "#99ccff"
+        },
+        "99685047": {
+          "name": "PROP: DERIVADO",
+          "sort": 160,
+          "color": "#99ccff"
+        },
+        "99685051": {
+          "name": "CLI: IDENTIFICADO",
+          "sort": 170,
+          "color": "#99ccff"
+        },
+        "99685055": {
+          "name": "CLI: DERIVADO",
+          "sort": 180,
+          "color": "#99ccff"
+        },
+        "69395716": {
+          "name": "BBDD",
+          "sort": 190,
+          "color": "#ffff99"
+        },
+        "78209224": {
+          "name": "LINKEDIN",
+          "sort": 200,
+          "color": "#99ccff"
+        },
+        "69395840": {
+          "name": "INICIO",
+          "sort": 210,
+          "color": "#99ccff"
+        },
+        "69622856": {
+          "name": "NO APROBADO - NACIONAL",
+          "sort": 220,
+          "color": "#ff8f92"
+        },
+        "69622860": {
+          "name": "NO APROBADO - INTERNACIONAL",
+          "sort": 230,
+          "color": "#ff8f92"
+        },
+        "77046356": {
+          "name": "WEBINARS",
+          "sort": 240,
+          "color": "#99ccff"
+        },
+        "77077656": {
+          "name": "FERIAS B2B",
+          "sort": 250,
+          "color": "#99ccff"
+        },
+        "69622864": {
+          "name": "APROBADOS",
+          "sort": 260,
+          "color": "#ccc8f9"
+        },
+        "77190828": {
+          "name": "APROBADOS / CHARLAS",
+          "sort": 270,
+          "color": "#99ccff"
+        },
+        "69665104": {
+          "name": "SIN CLASIFICAR",
+          "sort": 280,
+          "color": "#99ccff"
+        },
+        "69622868": {
+          "name": "WORKSHOP - ALTO",
+          "sort": 290,
+          "color": "#deff81"
+        },
+        "69622872": {
+          "name": "WORKSHOP - MEDIO",
+          "sort": 300,
+          "color": "#fff000"
+        },
+        "69622876": {
+          "name": "WORKSHOP - EMPUJE",
+          "sort": 310,
+          "color": "#ffce5a"
+        },
+        "69622880": {
+          "name": "SOLICITO CITA - INTERNACIONAL",
+          "sort": 320,
+          "color": "#98cbff"
+        },
+        "69622884": {
+          "name": "SOLICITO CITA N.G. - ALTO",
+          "sort": 330,
+          "color": "#deff81"
+        },
+        "69622888": {
+          "name": "SOLICITÓ CITA N.G - MEDIO",
+          "sort": 340,
+          "color": "#fff000"
+        },
+        "69622892": {
+          "name": "SOLICITÓ CITA N.G - EMPUJE",
+          "sort": 350,
+          "color": "#ffce5a"
+        },
+        "69622896": {
+          "name": "ABORDADO POR ASESOR",
+          "sort": 360,
+          "color": "#e6e8ea"
+        },
+        "69622900": {
+          "name": "REUNIÓN AGENDADA",
+          "sort": 370,
+          "color": "#e6e8ea"
+        },
+        "69622904": {
+          "name": "REUNIÓN AGENDADA LUNES",
+          "sort": 380,
+          "color": "#d6eaff"
+        },
+        "69622908": {
+          "name": "REUNIÓN AGENDADA MIÉRCOLES",
+          "sort": 390,
+          "color": "#deff81"
+        },
+        "69623280": {
+          "name": "COORDINAR REUNION",
+          "sort": 400,
+          "color": "#ffce5a"
+        },
+        "69797504": {
+          "name": "HABLAR CON ASESOR",
+          "sort": 410,
+          "color": "#fffeb2"
+        },
+        "69623284": {
+          "name": "SEGUIMIENTO INICIAL",
+          "sort": 420,
+          "color": "#ff8f92"
+        },
+        "69781148": {
+          "name": "NO ASISTIO A REUNION",
+          "sort": 430,
+          "color": "#99ccff"
+        },
+        "69622912": {
+          "name": "SIN RESPUESTA",
+          "sort": 440,
+          "color": "#99ccff"
+        },
+        "69666864": {
+          "name": "ERROR MENSAJE",
+          "sort": 450,
+          "color": "#eb93ff"
+        },
+        "69623288": {
+          "name": "ENVIO A INMOBILIARIA",
+          "sort": 460,
+          "color": "#e6e8ea"
+        },
+        "69623292": {
+          "name": "SOLICITUD DOCUMENTOS",
+          "sort": 470,
+          "color": "#e6e8ea"
+        },
+        "71069588": {
+          "name": "ATENCION SOLICITUD DOCUMENTOS",
+          "sort": 480,
+          "color": "#f2f3f4"
+        },
+        "71334484": {
+          "name": "COTIZACION ENVIADA",
+          "sort": 490,
+          "color": "#99ccff"
+        },
+        "74034020": {
+          "name": "SEG - COTIZACION ENVIADA",
+          "sort": 500,
+          "color": "#99ccff"
+        },
+        "74323956": {
+          "name": "RPTA - ASESOR COT",
+          "sort": 510,
+          "color": "#99ccff"
+        },
+        "69622916": {
+          "name": "PRECA - BANCO",
+          "sort": 520,
+          "color": "#e6e8ea"
+        },
+        "69623296": {
+          "name": "VISITA PROYECTO",
+          "sort": 530,
+          "color": "#e6e8ea"
+        },
+        "69622924": {
+          "name": "CALIENTES",
+          "sort": 540,
+          "color": "#e6e8ea"
+        },
+        "71766716": {
+          "name": "ENFRIADOS",
+          "sort": 550,
+          "color": "#99ccff"
+        },
+        "69622928": {
+          "name": "SEPARACIÓN",
+          "sort": 560,
+          "color": "#e6e8ea"
+        },
+        "69622932": {
+          "name": "CARTA APROBACIÓN",
+          "sort": 570,
+          "color": "#e6e8ea"
+        },
+        "69623300": {
+          "name": "MINUTA ENVIADA",
+          "sort": 580,
+          "color": "#98cbff"
+        },
+        "69622936": {
+          "name": "CLIENTES PERDIDOS F2",
+          "sort": 590,
+          "color": "#ff8f92"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "9165176": {
+      "name": "PROPER RENTAS",
+      "sort": 3,
+      "is_main": false,
+      "stages": {
+        "71239024": {
+          "name": "Incoming leads",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "90694444": {
+          "name": "BACKUP",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "71239028": {
+          "name": "CON COBERTURA",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "92821220": {
+          "name": "PRIMER CONTACTO",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "92821224": {
+          "name": "CONSULTANDO SERVICIOS",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "92821228": {
+          "name": "INTERESADO",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "92822272": {
+          "name": "SEGUIMIENTO",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "92821232": {
+          "name": "HORARIOS DADOS",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "92821236": {
+          "name": "CASO ESPECIAL",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "92821424": {
+          "name": "CLIENTE/INQ/PROP",
+          "sort": 100,
+          "color": "#99ccff"
+        },
+        "89803176": {
+          "name": "CONTACTOS",
+          "sort": 110,
+          "color": "#99ccff"
+        },
+        "71239372": {
+          "name": "SIN COBERTURA",
+          "sort": 120,
+          "color": "#ff8f92"
+        },
+        "72769428": {
+          "name": "SEGUIMIENTO INICIAL",
+          "sort": 130,
+          "color": "#ffeab2"
+        },
+        "87066984": {
+          "name": "EN ATENCION",
+          "sort": 140,
+          "color": "#87f2c0"
+        },
+        "71239376": {
+          "name": "SOLICITA LLAMADA",
+          "sort": 150,
+          "color": "#d6eaff"
+        },
+        "72466296": {
+          "name": "LLAMADA  AGENDADA",
+          "sort": 160,
+          "color": "#c1e0ff"
+        },
+        "72769436": {
+          "name": "LLAMADA HECHA",
+          "sort": 170,
+          "color": "#99ccff"
+        },
+        "72769520": {
+          "name": "CALIENTES",
+          "sort": 180,
+          "color": "#ffce5a"
+        },
+        "87066328": {
+          "name": "CONTRATO ENVIADO",
+          "sort": 190,
+          "color": "#87f2c0"
+        },
+        "87066332": {
+          "name": "CONTRATO FIRMADO",
+          "sort": 200,
+          "color": "#deff81"
+        },
+        "87124592": {
+          "name": "ENTREGA DE LLAVES AGENDADA",
+          "sort": 210,
+          "color": "#ffce5a"
+        },
+        "87124836": {
+          "name": "NECESITA IMPLEMENTACION",
+          "sort": 220,
+          "color": "#ffdbdb"
+        },
+        "87124876": {
+          "name": "INMUEBLE IMPLEMENTADO LISTO",
+          "sort": 230,
+          "color": "#99ccff"
+        },
+        "88470452": {
+          "name": "CORRETAJE",
+          "sort": 240,
+          "color": "#ff8f92"
+        },
+        "71251772": {
+          "name": "PERDIDOS",
+          "sort": 250,
+          "color": "#f2f3f4"
+        },
+        "142": {
+          "name": "Closed - won",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Closed - lost",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "10231420": {
+      "name": "ATENCIÓN AL CLIENTE RENTAS",
+      "sort": 4,
+      "is_main": false,
+      "stages": {
+        "78496816": {
+          "name": "Incoming leads",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "85429080": {
+          "name": "CREACION",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "78496820": {
+          "name": "EN ATENCION",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "85427336": {
+          "name": "URGENTE",
+          "sort": 40,
+          "color": "#ff8f92"
+        },
+        "85427340": {
+          "name": "EN ESPERA",
+          "sort": 50,
+          "color": "#fff000"
+        },
+        "86605476": {
+          "name": "EVALUACION",
+          "sort": 60,
+          "color": "#87f2c0"
+        },
+        "85270572": {
+          "name": "TICKET CERRADO",
+          "sort": 70,
+          "color": "#e6e8ea"
+        },
+        "85600524": {
+          "name": "EQUIPO PROPER",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "86023808": {
+          "name": "BBDD RENTAS",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "142": {
+          "name": "Closed - won",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Closed - lost",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "11240224": {
+      "name": "PRE INQUILINOS",
+      "sort": 5,
+      "is_main": false,
+      "stages": {
+        "86254208": {
+          "name": "Incoming leads",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "89094404": {
+          "name": "pre creacion",
+          "sort": 10,
+          "color": "#fff000"
+        },
+        "100557183": {
+          "name": "LEAD - BOT IA",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "96812756": {
+          "name": "LEADS FORM - MODO",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "98770531": {
+          "name": "LEADS FORM - ARISE",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "97996236": {
+          "name": "leads form - digital",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "90801072": {
+          "name": "INGRESO CON PROPIEDAD",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "96205400": {
+          "name": "CORREDORES",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "90801076": {
+          "name": "DEFINIENDO PROPIEDAD",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "90801080": {
+          "name": "INTERACTUANDO",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "90801084": {
+          "name": "CASO ESPECIAL",
+          "sort": 100,
+          "color": "#99ccff"
+        },
+        "91040128": {
+          "name": "inquilino/prop/otros",
+          "sort": 110,
+          "color": "#99ccff"
+        },
+        "90801088": {
+          "name": "SEGUIMIENTO",
+          "sort": 120,
+          "color": "#99ccff"
+        },
+        "96290432": {
+          "name": "SEGUIMIENTO - MANUAL",
+          "sort": 130,
+          "color": "#99ccff"
+        },
+        "96290436": {
+          "name": "SEGUIMIENTO - MODO",
+          "sort": 140,
+          "color": "#99ccff"
+        },
+        "95827936": {
+          "name": "respuesta manual",
+          "sort": 150,
+          "color": "#99ccff"
+        },
+        "90801092": {
+          "name": "INTERESADO",
+          "sort": 160,
+          "color": "#99ccff"
+        },
+        "90801096": {
+          "name": "HORARIO INDICADO",
+          "sort": 170,
+          "color": "#99ccff"
+        },
+        "92800052": {
+          "name": "VISITA MODO",
+          "sort": 180,
+          "color": "#99ccff"
+        },
+        "86277776": {
+          "name": "CREACION",
+          "sort": 190,
+          "color": "#99ccff"
+        },
+        "88281952": {
+          "name": "creacion2",
+          "sort": 200,
+          "color": "#ffce5a"
+        },
+        "86823652": {
+          "name": "SIN RESPUESTA",
+          "sort": 210,
+          "color": "#ffc8c8"
+        },
+        "86254212": {
+          "name": "SEGUIMIENTO - SIN RESPUESTA",
+          "sort": 220,
+          "color": "#fff000"
+        },
+        "86254216": {
+          "name": "SOLICITA VISITA",
+          "sort": 230,
+          "color": "#87f2c0"
+        },
+        "88749392": {
+          "name": "CALENDARIO DE OPCIONES",
+          "sort": 240,
+          "color": "#99ccff"
+        },
+        "86445656": {
+          "name": "VISITA AGENDADA",
+          "sort": 250,
+          "color": "#deff81"
+        },
+        "86445660": {
+          "name": "VISITA REALIZADA",
+          "sort": 260,
+          "color": "#f3beff"
+        },
+        "86445664": {
+          "name": "VISITA NO REALIZADA",
+          "sort": 270,
+          "color": "#99ccff"
+        },
+        "86445668": {
+          "name": "CALIENTES",
+          "sort": 280,
+          "color": "#ff8f92"
+        },
+        "86445672": {
+          "name": "SEPARACION DEPA",
+          "sort": 290,
+          "color": "#99ccff"
+        },
+        "87064368": {
+          "name": "CONTRATO CREADO",
+          "sort": 300,
+          "color": "#ffce5a"
+        },
+        "86445676": {
+          "name": "CONTRATO FIRMADO",
+          "sort": 310,
+          "color": "#87f2c0"
+        },
+        "86479424": {
+          "name": "ENTREGA DEL DEPA",
+          "sort": 320,
+          "color": "#99ccff"
+        },
+        "86781368": {
+          "name": "ADMINISTRACIÓN",
+          "sort": 330,
+          "color": "#ff8f92"
+        },
+        "86781372": {
+          "name": "EQUIPO PROPER",
+          "sort": 340,
+          "color": "#99ccff"
+        },
+        "86781376": {
+          "name": "PROPIETARIOS",
+          "sort": 350,
+          "color": "#fff000"
+        },
+        "86876208": {
+          "name": "perdidos",
+          "sort": 360,
+          "color": "#e6e8ea"
+        },
+        "142": {
+          "name": "DEAL WON",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Closed - lost",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "11251596": {
+      "name": "MODO - TICKET",
+      "sort": 6,
+      "is_main": false,
+      "stages": {
+        "86343224": {
+          "name": "Incoming leads",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "86343228": {
+          "name": "CREACIÓN",
+          "sort": 10,
+          "color": "#99ccff"
+        },
+        "86343232": {
+          "name": "ATENCIÓN",
+          "sort": 20,
+          "color": "#ffff99"
+        },
+        "86343236": {
+          "name": "URGENTE",
+          "sort": 30,
+          "color": "#ffcc66"
+        },
+        "86343284": {
+          "name": "EN ESPERA",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "86603240": {
+          "name": "EVALUACION",
+          "sort": 50,
+          "color": "#87f2c0"
+        },
+        "86343288": {
+          "name": "TICKET CERRADO",
+          "sort": 60,
+          "color": "#e6e8ea"
+        },
+        "98205984": {
+          "name": "actualizacion bbdd",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "86495536": {
+          "name": "EQUIPO PROPER",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "142": {
+          "name": "Closed - won",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Closed - lost",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    }
+  },
+  "lead_custom_fields": {
+    "522512": {
+      "name": "utm_content",
+      "type": "tracking_data",
+      "code": "UTM_CONTENT",
+      "enums": null
+    },
+    "522514": {
+      "name": "utm_medium",
+      "type": "tracking_data",
+      "code": "UTM_MEDIUM",
+      "enums": null
+    },
+    "522516": {
+      "name": "utm_campaign",
+      "type": "tracking_data",
+      "code": "UTM_CAMPAIGN",
+      "enums": null
+    },
+    "522518": {
+      "name": "utm_source",
+      "type": "tracking_data",
+      "code": "UTM_SOURCE",
+      "enums": null
+    },
+    "522520": {
+      "name": "utm_term",
+      "type": "tracking_data",
+      "code": "UTM_TERM",
+      "enums": null
+    },
+    "522522": {
+      "name": "utm_referrer",
+      "type": "tracking_data",
+      "code": "UTM_REFERRER",
+      "enums": null
+    },
+    "522524": {
+      "name": "referrer",
+      "type": "tracking_data",
+      "code": "REFERRER",
+      "enums": null
+    },
+    "522526": {
+      "name": "gclientid",
+      "type": "tracking_data",
+      "code": "GCLIENTID",
+      "enums": null
+    },
+    "522528": {
+      "name": "gclid",
+      "type": "tracking_data",
+      "code": "GCLID",
+      "enums": null
+    },
+    "522530": {
+      "name": "fbclid",
+      "type": "tracking_data",
+      "code": "FBCLID",
+      "enums": null
+    },
+    "793257": {
+      "name": "problem",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "793259": {
+      "name": "quest1",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "793261": {
+      "name": "quest2",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "793283": {
+      "name": "TimeOut",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "793293": {
+      "name": "NPS",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "793347": {
+      "name": "usuario",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "497257": "Propietario",
+        "497259": "Inquilino"
+      }
+    },
+    "793349": {
+      "name": "atencion",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "497261": "bot",
+        "497263": "asesor"
+      }
+    },
+    "793359": {
+      "name": "NPS",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "497271": "1",
+        "497273": "2",
+        "497275": "3",
+        "497277": "4",
+        "497279": "5",
+        "497281": "6",
+        "497283": "7",
+        "497285": "8",
+        "497287": "9",
+        "497289": "10"
+      }
+    },
+    "795209": {
+      "name": "Pipeline",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "795211": {
+      "name": "Lead Status",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "795213": {
+      "name": "Lead Title",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "796109": {
+      "name": "AgendarCitaAsesor",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "796943": {
+      "name": "tipocliente",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "501525": "Inquilino",
+        "501527": "Propietario",
+        "501529": "Proveedor",
+        "501601": "AdminEdificio",
+        "501935": "Proper"
+      }
+    },
+    "796945": {
+      "name": "categoría",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "501531": "Contrato - renovación",
+        "501533": "Contrato - no renovación",
+        "501535": "Contrato - consultas",
+        "501537": "Contrato - salida anticipada",
+        "501539": "Contrato - contrato firmado",
+        "501541": "Instalaciones",
+        "501543": "Pagos - liquidaciones",
+        "501545": "Reparaciones",
+        "501547": "Pagos - envío comprobantes",
+        "501549": "Solicitud de autorización para modificación",
+        "501551": "Pagos - servicios",
+        "501553": "Solicitudes - entrega de llaves",
+        "501555": "Solicitudes - tasación",
+        "501557": "Coordinaciones - visita",
+        "501559": "Pagos - impuestos",
+        "501561": "Pagos - envío de recibos",
+        "501563": "Pagos - alquiler",
+        "501565": "Pagos - arbitrios",
+        "501567": "Solicitudes - cambio cuenta de pago",
+        "501569": "Quejas - conducta inquilino",
+        "501575": "Áreas comunes - reserva",
+        "501577": "Pagos - información suministros",
+        "501579": "Visita inspección - gas",
+        "501581": "Pagos - garantías",
+        "501583": "Corretaje",
+        "501585": "Uso estacionamiento",
+        "501587": "Coordinación salida inquilino",
+        "501589": "Pagos - moras",
+        "501591": "Proveedor - solicitud gas",
+        "501593": "Administración edificio - pago mantenimiento",
+        "501595": "Administración edificio - registro inquilino",
+        "501597": "Administración edificio - solicitud contacto",
+        "501599": "Equipo interno Proper Rentas",
+        "501603": "Contrato - coordinación firma",
+        "501605": "Proveedor - pago servicio",
+        "501607": "Proveedor - consulta compra",
+        "501609": "Administración edificio - comunicados",
+        "501611": "Acceso a Homming",
+        "501613": "Municipalidad - datos acceso",
+        "501615": "Administración edificio - queja sobre inquilino",
+        "501617": "Sin información",
+        "501619": "Alertas sobre el edificio",
+        "501621": "Municipalidad - comunicados",
+        "501623": "Proveedor - status envio",
+        "501967": "Solicitud de recibos de alquiler para declaración de impuestos",
+        "501969": "Seguimiento a pagos",
+        "501971": "Solicitud de datos a propietario",
+        "501973": "Coordinación de devolución de llaves"
+      }
+    },
+    "797003": {
+      "name": "fechaCreacion",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797005": {
+      "name": "fechaPrimeraAtencion",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797007": {
+      "name": "fechaResolucion",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797011": {
+      "name": "fechaUrgente",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797013": {
+      "name": "fechaEnEspera",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797015": {
+      "name": "sePudoResolver",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "501649": "sí",
+        "501651": "no"
+      }
+    },
+    "797017": {
+      "name": "puntajeAtencion",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "501653": "1 (nada satisfecho)",
+        "501655": "2 (poco satisfecho)",
+        "501657": "3 (neutro)",
+        "501659": "4 (satisfecho)",
+        "501661": "5 (muy satisfecho)"
+      }
+    },
+    "797019": {
+      "name": "fechaCerrado",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797051": {
+      "name": "codigoInmueble",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "797053": {
+      "name": "nombreCliente",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "797105": {
+      "name": "statusIntegracion",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "501743": "seEncontro",
+        "501745": "noSeEncontro"
+      }
+    },
+    "797275": {
+      "name": "fechaSolicitaVisita",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797277": {
+      "name": "solicitaVisita",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "502031": "Si",
+        "502033": "No"
+      }
+    },
+    "797279": {
+      "name": "fechaSeguimientoInicial",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797281": {
+      "name": "fechaVisitaAgendada",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797283": {
+      "name": "visitaAgendada",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "502035": "Si",
+        "502037": "No"
+      }
+    },
+    "797285": {
+      "name": "visitaRealizada",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "502039": "Si",
+        "502041": "No"
+      }
+    },
+    "797287": {
+      "name": "fechaVisitaRealizada",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797289": {
+      "name": "fechaCaliente",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797291": {
+      "name": "caliente",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "502043": "Si",
+        "502045": "No"
+      }
+    },
+    "797293": {
+      "name": "separoDepa",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "502047": "Si",
+        "502049": "No"
+      }
+    },
+    "797295": {
+      "name": "fechaSeparoDepa",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797297": {
+      "name": "firmaContrato",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "502051": "Si",
+        "502053": "No"
+      }
+    },
+    "797299": {
+      "name": "fechaInicioContrato",
+      "type": "date",
+      "code": null,
+      "enums": null
+    },
+    "797319": {
+      "name": "fechatest",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797341": {
+      "name": "enAtencion",
+      "type": "multiselect",
+      "code": null,
+      "enums": {
+        "502087": "Si",
+        "502089": "No"
+      }
+    },
+    "797343": {
+      "name": "fechaEnAtencion",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797393": {
+      "name": "distrito",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797397": {
+      "name": "cantidadInmuebles",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797399": {
+      "name": "etapaInmueble",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797401": {
+      "name": "fechaEntrega",
+      "type": "date",
+      "code": null,
+      "enums": null
+    },
+    "797429": {
+      "name": "primerMensaje",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "797511": {
+      "name": "LinkUrbania",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797609": {
+      "name": "fechaLlamadaHecha",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797617": {
+      "name": "fechaCalientes",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797619": {
+      "name": "fechaSolicitaLlamada",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797621": {
+      "name": "fechaLlamadaAgendada",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797699": {
+      "name": "visitaNoRealizada",
+      "type": "multiselect",
+      "code": null,
+      "enums": {
+        "502301": "Si",
+        "502303": "No"
+      }
+    },
+    "797823": {
+      "name": "solicitaLlamada",
+      "type": "multiselect",
+      "code": null,
+      "enums": {
+        "502337": "si",
+        "502339": "no"
+      }
+    },
+    "797825": {
+      "name": "seguimientoInicial",
+      "type": "multiselect",
+      "code": null,
+      "enums": {
+        "502341": "si",
+        "502343": "no"
+      }
+    },
+    "797827": {
+      "name": "llamadaHecha",
+      "type": "multiselect",
+      "code": null,
+      "enums": {
+        "502345": "si",
+        "502347": "no"
+      }
+    },
+    "797829": {
+      "name": "fechaSeguimientoInicial",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "797831": {
+      "name": "llamadaAgendada",
+      "type": "multiselect",
+      "code": null,
+      "enums": {
+        "502349": "si",
+        "502351": "no"
+      }
+    },
+    "797869": {
+      "name": "n8n - nombre",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797871": {
+      "name": "n8n - unidad",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797875": {
+      "name": "n8n - etapa",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797877": {
+      "name": "n8n - solicitud",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797879": {
+      "name": "n8n - animo",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797917": {
+      "name": "n8n - rent - seg1",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "797919": {
+      "name": "n8n - rent - seg2",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "797921": {
+      "name": "n8n - rent - seg3",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "797923": {
+      "name": "n8n - casoEspecial",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "797925": {
+      "name": "n8n - infoPrevia",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798001": {
+      "name": "n8n - fecha1",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798003": {
+      "name": "n8n - fecha2",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798195": {
+      "name": "DealDzANuevoAsesor",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "798327": {
+      "name": "n8n - fechaMODO",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798329": {
+      "name": "n8n - diego - nombreCliente",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798331": {
+      "name": "n8n - diego - telefonoCliente",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798333": {
+      "name": "n8n - diego - correoCliente",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798335": {
+      "name": "n8n - diego - fecha1",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798337": {
+      "name": "n8n - diego - seg1",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798339": {
+      "name": "n8n - diego - seg2",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798341": {
+      "name": "n8n - diego - seg3",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798343": {
+      "name": "n8n - diego - animo",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798345": {
+      "name": "n8n - diego - solicitud",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798347": {
+      "name": "n8n - diego - etapa",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798349": {
+      "name": "n8n - diego - fecha2",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798353": {
+      "name": "n8n - Origen",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798355": {
+      "name": "n8n - CODPROPIEDAD",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798433": {
+      "name": "n8n - diego - origen",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798435": {
+      "name": "n8n - ClienteNuevo",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798463": {
+      "name": "n8n - TipoCliente",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798513": {
+      "name": "n8n - pregunta",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798515": {
+      "name": "n8n - puede responder",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798799": {
+      "name": "n8n - supp - persona",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798801": {
+      "name": "n8n - supp - codigoInmueble",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798803": {
+      "name": "n8n - supp - relacionTitular",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798805": {
+      "name": "n8n - supp - categoria_completa",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798807": {
+      "name": "n8n - supp - resumen_solicitud",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798809": {
+      "name": "n8n - supp - requiereTicket",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798811": {
+      "name": "n8n - supp - detalle_ticket",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798813": {
+      "name": "n8n - supp - caso_especial",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798815": {
+      "name": "n8n - supp - detalle_caso_especial",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798817": {
+      "name": "n8n - supp - estatusEmbudo",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798819": {
+      "name": "n8n - supp - clienteIdentificado",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798821": {
+      "name": "n8n - supp - es_error",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798823": {
+      "name": "n8n - supp - detalle_es_error",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798825": {
+      "name": "n8n - supp - seg1",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798827": {
+      "name": "n8n - supp - seg2",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798829": {
+      "name": "n8n - supp - animo",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798831": {
+      "name": "n8n - david - categoria",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798833": {
+      "name": "n8n - diego - categoria",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798835": {
+      "name": "n8n - supp - tiene_solucion",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798837": {
+      "name": "n8n - supp - descripcion_tiene_solucion",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798839": {
+      "name": "bot - fecha_ult_msg",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "798893": {
+      "name": "n8n - corregido",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "503049": "SI",
+        "503051": "EN REVISION",
+        "503053": "ERROR",
+        "503055": "ALTERNATIVA"
+      }
+    },
+    "798895": {
+      "name": "n8n - detalle corregido",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "798905": {
+      "name": "rentas_mensajeia_salio",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798909": {
+      "name": "rentas_error_marcado",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798913": {
+      "name": "rentas_ia_generohorario",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798915": {
+      "name": "rentas_ia_generohorario_registrado",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798923": {
+      "name": "click_reu_lunes",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798925": {
+      "name": "click_reu_miercoles",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798927": {
+      "name": "click_coordinar_reu",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798931": {
+      "name": "rentas_bot_apagado_manual",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "798935": {
+      "name": "campaña_meta_ads",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799008": {
+      "name": "n8n - ingresos",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799010": {
+      "name": "n8n - inicial",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799012": {
+      "name": "rentas_ia_generohorario_notificado",
+      "type": "checkbox",
+      "code": null,
+      "enums": null
+    },
+    "799035": {
+      "name": "rentas - modo - plazo_mudanza",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799121": {
+      "name": "n8n - codpropiedad logico",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799123": {
+      "name": "n8n - origen logico",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799148": {
+      "name": "n8n - origen - form",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799214": {
+      "name": "botia - nombre",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799216": {
+      "name": "botia - interes",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799218": {
+      "name": "botia - ingreso_promedio_mensual",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799220": {
+      "name": "botia - capital_inicial",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799222": {
+      "name": "botia - egresos",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799224": {
+      "name": "botia - primera_vivienda",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799226": {
+      "name": "botia - edad",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799228": {
+      "name": "botia - dni",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799230": {
+      "name": "botia - tipo_ingreso",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799232": {
+      "name": "botia - cumple_ingresos",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799234": {
+      "name": "botia - cumple_inicial",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799236": {
+      "name": "botia - categoria_completa",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799238": {
+      "name": "botia - tiene_asesor",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799240": {
+      "name": "botia - nombre_asesor",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799242": {
+      "name": "botia - telefono_asesor",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799244": {
+      "name": "botia - charla_elegida",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799246": {
+      "name": "botia - derivado_a",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799248": {
+      "name": "botia - tipo_cliente",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799250": {
+      "name": "botia - distrito_propiedad",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799252": {
+      "name": "botia - zona_interes",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799254": {
+      "name": "botia - edificio_actual",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799256": {
+      "name": "botia - resumen_conversacion",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "799258": {
+      "name": "botia - caso_especial",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799260": {
+      "name": "botia - detalle_caso_especial",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "799262": {
+      "name": "botia - estatusEmbudo",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799264": {
+      "name": "botia - statusId",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799300": {
+      "name": "rango_ingresos",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799302": {
+      "name": "rango_inicial",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799304": {
+      "name": "primera_vivienda",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799306": {
+      "name": "tipo_ingresos",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799688": {
+      "name": "botia - bot_origen",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799776": {
+      "name": "ttad_id",
+      "type": "tracking_data",
+      "code": "TIKTOK_AD_ID_TD",
+      "enums": null
+    },
+    "799778": {
+      "name": "ttad_name",
+      "type": "tracking_data",
+      "code": "TIKTOK_AD_NAME_TD",
+      "enums": null
+    }
+  },
+  "contact_custom_fields": {
+    "522502": {
+      "name": "Position",
+      "type": "text",
+      "code": "POSITION",
+      "enums": null
+    },
+    "522504": {
+      "name": "Phone",
+      "type": "multitext",
+      "code": "PHONE",
+      "enums": {
+        "315940": "WORK",
+        "315942": "WORKDD",
+        "315944": "MOB",
+        "315946": "FAX",
+        "315948": "HOME",
+        "315950": "OTHER"
+      }
+    },
+    "522506": {
+      "name": "Email",
+      "type": "multitext",
+      "code": "EMAIL",
+      "enums": {
+        "315952": "WORK",
+        "315954": "PRIV",
+        "315956": "OTHER"
+      }
+    },
+    "645934": {
+      "name": "Términos y condiciones",
+      "type": "checkbox",
+      "code": "USER_AGREEMENT",
+      "enums": null
+    },
+    "793247": {
+      "name": "Categoria",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "794335": {
+      "name": "Responsable",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "794337": {
+      "name": "Contact ID",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "794339": {
+      "name": "Deal ID",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "794825": {
+      "name": "Calendly - Mensaje",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "794827": {
+      "name": "Calendly - Fecha",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "794829": {
+      "name": "Calendly - Reagendar",
+      "type": "url",
+      "code": null,
+      "enums": null
+    },
+    "794945": {
+      "name": "Categoria Cliente",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "794947": {
+      "name": "ID Embudo",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "794949": {
+      "name": "Nombre Embudo",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797109": {
+      "name": "Inicial",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797111": {
+      "name": "Ingresos",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "797395": {
+      "name": "DNI",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "798461": {
+      "name": "n8n - tipoCliente",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798683": {
+      "name": "n8n - cuota inicial",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "798685": {
+      "name": "n8n - ingresos",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799004": {
+      "name": "n8n - ingresos",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "799006": {
+      "name": "n8n - inicial",
+      "type": "text",
+      "code": null,
+      "enums": null
+    }
+  },
+  "users": {
+    "7441186": {
+      "name": "Martin Velasco",
+      "email": "contacto@conceptstudio.pe"
+    },
+    "7997675": {
+      "name": "Proper",
+      "email": "proper@tamibot.com"
+    },
+    "9955003": {
+      "name": "Tami Bot",
+      "email": "tamibotperu@gmail.com"
+    },
+    "12437200": {
+      "name": "Valeria",
+      "email": "valeria.vega@proper.com.pe"
+    },
+    "13880744": {
+      "name": "Eduardo Salas",
+      "email": "eduardo.salas@proper.com.pe"
+    },
+    "14267484": {
+      "name": "David",
+      "email": "soporte.corretaje@proper.com.pe"
+    },
+    "15046159": {
+      "name": "Carlos Patiño",
+      "email": "carlos.patino@proper.com.pe"
+    }
+  }
+}
