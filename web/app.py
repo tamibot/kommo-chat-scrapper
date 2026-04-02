@@ -305,6 +305,31 @@ def api_stats():
     return jsonify(metrics or [])
 
 
+@app.route('/api/health')
+def api_health():
+    """Health check - shows DB connection status and table counts."""
+    result = {'db_url_set': bool(DB_URL), 'db_url_preview': DB_URL[:40] + '...' if DB_URL else 'NOT SET'}
+    try:
+        conn = get_db()
+        cur = conn.cursor()
+        cur.execute("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='public'")
+        result['tables'] = cur.fetchone()[0]
+        for t in ['kommo_chats', 'kommo_messages', 'kommo_leads', 'kommo_app_settings']:
+            try:
+                cur.execute(f"SELECT COUNT(*) FROM {t}")
+                result[t] = cur.fetchone()[0]
+            except:
+                result[t] = 'TABLE_MISSING'
+                conn.rollback()
+        cur.close()
+        conn.close()
+        result['status'] = 'connected'
+    except Exception as e:
+        result['status'] = 'error'
+        result['error'] = str(e)[:200]
+    return jsonify(result)
+
+
 # ── Main ─────────────────────────────────────────────────────────────
 
 # Initialize DB on startup
