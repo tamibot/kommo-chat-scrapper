@@ -14,9 +14,45 @@ app.secret_key = os.environ.get('SECRET_KEY', 'kommo-scrapper-2026')
 
 DB_URL = os.environ.get('DATABASE_URL', '')
 
+if not DB_URL:
+    print("WARNING: DATABASE_URL not set!")
+
 
 def get_db():
+    if not DB_URL:
+        raise Exception("DATABASE_URL environment variable not set")
     return psycopg2.connect(DB_URL)
+
+
+def init_db():
+    """Create tables if they don't exist."""
+    try:
+        conn = get_db()
+        cur = conn.cursor()
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS kommo_app_settings (
+                id SERIAL PRIMARY KEY,
+                key TEXT UNIQUE NOT NULL,
+                value TEXT,
+                updated_at TIMESTAMP DEFAULT NOW()
+            );
+            CREATE TABLE IF NOT EXISTS kommo_contacts (contact_id BIGINT PRIMARY KEY, name TEXT, phone TEXT, email TEXT, created_at TIMESTAMP, updated_at TIMESTAMP, custom_fields JSONB DEFAULT '{}', fetched_at TIMESTAMP DEFAULT NOW());
+            CREATE TABLE IF NOT EXISTS kommo_leads (lead_id BIGINT PRIMARY KEY, name TEXT, contact_id BIGINT, responsible_user_id BIGINT, responsible_user_name TEXT, pipeline_id BIGINT, pipeline_name TEXT, status_id BIGINT, stage_name TEXT, price NUMERIC DEFAULT 0, tags TEXT[], loss_reason TEXT, source TEXT, created_at TIMESTAMP, updated_at TIMESTAMP, closed_at TIMESTAMP, custom_fields JSONB DEFAULT '{}', fetched_at TIMESTAMP DEFAULT NOW());
+            CREATE TABLE IF NOT EXISTS kommo_chats (id SERIAL PRIMARY KEY, talk_id BIGINT NOT NULL, lead_id BIGINT NOT NULL, contact_id BIGINT, chat_date DATE NOT NULL, conversation_ids TEXT[], total_messages INT DEFAULT 0, total_in INT DEFAULT 0, total_out INT DEFAULT 0, total_bot INT DEFAULT 0, total_human INT DEFAULT 0, total_media INT DEFAULT 0, interactions INT DEFAULT 0, has_bot_response BOOLEAN DEFAULT FALSE, has_human_response BOOLEAN DEFAULT FALSE, is_bot_only BOOLEAN DEFAULT FALSE, human_takeover_at_msg INT, bot_names TEXT[], human_agents TEXT[], attention_status TEXT DEFAULT 'unknown', last_message_direction TEXT, last_message_sender_type TEXT, first_contact_time TEXT, first_bot_time TEXT, first_human_time TEXT, last_message_time TEXT, bot_response_time_min NUMERIC, human_response_time_min NUMERIC, media_types TEXT[], scraped_at TIMESTAMP DEFAULT NOW(), UNIQUE(talk_id, chat_date));
+            CREATE TABLE IF NOT EXISTS kommo_messages (id SERIAL PRIMARY KEY, talk_id BIGINT NOT NULL, lead_id BIGINT NOT NULL, contact_id BIGINT, chat_date DATE NOT NULL, msg_index INT NOT NULL, direction TEXT NOT NULL, sender_type TEXT, author TEXT, is_bot BOOLEAN DEFAULT FALSE, bot_name TEXT, channel TEXT, conversation_id TEXT, delivery_status TEXT, msg_type TEXT DEFAULT 'text', msg_text TEXT, msg_timestamp TEXT, created_at TIMESTAMP DEFAULT NOW(), UNIQUE(talk_id, chat_date, msg_index));
+            CREATE TABLE IF NOT EXISTS kommo_stage_changes (id SERIAL PRIMARY KEY, lead_id BIGINT NOT NULL, event_id TEXT UNIQUE, old_pipeline_id BIGINT, old_pipeline_name TEXT, old_status_id BIGINT, old_stage_name TEXT, new_pipeline_id BIGINT, new_pipeline_name TEXT, new_status_id BIGINT, new_stage_name TEXT, changed_by BIGINT, changed_by_name TEXT, changed_at TIMESTAMP, created_at TIMESTAMP DEFAULT NOW());
+            CREATE TABLE IF NOT EXISTS kommo_events (id SERIAL PRIMARY KEY, event_id TEXT UNIQUE, event_type TEXT NOT NULL, entity_type TEXT, entity_id BIGINT, value_before JSONB, value_after JSONB, created_by BIGINT, created_at TIMESTAMP, event_date DATE, fetched_at TIMESTAMP DEFAULT NOW());
+            CREATE TABLE IF NOT EXISTS kommo_conversations_compiled (id SERIAL PRIMARY KEY, lead_id BIGINT NOT NULL UNIQUE, contact_id BIGINT, contact_name TEXT, contact_phone TEXT, responsible_user TEXT, pipeline_name TEXT, stage_name TEXT, conversation_json JSONB NOT NULL, conversation_text TEXT, total_messages INT DEFAULT 0, total_bot_msgs INT DEFAULT 0, total_human_msgs INT DEFAULT 0, total_contact_msgs INT DEFAULT 0, date_range_start DATE, date_range_end DATE, channels TEXT[], bots_used TEXT[], agents_involved TEXT[], attention_status TEXT, has_human_attention BOOLEAN DEFAULT FALSE, compiled_at TIMESTAMP DEFAULT NOW());
+            CREATE TABLE IF NOT EXISTS kommo_daily_metrics (id SERIAL PRIMARY KEY, metric_date DATE NOT NULL UNIQUE, total_chats INT DEFAULT 0, total_messages INT DEFAULT 0, total_in INT DEFAULT 0, total_out INT DEFAULT 0, total_bot INT DEFAULT 0, total_human INT DEFAULT 0, total_media INT DEFAULT 0, chats_with_human INT DEFAULT 0, chats_bot_only INT DEFAULT 0, chats_unanswered INT DEFAULT 0, avg_interactions NUMERIC, avg_bot_response_min NUMERIC, avg_human_response_min NUMERIC, unique_contacts INT DEFAULT 0, unique_agents INT DEFAULT 0, top_bots JSONB DEFAULT '[]', top_agents JSONB DEFAULT '[]', computed_at TIMESTAMP DEFAULT NOW());
+            CREATE TABLE IF NOT EXISTS kommo_scrape_errors (id SERIAL PRIMARY KEY, talk_id BIGINT, lead_id BIGINT, chat_date DATE, error_type TEXT, error_message TEXT, retry_count INT DEFAULT 0, resolved BOOLEAN DEFAULT FALSE, created_at TIMESTAMP DEFAULT NOW());
+            CREATE TABLE IF NOT EXISTS kommo_no_reply_tracking (id SERIAL PRIMARY KEY, lead_id BIGINT NOT NULL UNIQUE, contact_id BIGINT, contact_name TEXT, contact_phone TEXT, consecutive_out INT DEFAULT 0, last_out_date TEXT, last_out_text TEXT, days_without_reply INT DEFAULT 0, status TEXT DEFAULT 'no_reply', pipeline_name TEXT, stage_name TEXT, responsible_user TEXT, detected_at TIMESTAMP DEFAULT NOW());
+        """)
+        conn.commit()
+        cur.close()
+        conn.close()
+        print("Database tables initialized")
+    except Exception as e:
+        print(f"DB init error: {e}")
 
 
 def query(sql, params=None, fetchone=False):
@@ -71,8 +107,10 @@ def set_setting(key, value):
 @app.route('/')
 def index():
     """Main dashboard."""
+    # Check if setup is done: either setting says true OR we already have data
     setup = get_setting('setup_completed')
-    if setup != 'true':
+    has_data = query("SELECT COUNT(*) as c FROM kommo_chats", fetchone=True)
+    if setup != 'true' and (not has_data or has_data.get('c', 0) == 0):
         return redirect(url_for('onboarding'))
 
     # Get daily metrics
@@ -268,6 +306,9 @@ def api_stats():
 
 
 # ── Main ─────────────────────────────────────────────────────────────
+
+# Initialize DB on startup
+init_db()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
