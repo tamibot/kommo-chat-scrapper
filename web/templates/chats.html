@@ -2,50 +2,49 @@
 {% block title %}Chats - Kommo Scrapper{% endblock %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4><i class="bi bi-chat-left-text"></i> Chats del {{ current_date }}</h4>
-    <div>
-        <select class="form-select form-select-sm bg-dark text-light border-secondary" style="width:200px;display:inline-block"
-                onchange="window.location='/chats?date='+this.value">
-            {% for d in dates %}
-            <option value="{{ d.chat_date }}" {% if d.chat_date|string == current_date %}selected{% endif %}>{{ d.chat_date }}</option>
-            {% endfor %}
-        </select>
-    </div>
+    <h4 class="page-title mb-0"><i class="bi bi-chat-left-text"></i> Chats del {{ current_date }}</h4>
+    <select class="form-select" style="width:180px"
+            onchange="window.location='/chats?date='+this.value">
+        {% for d in dates %}
+        <option value="{{ d.chat_date }}" {% if d.chat_date|string == current_date %}selected{% endif %}>{{ d.chat_date }}</option>
+        {% endfor %}
+    </select>
 </div>
 
 <div class="card">
     <div class="card-body p-0">
-        <table class="table table-dark table-hover mb-0">
-            <thead>
-                <tr>
-                    <th>Lead</th><th>Contacto</th><th>Telefono</th>
-                    <th>Pipeline</th><th>Estado</th><th>Msgs</th>
-                    <th>Bot</th><th>Humano</th><th>Status</th><th>Bots</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for c in chats %}
-                <tr>
-                    <td><a href="/chat/{{ c.talk_id }}?date={{ current_date }}">{{ c.lead_name or ('Lead #' ~ c.lead_id) }}</a></td>
-                    <td>{{ c.contact_name or '-' }}</td>
-                    <td><small>{{ c.phone or '-' }}</small></td>
-                    <td><small>{{ c.pipeline_name or '' }} > {{ c.stage_name or '' }}</small></td>
-                    <td>
-                        {% if c.attention_status == 'attended' %}<span class="badge badge-attended">Atendido</span>
-                        {% elif c.attention_status == 'pending_response' %}<span class="badge badge-pending">Pendiente</span>
-                        {% elif c.attention_status == 'bot_only' %}<span class="badge badge-bot-only">Solo Bot</span>
-                        {% else %}<span class="badge badge-outbound">{{ c.attention_status }}</span>{% endif %}
-                    </td>
-                    <td>{{ c.total_messages }}</td>
-                    <td><span class="badge badge-bot">{{ c.total_bot }}</span></td>
-                    <td><span class="badge badge-human">{{ c.total_human }}</span></td>
-                    <td>{{ c.responsible_user_name or '-' }}</td>
-                    <td><small>{{ (c.bot_names or [])|join(', ') }}</small></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Lead</th><th>Contacto</th><th>Telefono</th>
+                        <th>Pipeline / Etapa</th><th>Estado</th><th>Msgs</th>
+                        <th>Bot</th><th>Humano</th><th>Responsable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in chats %}
+                    <tr>
+                        <td><a href="/chat/{{ c.talk_id }}?date={{ current_date }}" style="text-decoration:none;font-weight:600">{{ c.lead_name or ('Lead #' ~ c.lead_id) }}</a></td>
+                        <td>{{ c.contact_name or '-' }}</td>
+                        <td><small class="text-muted">{{ c.phone or '-' }}</small></td>
+                        <td><small>{{ c.pipeline_name or '' }}{% if c.stage_name %} <i class="bi bi-chevron-right" style="font-size:0.6rem"></i> {{ c.stage_name }}{% endif %}</small></td>
+                        <td>
+                            {% if c.attention_status == 'attended' %}<span class="badge badge-attended">Atendido</span>
+                            {% elif c.attention_status == 'pending_response' %}<span class="badge badge-pending">Pendiente</span>
+                            {% elif c.attention_status == 'bot_only' %}<span class="badge badge-bot-only">Solo Bot</span>
+                            {% else %}<span class="badge badge-outbound">{{ c.attention_status }}</span>{% endif %}
+                        </td>
+                        <td><strong>{{ c.total_messages }}</strong></td>
+                        <td><span class="badge badge-bot">{{ c.total_bot }}</span></td>
+                        <td><span class="badge badge-human">{{ c.total_human }}</span></td>
+                        <td><small>{{ c.responsible_user_name or '-' }}</small></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<p class="text-muted mt-2">Total: {{ chats|length }} chats</p>
+<p class="text-muted-custom mt-2">Total: {{ chats|length }} chats</p>
 {% endblock %}

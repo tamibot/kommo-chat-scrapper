@@ -1,34 +1,36 @@
 {% extends "base.html" %}
 {% block title %}Sin Respuesta - Kommo Scrapper{% endblock %}
 {% block content %}
-<h4 class="mb-3"><i class="bi bi-exclamation-triangle text-warning"></i> Chats Sin Respuesta del Cliente</h4>
-<p class="text-muted">Leads donde se enviaron multiples mensajes salientes sin recibir respuesta</p>
+<h4 class="page-title mb-1"><i class="bi bi-exclamation-triangle text-warning"></i> Chats Sin Respuesta del Cliente</h4>
+<p class="text-muted-custom mb-3">Leads donde se enviaron multiples mensajes salientes sin recibir respuesta</p>
 
 <div class="card">
     <div class="card-body p-0">
-        <table class="table table-dark table-hover mb-0">
-            <thead>
-                <tr>
-                    <th>Lead</th><th>Contacto</th><th>Telefono</th>
-                    <th>OUTs sin respuesta</th><th>Ultimo msg</th>
-                    <th>Pipeline</th><th>Responsable</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for c in chats %}
-                <tr>
-                    <td>{{ c.lead_id }}</td>
-                    <td>{{ c.contact_name or '-' }}</td>
-                    <td>{{ c.contact_phone or '-' }}</td>
-                    <td><span class="badge bg-danger">{{ c.consecutive_out }}</span></td>
-                    <td><small>{{ (c.last_out_text or '')[:60] }}</small></td>
-                    <td>{{ c.pipeline_name or '' }} > {{ c.stage_name or '' }}</td>
-                    <td>{{ c.responsible_user or '-' }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Lead ID</th><th>Contacto</th><th>Telefono</th>
+                        <th>OUTs sin respuesta</th><th>Ultimo mensaje</th>
+                        <th>Pipeline / Etapa</th><th>Responsable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in chats %}
+                    <tr>
+                        <td><strong>{{ c.lead_id }}</strong></td>
+                        <td>{{ c.contact_name or '-' }}</td>
+                        <td><small class="text-muted">{{ c.contact_phone or '-' }}</small></td>
+                        <td><span class="badge bg-danger">{{ c.consecutive_out }}</span></td>
+                        <td><small>{{ (c.last_out_text or '')[:80] }}</small></td>
+                        <td><small>{{ c.pipeline_name or '' }}{% if c.stage_name %} <i class="bi bi-chevron-right" style="font-size:0.6rem"></i> {{ c.stage_name }}{% endif %}</small></td>
+                        <td>{{ c.responsible_user or '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<p class="text-muted mt-2">Total: {{ chats|length }} chats sin respuesta</p>
+<p class="text-muted-custom mt-2">Total: {{ chats|length }} chats sin respuesta</p>
 {% endblock %}

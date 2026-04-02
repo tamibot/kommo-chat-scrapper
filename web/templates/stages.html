@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Cambios de Etapa - Kommo Scrapper{% endblock %}
 {% block content %}
-<h4 class="mb-3"><i class="bi bi-arrow-left-right"></i> Cambios de Etapa</h4>
+<h4 class="page-title mb-3"><i class="bi bi-arrow-left-right"></i> Cambios de Etapa</h4>
 
 <div class="row g-3 mb-4">
     <div class="col-md-4">
         <div class="card">
-            <div class="card-header">Top Movimientos</div>
+            <div class="card-header"><i class="bi bi-trophy"></i> Top Destinos</div>
             <div class="card-body">
                 {% for s in summary %}
-                <div class="d-flex justify-content-between mb-1">
+                <div class="d-flex justify-content-between align-items-center py-1" style="border-bottom:1px solid #f0f0f0">
                     <small>{{ s.new_stage_name or 'N/A' }}</small>
                     <span class="badge bg-primary">{{ s.cnt }}</span>
                 </div>
@@ -19,18 +19,19 @@
     </div>
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header">Ultimos 100 cambios</div>
+            <div class="card-header"><i class="bi bi-clock-history"></i> Ultimos 100 cambios</div>
             <div class="card-body p-0" style="max-height:500px;overflow-y:auto">
-                <table class="table table-dark table-sm mb-0">
-                    <thead><tr><th>Lead</th><th>De</th><th>A</th><th>Por</th><th>Fecha</th></tr></thead>
+                <table class="table table-hover table-sm mb-0">
+                    <thead><tr><th>Lead</th><th>De</th><th></th><th>A</th><th>Por</th><th>Fecha</th></tr></thead>
                     <tbody>
                         {% for c in changes %}
                         <tr>
-                            <td>{{ c.lead_id }}</td>
-                            <td><small>{{ c.old_stage_name or '-' }}</small></td>
-                            <td><strong>{{ c.new_stage_name or '-' }}</strong></td>
-                            <td>{{ c.changed_by_name or '-' }}</td>
-                            <td><small>{{ c.changed_at }}</small></td>
+                            <td><strong>{{ c.lead_id }}</strong></td>
+                            <td><small class="text-muted">{{ c.old_stage_name or '-' }}</small></td>
+                            <td><i class="bi bi-arrow-right" style="color:var(--primary)"></i></td>
+                            <td><strong style="color:var(--primary)">{{ c.new_stage_name or '-' }}</strong></td>
+                            <td><small>{{ c.changed_by_name or '-' }}</small></td>
+                            <td><small class="text-muted">{{ c.changed_at }}</small></td>
                         </tr>
                         {% endfor %}
                     </tbody>

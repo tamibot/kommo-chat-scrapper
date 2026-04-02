@@ -1,30 +1,30 @@
 {% extends "base.html" %}
 {% block title %}Configuracion - Kommo Scrapper{% endblock %}
 {% block content %}
-<h4 class="mb-3"><i class="bi bi-gear"></i> Configuracion</h4>
+<h4 class="page-title mb-3"><i class="bi bi-gear"></i> Configuracion</h4>
 
-<div class="row">
+<div class="row g-3">
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header">Variables de configuracion</div>
+            <div class="card-header">Variables de Configuracion</div>
             <div class="card-body">
                 <form method="POST">
                     {% for s in settings %}
-                    <div class="mb-2 row">
-                        <label class="col-sm-4 col-form-label"><code>{{ s.key }}</code></label>
+                    <div class="row mb-2 align-items-center">
+                        <label class="col-sm-4 col-form-label" style="font-size:0.85rem">
+                            <code>{{ s.key }}</code>
+                        </label>
                         <div class="col-sm-8">
                             {% if 'password' in s.key or 'token' in s.key %}
-                            <input type="password" name="{{ s.key }}" value="{{ s.value or '' }}"
-                                   class="form-control form-control-sm bg-dark text-light border-secondary">
+                            <input type="password" name="{{ s.key }}" value="{{ s.value or '' }}" class="form-control form-control-sm">
                             {% else %}
-                            <input type="text" name="{{ s.key }}" value="{{ s.value or '' }}"
-                                   class="form-control form-control-sm bg-dark text-light border-secondary">
+                            <input type="text" name="{{ s.key }}" value="{{ s.value or '' }}" class="form-control form-control-sm">
                             {% endif %}
                         </div>
                     </div>
                     {% endfor %}
                     <div class="text-end mt-3">
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar Cambios</button>
                     </div>
                 </form>
             </div>
@@ -32,10 +32,13 @@
     </div>
     <div class="col-md-4">
         <div class="card">
-            <div class="card-header">Acciones rapidas</div>
+            <div class="card-header">Acciones</div>
             <div class="card-body">
                 <a href="/onboarding" class="btn btn-outline-primary btn-sm d-block mb-2">
                     <i class="bi bi-arrow-repeat"></i> Re-configurar credenciales
+                </a>
+                <a href="/" class="btn btn-outline-secondary btn-sm d-block">
+                    <i class="bi bi-speedometer2"></i> Ir al Dashboard
                 </a>
             </div>
         </div>
