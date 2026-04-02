@@ -1,11 +1,12 @@
 # Core
 python-dotenv>=1.0.0
 
-# Browser automation for chat scraping
+# Browser automation for chat scraping (local only)
 selenium>=4.15.0
 
-# Google Services (for future export)
-google-auth>=2.25.0
-google-auth-oauthlib>=1.2.0
-google-api-python-client>=2.110.0
-gspread>=6.0.0
+# Database
+psycopg2-binary>=2.9.0
+
+# Web dashboard (Railway)
+flask>=3.0.0
+gunicorn>=21.2.0

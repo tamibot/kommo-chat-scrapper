@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Setup - Kommo Scrapper{% endblock %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3><i class="bi bi-rocket-takeoff"></i> Configuracion Inicial</h3>
+                <p class="mb-0 opacity-75">Conecta tu cuenta de Kommo CRM para comenzar</p>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    <h5 class="mb-3"><i class="bi bi-1-circle"></i> Kommo API</h5>
+                    <div class="mb-3">
+                        <label class="form-label">URL de tu cuenta Kommo</label>
+                        <input type="text" name="kommo_base_url" class="form-control bg-dark text-light border-secondary"
+                               placeholder="https://tu-subdominio.kommo.com"
+                               value="{{ settings.kommo_base_url }}">
+                        <small class="text-muted">Ejemplo: https://miempresa.kommo.com</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Token API v4</label>
+                        <input type="password" name="kommo_access_token" class="form-control bg-dark text-light border-secondary"
+                               placeholder="eyJ0eXAiOiJKV1Q..."
+                               value="{{ settings.kommo_access_token }}">
+                        <small class="text-muted">Obtener desde Configuracion > Integraciones en Kommo</small>
+                    </div>
+
+                    <h5 class="mb-3 mt-4"><i class="bi bi-2-circle"></i> Login para Scraping (sin 2FA)</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Email de usuario</label>
+                        <input type="email" name="kommo_login_email" class="form-control bg-dark text-light border-secondary"
+                               placeholder="usuario@empresa.com"
+                               value="{{ settings.kommo_login_email }}">
+                        <small class="text-muted">Usuario SIN autenticacion de 2 factores</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="kommo_login_password" class="form-control bg-dark text-light border-secondary"
+                               value="{{ settings.kommo_login_password }}">
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-plug"></i> Conectar y Validar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

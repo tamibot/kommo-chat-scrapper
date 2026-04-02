@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Kommo Scrapper{% endblock %}
+{% block content %}
+<h4 class="mb-3"><i class="bi bi-speedometer2"></i> Dashboard {% if latest_date %}<small class="text-muted">Ultima fecha: {{ latest_date }}</small>{% endif %}</h4>
+
+<!-- Stats Cards -->
+<div class="row g-3 mb-4">
+    <div class="col-md-2">
+        <div class="card stat-card">
+            <div class="stat-number text-primary">{{ counts.get('kommo_chats', 0) }}</div>
+            <div class="stat-label">Chats</div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card">
+            <div class="stat-number text-info">{{ counts.get('kommo_messages', 0) }}</div>
+            <div class="stat-label">Mensajes</div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card">
+            <div class="stat-number text-success">{{ counts.get('kommo_leads', 0) }}</div>
+            <div class="stat-label">Leads</div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card">
+            <div class="stat-number text-warning">{{ counts.get('kommo_stage_changes', 0) }}</div>
+            <div class="stat-label">Cambios Etapa</div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card">
+            <div class="stat-number text-info">{{ counts.get('kommo_events', 0) }}</div>
+            <div class="stat-label">Eventos</div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card">
+            <div class="stat-number text-danger">{{ counts.get('kommo_no_reply_tracking', 0) }}</div>
+            <div class="stat-label">Sin Respuesta</div>
+        </div>
+    </div>
+</div>
+
+<!-- Attention Status -->
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><i class="bi bi-pie-chart"></i> Estado de Atencion (ultimo dia)</div>
+            <div class="card-body">
+                {% for s in today_status %}
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>
+                        {% if s.attention_status == 'attended' %}<span class="badge badge-attended">Atendido</span>
+                        {% elif s.attention_status == 'pending_response' %}<span class="badge badge-pending">Pendiente</span>
+                        {% elif s.attention_status == 'bot_only' %}<span class="badge badge-bot-only">Solo Bot</span>
+                        {% elif s.attention_status == 'outbound_only' %}<span class="badge badge-outbound">Solo Saliente</span>
+                        {% else %}<span class="badge bg-secondary">{{ s.attention_status }}</span>{% endif %}
+                    </span>
+                    <strong>{{ s.cnt }}</strong>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><i class="bi bi-database"></i> Tablas en Base de Datos</div>
+            <div class="card-body">
+                {% for table, count in counts.items() %}
+                <div class="d-flex justify-content-between mb-1">
+                    <code>{{ table }}</code>
+                    <span class="badge bg-secondary">{{ count }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Daily Metrics Table -->
+<div class="card mb-4">
+    <div class="card-header"><i class="bi bi-calendar-day"></i> Metricas Diarias</div>
+    <div class="card-body p-0">
+        <table class="table table-dark table-striped mb-0">
+            <thead>
+                <tr>
+                    <th>Fecha</th><th>Chats</th><th>Msgs</th>
+                    <th>Bot</th><th>Humano</th><th>Con Humano</th>
+                    <th>Solo Bot</th><th>Avg Interac.</th><th>Agentes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in metrics %}
+                <tr>
+                    <td><a href="/chats?date={{ m.metric_date }}">{{ m.metric_date }}</a></td>
+                    <td>{{ m.total_chats }}</td>
+                    <td>{{ m.total_messages }}</td>
+                    <td><span class="badge badge-bot">{{ m.total_bot }}</span></td>
+                    <td><span class="badge badge-human">{{ m.total_human }}</span></td>
+                    <td>{{ m.chats_with_human }}</td>
+                    <td>{{ m.chats_bot_only }}</td>
+                    <td>{{ "%.1f"|format(m.avg_interactions or 0) }}</td>
+                    <td>{{ m.unique_agents }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

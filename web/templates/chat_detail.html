@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Chat {{ chat.talk_id or '' }} - Kommo Scrapper{% endblock %}
+{% block content %}
+<a href="/chats" class="btn btn-sm btn-outline-secondary mb-3"><i class="bi bi-arrow-left"></i> Volver</a>
+
+{% if chat %}
+<div class="row mb-3">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Lead Info</div>
+            <div class="card-body">
+                <p><strong>{{ chat.lead_name or 'Lead #' ~ chat.lead_id }}</strong></p>
+                <p><i class="bi bi-person"></i> {{ chat.contact_name or '-' }}</p>
+                <p><i class="bi bi-phone"></i> {{ chat.phone or '-' }}</p>
+                <p><i class="bi bi-funnel"></i> {{ chat.pipeline_name or '' }} > {{ chat.stage_name or '' }}</p>
+                <p><i class="bi bi-person-badge"></i> {{ chat.responsible_user_name or '-' }}</p>
+                {% if chat.tags %}<p><i class="bi bi-tags"></i> {% for t in chat.tags %}
+                <span class="badge bg-secondary">{{ t }}</span>{% endfor %}</p>{% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">Analytics</div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col"><strong>{{ chat.total_messages }}</strong><br><small>Mensajes</small></div>
+                    <div class="col"><span class="badge badge-bot">{{ chat.total_bot }}</span><br><small>Bot</small></div>
+                    <div class="col"><span class="badge badge-human">{{ chat.total_human }}</span><br><small>Humano</small></div>
+                    <div class="col"><strong>{{ chat.interactions }}</strong><br><small>Interacciones</small></div>
+                    <div class="col">
+                        {% if chat.attention_status == 'attended' %}<span class="badge badge-attended">Atendido</span>
+                        {% elif chat.attention_status == 'pending_response' %}<span class="badge badge-pending">Pendiente</span>
+                        {% else %}<span class="badge bg-secondary">{{ chat.attention_status }}</span>{% endif %}
+                        <br><small>Estado</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Messages -->
+<div class="card">
+    <div class="card-header"><i class="bi bi-chat-dots"></i> Conversacion ({{ messages|length }} mensajes)</div>
+    <div class="card-body" style="max-height:600px;overflow-y:auto">
+        {% for m in messages %}
+        <div class="d-flex {% if m.direction == 'OUT' %}justify-content-end{% endif %} mb-2">
+            <div class="{% if m.direction == 'IN' %}msg-in{% else %}msg-out{% endif %} {% if m.is_bot %}msg-bot{% endif %}">
+                <div class="msg-author">
+                    {% if m.is_bot %}<i class="bi bi-robot"></i> {{ m.bot_name or 'Bot' }}
+                    {% elif m.sender_type == 'agent' %}<i class="bi bi-headset"></i> {{ m.author or 'Agente' }}
+                    {% else %}<i class="bi bi-person"></i> {{ m.author or 'Cliente' }}{% endif %}
+                </div>
+                {% if m.msg_type != 'text' %}
+                <span class="badge bg-secondary"><i class="bi bi-{% if m.msg_type == 'image' %}image{% elif m.msg_type == 'video' %}camera-video{% elif m.msg_type == 'file' %}file-earmark{% elif m.msg_type == 'audio' %}mic{% else %}paperclip{% endif %}"></i> {{ m.msg_type }}</span>
+                {% endif %}
+                <div>{{ m.msg_text or '' }}</div>
+                <div class="msg-time">{{ m.msg_timestamp or '' }} {% if m.delivery_status %}| {{ m.delivery_status }}{% endif %}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
