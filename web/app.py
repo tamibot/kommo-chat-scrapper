@@ -329,10 +329,10 @@ def settings():
 
     # Group settings for better display
     groups = {
-        'api': {'title': 'Kommo API', 'icon': 'cloud', 'keys': ['kommo_base_url', 'kommo_access_token', 'kommo_account_name', 'kommo_amojo_id']},
-        'login': {'title': 'Login Scraping (sin 2FA)', 'icon': 'person-lock', 'keys': ['kommo_login_email', 'kommo_login_password']},
-        'scrape': {'title': 'Scraping Config', 'icon': 'gear', 'keys': ['scrape_default_date', 'scrape_status_filter']},
-        'system': {'title': 'Sistema', 'icon': 'cpu', 'keys': ['setup_completed']},
+        'api': {'title': 'Kommo API', 'icon': 'cloud', 'fields': ['kommo_base_url', 'kommo_access_token', 'kommo_account_name', 'kommo_amojo_id']},
+        'login': {'title': 'Login Scraping (sin 2FA)', 'icon': 'person-lock', 'fields': ['kommo_login_email', 'kommo_login_password']},
+        'scrape': {'title': 'Scraping Config', 'icon': 'gear', 'fields': ['scrape_default_date', 'scrape_status_filter']},
+        'system': {'title': 'Sistema', 'icon': 'cpu', 'fields': ['setup_completed']},
     }
 
     return render_template('settings.html', settings=all_settings or [], groups=groups)

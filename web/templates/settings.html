@@ -11,7 +11,7 @@
                 <div class="card-header"><i class="bi bi-{{ group.icon }}"></i> {{ group.title }}</div>
                 <div class="card-body">
                     {% for s in settings %}
-                    {% if s.key in group.keys %}
+                    {% if s.key in group.fields %}
                     <div class="row mb-2 align-items-center">
                         <label class="col-sm-4 col-form-label" style="font-size:.85rem"><code>{{ s.key }}</code></label>
                         <div class="col-sm-8">

@@ -146,7 +146,7 @@ def collect_targets(driver, date_preset, status):
 
     driver.execute_script("window.__ac = {};")
     prev = 0; stale = 0
-    for _ in range(200):
+    for i in range(500):  # Support up to ~1000+ chats
         count = driver.execute_script("""
             var ls = document.querySelectorAll('a[href*="/chats/"][href*="/leads/detail/"]');
             for (var a of ls) {
@@ -158,9 +158,12 @@ def collect_targets(driver, date_preset, status):
         """)
         if count == prev:
             stale += 1
-            if stale >= 7: break
+            # For large lists, be more patient: wait 12 stale rounds
+            if stale >= 12: break
         else:
             stale = 0
+            if count % 100 == 0:
+                print(f"    {count} chats loaded...", flush=True)
         prev = count
         time.sleep(SCROLL_WAIT)
 
@@ -204,6 +207,37 @@ def extract_chat_robust(driver, talk_id, lead_id, max_retries=2):
                 time.sleep(3)
             else:
                 return {'messages': [], 'conversation_ids': [], 'msg_count': 0}
+
+
+def parse_chat_date_from_messages(messages):
+    """Extract the actual date from message timestamps.
+    Kommo formats: 'DD.MM.YYYY HH:MM', 'Yesterday HH:MM', 'Today HH:MM'"""
+    import re
+    from datetime import datetime, timezone, timedelta
+
+    now = datetime.now(timezone.utc) - timedelta(hours=5)  # Peru time
+
+    for msg in messages:
+        ts = msg.get('timestamp', '')
+        if not ts:
+            continue
+
+        # Try DD.MM.YYYY format (absolute date from older chats)
+        m = re.match(r'(\d{2})\.(\d{2})\.(\d{4})', ts)
+        if m:
+            day, month, year = int(m.group(1)), int(m.group(2)), int(m.group(3))
+            return date(year, month, day)
+
+        # "Yesterday" = now - 1 day
+        if ts.startswith('Yesterday'):
+            return (now - timedelta(days=1)).date()
+
+        # "Today" = now
+        if ts.startswith('Today'):
+            return now.date()
+
+    # Fallback: return today
+    return now.date()
 
 
 def compute_analytics(messages):
@@ -306,9 +340,13 @@ def run_single_day(args, chat_date, date_preset):
         if data['msg_count'] == 0:
             errors += 1
 
+        # Parse REAL date from message timestamps (not filter date)
+        real_date = parse_chat_date_from_messages(data['messages']) if data['messages'] else chat_date
+
         results.append({
             'talk_id': t['talk_id'],
             'lead_id': t['lead_id'],
+            'chat_date': str(real_date),
             'conversation_ids': data['conversation_ids'],
             'msg_count': data['msg_count'],
             'analytics': analytics,
@@ -364,7 +402,8 @@ def run_single_day(args, chat_date, date_preset):
         db.upsert_leads(leads_map)
     for r in results:
         try:
-            db.upsert_chat(r, chat_date)
+            real_d = date.fromisoformat(r['chat_date']) if r.get('chat_date') else chat_date
+            db.upsert_chat(r, real_d)
         except Exception as e:
             db.log_error(int(r['talk_id']), int(r['lead_id']), chat_date, 'db_insert', str(e))
     if stage_changes:
@@ -375,7 +414,8 @@ def run_single_day(args, chat_date, date_preset):
         compiled = 0
         for r in results:
             try:
-                db.compile_conversation(int(r['lead_id']), chat_date)
+                real_d2 = date.fromisoformat(r['chat_date']) if r.get('chat_date') else chat_date
+                db.compile_conversation(int(r['lead_id']), real_d2)
                 compiled += 1
             except Exception:
                 pass
