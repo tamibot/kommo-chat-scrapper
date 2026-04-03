@@ -146,9 +146,16 @@ def get_day_unix_range(target_date):
     return from_ts, to_ts
 
 
-def collect_targets_via_api(target_date):
-    """Get all talk_id + lead_id for a day using Events API (11x faster than scroll).
-    Returns list of {talk_id, lead_id, contact_id}."""
+def collect_targets_via_api(target_date, filter_mode='conversations'):
+    """Get chat targets for a day using Events API.
+
+    filter_mode:
+        'all' - all leads with any chat activity
+        'conversations' - only leads with both IN and OUT (real conversations)
+        'conversations+pending' - conversations + leads with only IN (pending our response)
+
+    Returns list of {talk_id, lead_id, contact_id, in_events, out_events, category}
+    """
     import ssl, urllib.request, urllib.error
     env = {}
     with open(os.path.join(os.path.dirname(__file__), '..', '.env')) as f:
@@ -162,9 +169,10 @@ def collect_targets_via_api(target_date):
     ctx = ssl.create_default_context()
 
     ts_from, ts_to = get_day_unix_range(target_date)
-    talks = {}
-    page = 1
 
+    # Phase 1: Collect all events and group by lead_id
+    leads = {}  # lead_id -> {talk_ids, in, out, contact_id}
+    page = 1
     while True:
         try:
             url = (f"{base}/api/v4/events?limit=100&page={page}"
@@ -179,25 +187,73 @@ def collect_targets_via_api(target_date):
             if not events:
                 break
             for e in events:
+                lid = e.get('entity_id')
+                if lid not in leads:
+                    leads[lid] = {'talk_ids': set(), 'in': 0, 'out': 0, 'contact_id': None}
+                if e['type'] == 'incoming_chat_message':
+                    leads[lid]['in'] += 1
+                else:
+                    leads[lid]['out'] += 1
                 va = e.get('value_after', [{}])
                 if va and va[0].get('message', {}).get('talk_id'):
-                    tid = va[0]['message']['talk_id']
-                    if tid not in talks:
-                        emb = e.get('_embedded', {}).get('entity', {})
-                        talks[tid] = {
-                            'talk_id': str(tid),
-                            'lead_id': str(e.get('entity_id', '')),
-                            'contact_id': emb.get('linked_talk_contact_id'),
-                        }
+                    leads[lid]['talk_ids'].add(va[0]['message']['talk_id'])
+                emb = e.get('_embedded', {}).get('entity', {})
+                if emb.get('linked_talk_contact_id'):
+                    leads[lid]['contact_id'] = emb['linked_talk_contact_id']
             if len(events) < 100:
                 break
             page += 1
-            time.sleep(0.15)  # Rate limit safe
+            time.sleep(0.15)
         except Exception as ex:
             print(f"    API error page {page}: {ex}")
             break
 
-    return list(talks.values())
+    # Phase 2: Classify and filter
+    targets = []
+    stats = {'conversations': 0, 'pending': 0, 'follow_up': 0, 'masivo': 0}
+
+    for lid, act in leads.items():
+        if act['in'] > 0 and act['out'] > 0:
+            category = 'conversation'
+            stats['conversations'] += 1
+        elif act['in'] > 0 and act['out'] == 0:
+            category = 'pending'
+            stats['pending'] += 1
+        elif act['out'] <= 2:
+            category = 'follow_up'
+            stats['follow_up'] += 1
+            continue  # Skip follow-ups
+        else:
+            category = 'masivo'
+            stats['masivo'] += 1
+            continue  # Skip masivos
+
+        # Apply filter
+        include = False
+        if filter_mode == 'all':
+            include = True
+        elif filter_mode == 'conversations' and category == 'conversation':
+            include = True
+        elif filter_mode == 'conversations+pending' and category in ('conversation', 'pending'):
+            include = True
+
+        if include:
+            # Use the most recent talk_id for this lead
+            for tid in act['talk_ids']:
+                targets.append({
+                    'talk_id': str(tid),
+                    'lead_id': str(lid),
+                    'contact_id': act['contact_id'],
+                    'in_events': act['in'],
+                    'out_events': act['out'],
+                    'category': category,
+                })
+                break  # One target per lead (most recent talk)
+
+    print(f"    Events: {page} pages | Leads: {len(leads)} | Conv: {stats['conversations']} | "
+          f"Pending: {stats['pending']} | Follow-up: {stats['follow_up']} | Masivo: {stats['masivo']}")
+
+    return targets
 
 
 def collect_targets(driver, date_preset, status, target_date=None):
@@ -391,12 +447,19 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
     print("  OK")
 
     print(f"[2/6] Collecting chat targets...")
-    # Use Selenium with Unix date filter (matches Kommo UI "opened" filter)
-    # API events returns ALL activity including bot follow-ups on old chats
     t_collect = time.time()
-    targets = collect_targets(driver, date_preset, args.status,
-                              target_date=chat_date if use_unix_date else None)
-    print(f"  Selenium: {len(targets)} opened chats in {time.time()-t_collect:.1f}s")
+
+    # Primary: Events API (fast, gets real conversations)
+    targets = collect_targets_via_api(chat_date, filter_mode='conversations+pending')
+
+    if targets:
+        print(f"  API: {len(targets)} targets in {time.time()-t_collect:.1f}s")
+    else:
+        # Fallback: Selenium scroll
+        print(f"  API returned 0, fallback to Selenium...")
+        targets = collect_targets(driver, date_preset, args.status,
+                                  target_date=chat_date if use_unix_date else None)
+        print(f"  Selenium: {len(targets)} targets in {time.time()-t_collect:.1f}s")
 
     total = len(targets) if args.max_chats == 0 else min(args.max_chats, len(targets))
     print(f"  Will scrape {total}")
