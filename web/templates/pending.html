@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Pendientes - Kommo Scrapper{% endblock %}
+{% block content %}
+<h4 class="page-title mb-1"><i class="bi bi-bell text-danger"></i> Pendientes de Nuestra Respuesta</h4>
+<p class="text-muted-custom mb-3">Chats donde el cliente escribio y nosotros aun no hemos respondido. <strong>Requieren atencion.</strong></p>
+
+<div class="row g-2 mb-3">
+    <div class="col-md-3">
+        <div class="card stat-card py-2" style="border-left:4px solid var(--danger)">
+            <div class="stat-number fs-4" style="color:var(--danger)">{{ chats|length }}</div>
+            <div class="stat-label">Total Pendientes</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card py-2">
+            <div class="stat-number fs-4" style="color:var(--warning)">{{ chats|selectattr('total_human','equalto',0)|list|length }}</div>
+            <div class="stat-label">Sin Atencion Humana</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card py-2">
+            <div class="stat-number fs-4" style="color:var(--bot)">{{ chats|selectattr('total_bot','greaterthan',0)|list|length }}</div>
+            <div class="stat-label">Solo Bot Respondio</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card py-2">
+            <div class="stat-number fs-4" style="color:var(--success)">{{ chats|selectattr('total_human','greaterthan',0)|list|length }}</div>
+            <div class="stat-label">Con Atencion Previa</div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Fecha</th><th>Lead</th><th>Contacto</th><th>Telefono</th>
+                        <th>Pipeline / Etapa</th><th>Ultimo Msg</th>
+                        <th>Msgs IN</th><th>Bot</th><th>Humano</th>
+                        <th>Responsable</th><th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in chats %}
+                    <tr style="cursor:pointer" onclick="window.location='/chat/{{ c.talk_id }}?date={{ c.chat_date }}'">
+                        <td><small class="text-muted">{{ c.chat_date }}</small></td>
+                        <td><a href="/chat/{{ c.talk_id }}?date={{ c.chat_date }}" style="text-decoration:none;font-weight:600" onclick="event.stopPropagation()">{{ c.lead_name or ('Lead #' ~ c.lead_id) }}</a></td>
+                        <td>{{ c.contact_name or '-' }}</td>
+                        <td><small class="text-muted">{{ c.phone or '-' }}</small></td>
+                        <td><small>{{ c.pipeline_name or '' }}{% if c.stage_name %} <i class="bi bi-chevron-right" style="font-size:.6rem"></i> {{ c.stage_name }}{% endif %}</small></td>
+                        <td><small>{{ c.last_message_time or '-' }}</small></td>
+                        <td><strong>{{ c.total_in }}</strong></td>
+                        <td>{% if c.total_bot > 0 %}<span class="badge badge-bot">{{ c.total_bot }}</span>{% else %}<span class="text-muted">0</span>{% endif %}</td>
+                        <td>{% if c.total_human > 0 %}<span class="badge badge-human">{{ c.total_human }}</span>{% else %}<span class="badge bg-danger text-white">0</span>{% endif %}</td>
+                        <td><small>{{ c.responsible_user_name or '-' }}</small></td>
+                        <td onclick="event.stopPropagation()">
+                            <a href="https://propertamibotcom.kommo.com/leads/detail/{{ c.lead_id }}" target="_blank" class="btn btn-sm btn-outline-secondary py-0 px-1"><i class="bi bi-box-arrow-up-right"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<p class="text-muted-custom mt-2">{{ chats|length }} chats pendientes de nuestra respuesta</p>
+{% endblock %}

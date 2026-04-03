@@ -391,16 +391,12 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
     print("  OK")
 
     print(f"[2/6] Collecting chat targets...")
-    # Try API first (11x faster), fallback to Selenium scroll
-    t_api = time.time()
-    targets = collect_targets_via_api(chat_date)
-    if targets:
-        print(f"  API: {len(targets)} chats in {time.time()-t_api:.1f}s")
-    else:
-        print(f"  API returned 0, falling back to Selenium scroll...")
-        targets = collect_targets(driver, date_preset, args.status,
-                                  target_date=chat_date if use_unix_date else None)
-        print(f"  Selenium: {len(targets)} chats")
+    # Use Selenium with Unix date filter (matches Kommo UI "opened" filter)
+    # API events returns ALL activity including bot follow-ups on old chats
+    t_collect = time.time()
+    targets = collect_targets(driver, date_preset, args.status,
+                              target_date=chat_date if use_unix_date else None)
+    print(f"  Selenium: {len(targets)} opened chats in {time.time()-t_collect:.1f}s")
 
     total = len(targets) if args.max_chats == 0 else min(args.max_chats, len(targets))
     print(f"  Will scrape {total}")

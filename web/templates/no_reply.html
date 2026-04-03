@@ -1,8 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Sin Respuesta - Kommo Scrapper{% endblock %}
 {% block content %}
-<h4 class="page-title mb-1"><i class="bi bi-exclamation-triangle text-warning"></i> Chats Sin Respuesta del Cliente</h4>
-<p class="text-muted-custom mb-3">Leads donde se enviaron multiples mensajes salientes sin recibir respuesta</p>
+<h4 class="page-title mb-1"><i class="bi bi-exclamation-triangle text-warning"></i> Sin Respuesta del Cliente</h4>
+<p class="text-muted-custom mb-3">Leads a los que les enviamos mensajes y <strong>el cliente no ha respondido</strong>. Se muestran los que tienen 2+ mensajes salientes consecutivos sin respuesta.</p>
+
+<div class="row g-2 mb-3">
+    <div class="col-md-3">
+        <div class="card stat-card py-2" style="border-left:4px solid var(--warning)">
+            <div class="stat-number fs-4" style="color:var(--warning)">{{ chats|length }}</div>
+            <div class="stat-label">Total Sin Respuesta</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card py-2">
+            <div class="stat-number fs-4" style="color:var(--danger)">{{ chats|selectattr('consecutive_out','greaterthan',3)|list|length }}</div>
+            <div class="stat-label">4+ Msgs Sin Respuesta</div>
+        </div>
+    </div>
+</div>
 
 <div class="card">
     <div class="card-body p-0">
@@ -11,8 +26,8 @@
                 <thead>
                     <tr>
                         <th>Lead ID</th><th>Contacto</th><th>Telefono</th>
-                        <th>OUTs sin respuesta</th><th>Ultimo mensaje</th>
-                        <th>Pipeline / Etapa</th><th>Responsable</th>
+                        <th>Msgs Enviados</th><th>Ultimo Mensaje Enviado</th>
+                        <th>Pipeline / Etapa</th><th>Responsable</th><th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,10 +36,17 @@
                         <td><strong>{{ c.lead_id }}</strong></td>
                         <td>{{ c.contact_name or '-' }}</td>
                         <td><small class="text-muted">{{ c.contact_phone or '-' }}</small></td>
-                        <td><span class="badge bg-danger">{{ c.consecutive_out }}</span></td>
-                        <td><small>{{ (c.last_out_text or '')[:80] }}</small></td>
-                        <td><small>{{ c.pipeline_name or '' }}{% if c.stage_name %} <i class="bi bi-chevron-right" style="font-size:0.6rem"></i> {{ c.stage_name }}{% endif %}</small></td>
+                        <td>
+                            <span class="badge {% if c.consecutive_out >= 4 %}bg-danger{% else %}bg-warning text-dark{% endif %}" style="font-size:.85rem">
+                                {{ c.consecutive_out }} sin respuesta
+                            </span>
+                        </td>
+                        <td><small>{{ (c.last_out_text or '')[:80] }}{% if c.last_out_text and c.last_out_text|length > 80 %}...{% endif %}</small></td>
+                        <td><small>{{ c.pipeline_name or '' }}{% if c.stage_name %} <i class="bi bi-chevron-right" style="font-size:.6rem"></i> {{ c.stage_name }}{% endif %}</small></td>
                         <td>{{ c.responsible_user or '-' }}</td>
+                        <td>
+                            <a href="https://propertamibotcom.kommo.com/leads/detail/{{ c.lead_id }}" target="_blank" class="btn btn-sm btn-outline-secondary py-0 px-1"><i class="bi bi-box-arrow-up-right"></i></a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -32,5 +54,5 @@
         </div>
     </div>
 </div>
-<p class="text-muted-custom mt-2">Total: {{ chats|length }} chats sin respuesta</p>
+<p class="text-muted-custom mt-2">{{ chats|length }} clientes sin respuesta</p>
 {% endblock %}

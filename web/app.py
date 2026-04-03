@@ -281,14 +281,33 @@ def chat_detail(talk_id):
 
 @app.route('/no-reply')
 def no_reply():
-    """Chats without client response."""
+    """Chats without client response (we sent, they didn't answer)."""
     data = query("""
         SELECT * FROM kommo_no_reply_tracking
         WHERE status = 'no_reply'
         ORDER BY consecutive_out DESC
     """)
-    return render_template('no_reply.html',
-                          chats=data or [])
+    return render_template('no_reply.html', chats=data or [])
+
+
+@app.route('/pending')
+def pending():
+    """Chats pending OUR response (client wrote, we haven't answered)."""
+    data = query("""
+        SELECT c.talk_id, c.lead_id, c.chat_date, c.total_messages,
+               c.total_in, c.total_out, c.total_bot, c.total_human,
+               c.last_message_time, c.first_contact_time, c.attention_status,
+               l.name as lead_name, l.pipeline_name, l.stage_name,
+               l.responsible_user_name, l.tags,
+               ct.name as contact_name, ct.phone
+        FROM kommo_chats c
+        LEFT JOIN kommo_leads l ON c.lead_id = l.lead_id
+        LEFT JOIN kommo_contacts ct ON l.contact_id = ct.contact_id
+        WHERE c.last_message_direction = 'IN'
+          AND c.attention_status != 'outbound_only'
+        ORDER BY c.chat_date DESC, c.last_message_time DESC
+    """)
+    return render_template('pending.html', chats=data or [])
 
 
 @app.route('/stages')

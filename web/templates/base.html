@@ -53,6 +53,7 @@
             <div class="navbar-nav ms-auto gap-1">
                 <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/"><i class="bi bi-speedometer2"></i> Dashboard</a>
                 <a class="nav-link {% if '/chats' in request.path %}active{% endif %}" href="/chats"><i class="bi bi-chat-left-text"></i> Chats</a>
+                <a class="nav-link {% if '/pending' in request.path %}active{% endif %}" href="/pending"><i class="bi bi-bell text-danger"></i> Pendientes</a>
                 <a class="nav-link {% if '/no-reply' in request.path %}active{% endif %}" href="/no-reply"><i class="bi bi-exclamation-triangle"></i> Sin Respuesta</a>
                 <a class="nav-link {% if '/stages' in request.path %}active{% endif %}" href="/stages"><i class="bi bi-arrow-left-right"></i> Etapas</a>
                 <a class="nav-link {% if '/settings' in request.path %}active{% endif %}" href="/settings"><i class="bi bi-gear"></i> Config</a>
