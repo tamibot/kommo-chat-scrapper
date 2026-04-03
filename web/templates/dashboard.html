@@ -4,61 +4,51 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="page-title mb-0"><i class="bi bi-speedometer2"></i> Dashboard</h4>
     <div>
-        {% if latest_date %}<span class="text-muted-custom">Ultima actualizacion: <strong>{{ latest_date }}</strong></span>{% endif %}
-        <a href="https://propertamibotcom.kommo.com/chats/" target="_blank" class="btn btn-sm btn-outline-primary ms-2">
-            <i class="bi bi-box-arrow-up-right"></i> Abrir Kommo
-        </a>
+        {% if latest_date %}<span class="text-muted-custom">Data hasta: <strong>{{ latest_date }}</strong></span>{% endif %}
+        <a href="https://propertamibotcom.kommo.com/chats/" target="_blank" class="btn btn-sm btn-outline-primary ms-2"><i class="bi bi-box-arrow-up-right"></i> Kommo</a>
     </div>
 </div>
 
 <!-- Stat Cards -->
 <div class="row g-3 mb-4">
+    {% set cards = [
+        ('kommo_chats', 'Chats', 'primary', '/chats'),
+        ('kommo_messages', 'Mensajes', 'info', None),
+        ('kommo_leads', 'Leads', 'success', None),
+        ('kommo_stage_changes', 'Cambios Etapa', 'warning', '/stages'),
+        ('kommo_events', 'Eventos', 'bot', None),
+        ('kommo_no_reply_tracking', 'Sin Respuesta', 'danger', '/no-reply'),
+    ] %}
+    {% for key, label, color, link in cards %}
     <div class="col-6 col-md-2">
-        <div class="card stat-card">
-            <div class="stat-number" style="color:var(--primary)">{{ counts.get('kommo_chats', 0) }}</div>
-            <div class="stat-label">Chats</div>
+        {% if link %}<a href="{{ link }}" style="text-decoration:none">{% endif %}
+        <div class="card stat-card {% if link %}clickable{% endif %}">
+            <div class="stat-number" style="color:var(--{{ color }})">{{ counts.get(key, 0) }}</div>
+            <div class="stat-label">{{ label }}</div>
         </div>
+        {% if link %}</a>{% endif %}
     </div>
-    <div class="col-6 col-md-2">
-        <div class="card stat-card">
-            <div class="stat-number" style="color:var(--info)">{{ counts.get('kommo_messages', 0) }}</div>
-            <div class="stat-label">Mensajes</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-2">
-        <div class="card stat-card">
-            <div class="stat-number" style="color:var(--success)">{{ counts.get('kommo_leads', 0) }}</div>
-            <div class="stat-label">Leads</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-2">
-        <div class="card stat-card">
-            <div class="stat-number" style="color:var(--warning)">{{ counts.get('kommo_stage_changes', 0) }}</div>
-            <div class="stat-label">Cambios Etapa</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-2">
-        <div class="card stat-card">
-            <div class="stat-number" style="color:var(--bot-color)">{{ counts.get('kommo_events', 0) }}</div>
-            <div class="stat-label">Eventos</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-2">
-        <div class="card stat-card">
-            <div class="stat-number" style="color:var(--danger)">{{ counts.get('kommo_no_reply_tracking', 0) }}</div>
-            <div class="stat-label">Sin Respuesta</div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 
 <div class="row g-3 mb-4">
+    <!-- Chart: Daily Messages -->
+    <div class="col-md-8">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-graph-up"></i> Mensajes por Dia</div>
+            <div class="card-body">
+                <canvas id="dailyChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attention Status (clickable) -->
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-header"><i class="bi bi-pie-chart"></i> Estado de Atencion</div>
             <div class="card-body">
-                {% if today_status %}
                 {% for s in today_status %}
-                <div class="d-flex justify-content-between align-items-center mb-2 py-1">
+                <a href="/chats?status={{ s.attention_status }}" style="text-decoration:none;display:block" class="d-flex justify-content-between align-items-center mb-2 py-2 px-2 rounded" onmouseover="this.style.background='#f0f4ff'" onmouseout="this.style.background='transparent'">
                     <span>
                         {% if s.attention_status == 'attended' %}<span class="badge badge-attended"><i class="bi bi-check-circle"></i> Atendido</span>
                         {% elif s.attention_status == 'pending_response' %}<span class="badge badge-pending"><i class="bi bi-clock"></i> Pendiente</span>
@@ -66,67 +56,136 @@
                         {% elif s.attention_status == 'outbound_only' %}<span class="badge badge-outbound"><i class="bi bi-arrow-right"></i> Solo Saliente</span>
                         {% else %}<span class="badge bg-secondary">{{ s.attention_status }}</span>{% endif %}
                     </span>
-                    <strong style="font-size:1.3rem">{{ s.cnt }}</strong>
-                </div>
+                    <strong style="font-size:1.3rem;color:#333">{{ s.cnt }}</strong>
+                </a>
                 {% endfor %}
-                {% else %}<p class="text-muted text-center py-3">Sin datos</p>{% endif %}
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-header"><i class="bi bi-database"></i> Base de Datos</div>
-            <div class="card-body">
-                {% for table, count in counts.items() %}
-                <div class="d-flex justify-content-between align-items-center mb-1 py-1" style="border-bottom:1px solid #f0f0f0">
-                    <code style="font-size:0.78rem;color:#495057">{{ table.replace('kommo_', '') }}</code>
-                    <span class="badge bg-light text-dark border" style="font-size:0.8rem">{{ count }}</span>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-header"><i class="bi bi-terminal"></i> Comandos</div>
-            <div class="card-body" style="font-size:0.82rem">
-                <div class="mb-2"><span class="text-muted">Ayer:</span><br><code>python scripts/scrape_v3.py</code></div>
-                <div class="mb-2"><span class="text-muted">Hoy:</span><br><code>python scripts/scrape_v3.py --date current_day</code></div>
-                <div class="mb-2"><span class="text-muted">Test:</span><br><code>python scripts/scrape_v3.py --max-chats 15</code></div>
-                <div><span class="text-muted">Validar:</span><br><code>python scripts/validate_setup.py</code></div>
+                <canvas id="statusChart" height="160" class="mt-2"></canvas>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Daily Metrics -->
-<div class="card mb-4">
-    <div class="card-header d-flex justify-content-between"><span><i class="bi bi-calendar-day"></i> Metricas Diarias</span></div>
-    <div class="card-body p-0">
-        {% if metrics %}
-        <div class="table-responsive">
-            <table class="table table-hover mb-0">
-                <thead>
-                    <tr><th>Fecha</th><th>Chats</th><th>Mensajes</th><th>Bot</th><th>Humano</th><th>Con Humano</th><th>Solo Bot</th><th>Avg Interac.</th><th>Agentes</th></tr>
-                </thead>
-                <tbody>
-                    {% for m in metrics %}
-                    <tr>
-                        <td><a href="/chats?date={{ m.metric_date }}" style="text-decoration:none;font-weight:600">{{ m.metric_date }}</a></td>
-                        <td><strong>{{ m.total_chats }}</strong></td>
-                        <td>{{ m.total_messages }}</td>
-                        <td><span class="badge badge-bot">{{ m.total_bot }}</span></td>
-                        <td><span class="badge badge-human">{{ m.total_human }}</span></td>
-                        <td>{{ m.chats_with_human }}</td>
-                        <td>{{ m.chats_bot_only }}</td>
-                        <td>{{ "%.1f"|format(m.avg_interactions or 0) }}</td>
-                        <td>{{ m.unique_agents }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+<div class="row g-3 mb-4">
+    <!-- Tags -->
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-tags"></i> Tags ({{ tags|length }})</div>
+            <div class="card-body" style="max-height:250px;overflow-y:auto">
+                {% for t in tags %}
+                <span class="tag-badge">{{ t.tag }} <strong>{{ t.cnt }}</strong></span>
+                {% endfor %}
+            </div>
         </div>
-        {% else %}<p class="text-muted text-center py-4">Ejecuta el scraper para ver metricas</p>{% endif %}
+    </div>
+
+    <!-- Top Bots -->
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-robot"></i> Top Bots</div>
+            <div class="card-body">
+                {% for b in top_bots %}
+                <div class="d-flex justify-content-between align-items-center mb-1 py-1" style="border-bottom:1px solid #f0f0f0">
+                    <small>{{ b.bot_name[:30] }}</small>
+                    <span class="badge badge-bot">{{ b.cnt }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Agents -->
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-header"><i class="bi bi-headset"></i> Top Agentes Humanos</div>
+            <div class="card-body">
+                {% for a in top_agents %}
+                <div class="d-flex justify-content-between align-items-center mb-1 py-1" style="border-bottom:1px solid #f0f0f0">
+                    <small>{{ a.author[:25] }}</small>
+                    <span class="badge badge-human">{{ a.cnt }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="row g-3 mb-4">
+    <!-- Pipelines -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header"><i class="bi bi-funnel"></i> Pipelines</div>
+            <div class="card-body">
+                {% for p in pipelines %}
+                <div class="d-flex justify-content-between align-items-center mb-1 py-1" style="border-bottom:1px solid #f0f0f0">
+                    <small>{{ p.pipeline_name }}</small>
+                    <span class="badge bg-light text-dark border">{{ p.cnt }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Metrics Table -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header"><i class="bi bi-calendar-day"></i> Metricas Diarias</div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead><tr><th>Fecha</th><th>Chats</th><th>Msgs</th><th>Bot</th><th>Humano</th><th>Con Humano</th><th>Solo Bot</th><th>Interac.</th></tr></thead>
+                        <tbody>
+                            {% for m in metrics %}
+                            <tr>
+                                <td><a href="/chats?date={{ m.metric_date }}" style="text-decoration:none;font-weight:600">{{ m.metric_date }}</a></td>
+                                <td><strong>{{ m.total_chats }}</strong></td>
+                                <td>{{ m.total_messages }}</td>
+                                <td><span class="badge badge-bot">{{ m.total_bot }}</span></td>
+                                <td><span class="badge badge-human">{{ m.total_human }}</span></td>
+                                <td>{{ m.chats_with_human }}</td>
+                                <td>{{ m.chats_bot_only }}</td>
+                                <td>{{ "%.1f"|format(m.avg_interactions or 0) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Daily chart
+var metrics = {{ metrics|tojson }};
+if (metrics.length > 0) {
+    metrics.reverse();
+    new Chart(document.getElementById('dailyChart'), {
+        type: 'bar',
+        data: {
+            labels: metrics.map(m => m.metric_date),
+            datasets: [
+                {label:'Bot', data:metrics.map(m=>m.total_bot), backgroundColor:'rgba(114,9,183,0.7)'},
+                {label:'Humano', data:metrics.map(m=>m.total_human), backgroundColor:'rgba(46,196,182,0.7)'},
+                {label:'Contacto', data:metrics.map(m=>m.total_in||0), backgroundColor:'rgba(67,97,238,0.3)'},
+            ]
+        },
+        options: {responsive:true, scales:{x:{stacked:true},y:{stacked:true}}, plugins:{legend:{position:'bottom'}}}
+    });
+}
+// Status donut
+var statuses = {{ today_status|tojson }};
+if (statuses.length > 0) {
+    var colors = {attended:'#2ec4b6', pending_response:'#f77f00', bot_only:'#7209b7', outbound_only:'#adb5bd'};
+    new Chart(document.getElementById('statusChart'), {
+        type: 'doughnut',
+        data: {
+            labels: statuses.map(s => s.attention_status),
+            datasets: [{data: statuses.map(s=>s.cnt), backgroundColor: statuses.map(s=>colors[s.attention_status]||'#ccc')}]
+        },
+        options: {responsive:true, plugins:{legend:{display:false}}}
+    });
+}
+</script>
 {% endblock %}

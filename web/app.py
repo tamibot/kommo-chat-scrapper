@@ -106,43 +106,60 @@ def set_setting(key, value):
 
 @app.route('/')
 def index():
-    """Main dashboard."""
-    # Check if setup is done: either setting says true OR we already have data
+    """Main dashboard with charts and analytics."""
     setup = get_setting('setup_completed')
     has_data = query("SELECT COUNT(*) as c FROM kommo_chats", fetchone=True)
     if setup != 'true' and (not has_data or has_data.get('c', 0) == 0):
         return redirect(url_for('onboarding'))
 
-    # Get daily metrics
-    metrics = query("""
-        SELECT * FROM kommo_daily_metrics ORDER BY metric_date DESC LIMIT 14
-    """)
-
-    # Get today's summary
-    today = query("""
-        SELECT attention_status, COUNT(*) as cnt
-        FROM kommo_chats
-        WHERE chat_date = (SELECT MAX(chat_date) FROM kommo_chats)
-        GROUP BY attention_status
-    """)
-
-    # Latest date
+    metrics = query("SELECT * FROM kommo_daily_metrics ORDER BY metric_date DESC LIMIT 14")
     latest = query("SELECT MAX(chat_date) as d FROM kommo_chats", fetchone=True)
     latest_date = latest['d'] if latest else None
 
-    # Table counts
+    today_status = query("""
+        SELECT attention_status, COUNT(*) as cnt
+        FROM kommo_chats WHERE chat_date = (SELECT MAX(chat_date) FROM kommo_chats)
+        GROUP BY attention_status
+    """)
+
     counts = {}
-    for t in ['kommo_contacts', 'kommo_leads', 'kommo_chats', 'kommo_messages',
-              'kommo_stage_changes', 'kommo_events', 'kommo_conversations_compiled',
-              'kommo_no_reply_tracking', 'kommo_scrape_errors']:
+    for t in ['kommo_contacts','kommo_leads','kommo_chats','kommo_messages',
+              'kommo_stage_changes','kommo_events','kommo_conversations_compiled',
+              'kommo_no_reply_tracking','kommo_scrape_errors']:
         r = query(f"SELECT COUNT(*) as c FROM {t}", fetchone=True)
         counts[t] = r['c'] if r else 0
 
+    # Tag distribution
+    tags = query("""
+        SELECT unnest(tags) as tag, COUNT(*) as cnt
+        FROM kommo_leads WHERE tags IS NOT NULL AND array_length(tags,1) > 0
+        GROUP BY tag ORDER BY cnt DESC LIMIT 15
+    """)
+
+    # Top bots
+    top_bots = query("""
+        SELECT bot_name, COUNT(*) as cnt FROM kommo_messages
+        WHERE is_bot=true AND bot_name != '' GROUP BY bot_name ORDER BY cnt DESC LIMIT 8
+    """)
+
+    # Top agents
+    top_agents = query("""
+        SELECT author, COUNT(*) as cnt FROM kommo_messages
+        WHERE sender_type='agent' AND author != '' AND author != 'WhatsApp Business'
+        GROUP BY author ORDER BY cnt DESC LIMIT 8
+    """)
+
+    # Pipeline distribution
+    pipelines = query("""
+        SELECT pipeline_name, COUNT(*) as cnt FROM kommo_leads
+        WHERE pipeline_name != '' GROUP BY pipeline_name ORDER BY cnt DESC
+    """)
+
     return render_template('dashboard.html',
-                          metrics=metrics or [],
-                          today_status=today or [],
-                          latest_date=latest_date,
-                          counts=counts)
+                          metrics=metrics or [], today_status=today_status or [],
+                          latest_date=latest_date, counts=counts,
+                          tags=tags or [], top_bots=top_bots or [],
+                          top_agents=top_agents or [], pipelines=pipelines or [])
 
 
 @app.route('/onboarding', methods=['GET', 'POST'])
@@ -190,33 +207,46 @@ def onboarding():
 
 @app.route('/chats')
 def chats():
-    """Chat list view."""
+    """Chat list view with status filter."""
     chat_date = request.args.get('date', '')
+    status_filter = request.args.get('status', '')
+
     if not chat_date:
         r = query("SELECT MAX(chat_date) as d FROM kommo_chats", fetchone=True)
         chat_date = str(r['d']) if r and r.get('d') else ''
 
-    chats_data = query("""
+    status_clause = ""
+    params = [chat_date]
+    if status_filter:
+        status_clause = "AND c.attention_status = %s"
+        params.append(status_filter)
+
+    chats_data = query(f"""
         SELECT c.talk_id, c.lead_id, c.total_messages, c.total_bot, c.total_human,
                c.attention_status, c.bot_names, c.human_agents,
-               c.first_contact_time, c.last_message_time,
+               c.first_contact_time, c.last_message_time, c.total_in, c.total_out,
                l.name as lead_name, l.pipeline_name, l.stage_name,
                l.responsible_user_name, l.tags,
                ct.name as contact_name, ct.phone
         FROM kommo_chats c
         LEFT JOIN kommo_leads l ON c.lead_id = l.lead_id
         LEFT JOIN kommo_contacts ct ON l.contact_id = ct.contact_id
-        WHERE c.chat_date = %s
+        WHERE c.chat_date = %s {status_clause}
         ORDER BY c.total_messages DESC
-    """, (chat_date,))
+    """, params)
 
-    # Available dates
     dates = query("SELECT DISTINCT chat_date FROM kommo_chats ORDER BY chat_date DESC LIMIT 30")
 
+    # Status counts for filter buttons
+    status_counts = query("""
+        SELECT attention_status, COUNT(*) as cnt FROM kommo_chats
+        WHERE chat_date = %s GROUP BY attention_status
+    """, (chat_date,))
+
     return render_template('chats.html',
-                          chats=chats_data or [],
-                          current_date=chat_date,
-                          dates=dates or [])
+                          chats=chats_data or [], current_date=chat_date,
+                          dates=dates or [], status_filter=status_filter,
+                          status_counts=status_counts or [])
 
 
 @app.route('/chat/<int:talk_id>')
@@ -288,7 +318,7 @@ def stages():
 
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
-    """App settings page."""
+    """App settings page with credential validation."""
     if request.method == 'POST':
         for key in request.form:
             set_setting(key, request.form[key])
@@ -296,8 +326,37 @@ def settings():
         return redirect(url_for('settings'))
 
     all_settings = query("SELECT key, value, updated_at FROM kommo_app_settings ORDER BY key")
-    return render_template('settings.html',
-                          settings=all_settings or [])
+
+    # Group settings for better display
+    groups = {
+        'api': {'title': 'Kommo API', 'icon': 'cloud', 'keys': ['kommo_base_url', 'kommo_access_token', 'kommo_account_name', 'kommo_amojo_id']},
+        'login': {'title': 'Login Scraping (sin 2FA)', 'icon': 'person-lock', 'keys': ['kommo_login_email', 'kommo_login_password']},
+        'scrape': {'title': 'Scraping Config', 'icon': 'gear', 'keys': ['scrape_default_date', 'scrape_status_filter']},
+        'system': {'title': 'Sistema', 'icon': 'cpu', 'keys': ['setup_completed']},
+    }
+
+    return render_template('settings.html', settings=all_settings or [], groups=groups)
+
+
+@app.route('/api/validate-token', methods=['POST'])
+def validate_token():
+    """Validate Kommo API token."""
+    import ssl, urllib.request
+    token = get_setting('kommo_access_token')
+    base = get_setting('kommo_base_url')
+    if not token or not base:
+        return jsonify({'ok': False, 'error': 'Token o URL no configurados'})
+    try:
+        ctx = ssl.create_default_context()
+        req = urllib.request.Request(f"{base}/api/v4/account?with=amojo_id",
+            headers={'Authorization': f'Bearer {token}'})
+        with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
+            data = json.loads(resp.read())
+            set_setting('kommo_account_name', data.get('name', ''))
+            set_setting('kommo_amojo_id', data.get('amojo_id', ''))
+            return jsonify({'ok': True, 'account': data.get('name'), 'id': data.get('id')})
+    except Exception as e:
+        return jsonify({'ok': False, 'error': str(e)[:100]})
 
 
 @app.route('/api/stats')

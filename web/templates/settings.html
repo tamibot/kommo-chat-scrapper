@@ -5,43 +5,85 @@
 
 <div class="row g-3">
     <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">Variables de Configuracion</div>
-            <div class="card-body">
-                <form method="POST">
+        <form method="POST">
+            {% for gkey, group in groups.items() %}
+            <div class="card mb-3">
+                <div class="card-header"><i class="bi bi-{{ group.icon }}"></i> {{ group.title }}</div>
+                <div class="card-body">
                     {% for s in settings %}
+                    {% if s.key in group.keys %}
                     <div class="row mb-2 align-items-center">
-                        <label class="col-sm-4 col-form-label" style="font-size:0.85rem">
-                            <code>{{ s.key }}</code>
-                        </label>
+                        <label class="col-sm-4 col-form-label" style="font-size:.85rem"><code>{{ s.key }}</code></label>
                         <div class="col-sm-8">
                             {% if 'password' in s.key or 'token' in s.key %}
                             <input type="password" name="{{ s.key }}" value="{{ s.value or '' }}" class="form-control form-control-sm">
+                            {% elif s.key == 'scrape_default_date' %}
+                            <select name="{{ s.key }}" class="form-select form-select-sm">
+                                {% for opt in ['yesterday','current_day','current_week','previous_week','current_month'] %}
+                                <option value="{{ opt }}" {% if s.value == opt %}selected{% endif %}>{{ opt }}</option>
+                                {% endfor %}
+                            </select>
                             {% else %}
-                            <input type="text" name="{{ s.key }}" value="{{ s.value or '' }}" class="form-control form-control-sm">
+                            <input type="text" name="{{ s.key }}" value="{{ s.value or '' }}" class="form-control form-control-sm" {% if s.key in ['kommo_account_name','kommo_amojo_id','setup_completed'] %}readonly style="background:#f0f0f0"{% endif %}>
                             {% endif %}
+                            {% if s.updated_at %}<small class="text-muted">Actualizado: {{ s.updated_at }}</small>{% endif %}
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
-                    <div class="text-end mt-3">
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar Cambios</button>
-                    </div>
-                </form>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="text-end"><button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar Cambios</button></div>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <!-- Validation -->
+        <div class="card mb-3">
+            <div class="card-header"><i class="bi bi-check-circle"></i> Validacion</div>
+            <div class="card-body">
+                <button class="btn btn-outline-primary btn-sm d-block w-100 mb-2" onclick="validateToken()">
+                    <i class="bi bi-cloud-check"></i> Validar Token API
+                </button>
+                <div id="tokenResult" class="mt-2"></div>
+
+                <hr>
+                <a href="/api/health" target="_blank" class="btn btn-outline-secondary btn-sm d-block w-100 mb-2">
+                    <i class="bi bi-database-check"></i> Health Check DB
+                </a>
+                <a href="/onboarding" class="btn btn-outline-warning btn-sm d-block w-100">
+                    <i class="bi bi-arrow-repeat"></i> Re-configurar
+                </a>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
+
+        <!-- DB Info -->
         <div class="card">
-            <div class="card-header">Acciones</div>
-            <div class="card-body">
-                <a href="/onboarding" class="btn btn-outline-primary btn-sm d-block mb-2">
-                    <i class="bi bi-arrow-repeat"></i> Re-configurar credenciales
-                </a>
-                <a href="/" class="btn btn-outline-secondary btn-sm d-block">
-                    <i class="bi bi-speedometer2"></i> Ir al Dashboard
-                </a>
+            <div class="card-header"><i class="bi bi-database"></i> Base de Datos</div>
+            <div class="card-body" id="dbInfo">
+                <small class="text-muted">Click "Health Check" para ver info</small>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function validateToken() {
+    var el = document.getElementById('tokenResult');
+    el.innerHTML = '<span class="text-muted">Validando...</span>';
+    fetch('/api/validate-token', {method:'POST'})
+        .then(r=>r.json())
+        .then(d => {
+            if (d.ok) {
+                el.innerHTML = '<span class="validation-ok"><i class="bi bi-check-circle"></i> Conectado: ' + d.account + ' (ID: ' + d.id + ')</span>';
+            } else {
+                el.innerHTML = '<span class="validation-fail"><i class="bi bi-x-circle"></i> Error: ' + d.error + '</span>';
+            }
+        })
+        .catch(e => { el.innerHTML = '<span class="validation-fail">Error de red</span>'; });
+}
+</script>
 {% endblock %}

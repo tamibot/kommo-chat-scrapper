@@ -461,14 +461,31 @@ def main():
         print(f"{'='*60}")
         return
 
-    # Single day mode
+    # Multi-day presets
     now = datetime.now(timezone.utc) - timedelta(hours=5)
-    if args.date == 'yesterday':
-        chat_date = (now - timedelta(days=1)).date()
-    else:
-        chat_date = now.date()
 
-    run_single_day(args, chat_date, args.date)
+    if args.date == 'previous_week':
+        # previous_week: Mon-Sun of last week
+        today = now.date()
+        last_monday = today - timedelta(days=today.weekday() + 7)
+        last_sunday = last_monday + timedelta(days=6)
+        # Scrape as single batch using Kommo's previous_week filter
+        run_single_day(args, last_monday, 'previous_week')
+
+    elif args.date == 'current_week':
+        today = now.date()
+        monday = today - timedelta(days=today.weekday())
+        run_single_day(args, monday, 'current_week')
+
+    elif args.date == 'yesterday':
+        chat_date = (now - timedelta(days=1)).date()
+        run_single_day(args, chat_date, 'yesterday')
+
+    elif args.date == 'current_day':
+        run_single_day(args, now.date(), 'current_day')
+
+    else:
+        run_single_day(args, now.date(), args.date)
 
 
 if __name__ == '__main__':
