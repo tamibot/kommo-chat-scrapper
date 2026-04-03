@@ -138,12 +138,12 @@ def login(driver):
 
 def get_day_unix_range(target_date):
     """Get Unix timestamp range for a single day in Peru time (UTC-5).
-    Kommo uses these in URL filters: filter[date][from]=X&filter[date][to]=Y"""
-    from datetime import datetime
-    dt = datetime(target_date.year, target_date.month, target_date.day, 5, 0, 0)
-    from_ts = int(dt.timestamp())
-    to_ts = from_ts + 86399
-    return from_ts, to_ts
+    Matches exactly what Kommo UI uses: filter[date][from]=X&filter[date][to]=Y
+    Example: Apr 1 -> from=1775019600 to=1775105999"""
+    PERU = timezone(timedelta(hours=-5))
+    day_start = datetime(target_date.year, target_date.month, target_date.day, 0, 0, 0, tzinfo=PERU)
+    day_end = datetime(target_date.year, target_date.month, target_date.day, 23, 59, 59, tzinfo=PERU)
+    return int(day_start.timestamp()), int(day_end.timestamp())
 
 
 def collect_targets_via_api(target_date, filter_mode='conversations'):
@@ -175,7 +175,7 @@ def collect_targets_via_api(target_date, filter_mode='conversations'):
     page = 1
     while True:
         try:
-            url = (f"{base}/api/v4/events?limit=100&page={page}"
+            url = (f"{base}/api/v4/events?limit=250&page={page}"
                    f"&filter[type][]=incoming_chat_message"
                    f"&filter[type][]=outgoing_chat_message"
                    f"&filter[created_at][from]={ts_from}"
@@ -200,7 +200,7 @@ def collect_targets_via_api(target_date, filter_mode='conversations'):
                 emb = e.get('_embedded', {}).get('entity', {})
                 if emb.get('linked_talk_contact_id'):
                     leads[lid]['contact_id'] = emb['linked_talk_contact_id']
-            if len(events) < 100:
+            if len(events) < 250:
                 break
             page += 1
             time.sleep(0.15)
