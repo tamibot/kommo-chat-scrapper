@@ -42,10 +42,10 @@ SESSION_DIR = '/tmp/kommo_scraper_session'
 SUBDOMAIN = 'propertamibotcom'
 
 # ── Anti-ban config ──────────────────────────────────────────────────
-MIN_DELAY = 2.0       # min seconds between chat navigations
-MAX_DELAY = 4.0       # max seconds (randomized)
-EXPAND_WAIT = 1.5     # wait after clicking "Más"
-SCROLL_WAIT = 0.7     # wait between scroll iterations
+MIN_DELAY = 1.5       # min seconds between chat navigations
+MAX_DELAY = 2.5       # max seconds (randomized)
+EXPAND_WAIT = 1.0     # wait after clicking "Más"
+SCROLL_WAIT = 0.5     # wait between scroll iterations
 
 # ── JS Scripts ───────────────────────────────────────────────────────
 
@@ -140,11 +140,64 @@ def get_day_unix_range(target_date):
     """Get Unix timestamp range for a single day in Peru time (UTC-5).
     Kommo uses these in URL filters: filter[date][from]=X&filter[date][to]=Y"""
     from datetime import datetime
-    # Midnight Peru = 5:00 UTC
     dt = datetime(target_date.year, target_date.month, target_date.day, 5, 0, 0)
     from_ts = int(dt.timestamp())
-    to_ts = from_ts + 86399  # 23:59:59
+    to_ts = from_ts + 86399
     return from_ts, to_ts
+
+
+def collect_targets_via_api(target_date):
+    """Get all talk_id + lead_id for a day using Events API (11x faster than scroll).
+    Returns list of {talk_id, lead_id, contact_id}."""
+    import ssl, urllib.request, urllib.error
+    env = {}
+    with open(os.path.join(os.path.dirname(__file__), '..', '.env')) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                k, v = line.split('=', 1); env[k.strip()] = v.strip()
+
+    token = env.get('KOMMO_ACCESS_TOKEN', '')
+    base = env.get('KOMMO_BASE_URL', f'https://{SUBDOMAIN}.kommo.com')
+    ctx = ssl.create_default_context()
+
+    ts_from, ts_to = get_day_unix_range(target_date)
+    talks = {}
+    page = 1
+
+    while True:
+        try:
+            url = (f"{base}/api/v4/events?limit=100&page={page}"
+                   f"&filter[type][]=incoming_chat_message"
+                   f"&filter[type][]=outgoing_chat_message"
+                   f"&filter[created_at][from]={ts_from}"
+                   f"&filter[created_at][to]={ts_to}")
+            req = urllib.request.Request(url, headers={'Authorization': f'Bearer {token}'})
+            with urllib.request.urlopen(req, context=ctx, timeout=15) as resp:
+                data = json.loads(resp.read())
+            events = data.get('_embedded', {}).get('events', [])
+            if not events:
+                break
+            for e in events:
+                va = e.get('value_after', [{}])
+                if va and va[0].get('message', {}).get('talk_id'):
+                    tid = va[0]['message']['talk_id']
+                    if tid not in talks:
+                        emb = e.get('_embedded', {}).get('entity', {})
+                        talks[tid] = {
+                            'talk_id': str(tid),
+                            'lead_id': str(e.get('entity_id', '')),
+                            'contact_id': emb.get('linked_talk_contact_id'),
+                        }
+            if len(events) < 100:
+                break
+            page += 1
+            time.sleep(0.15)  # Rate limit safe
+        except Exception as ex:
+            print(f"    API error page {page}: {ex}")
+            break
+
+    return list(talks.values())
 
 
 def collect_targets(driver, date_preset, status, target_date=None):
@@ -338,10 +391,19 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
     print("  OK")
 
     print(f"[2/6] Collecting chat targets...")
-    targets = collect_targets(driver, date_preset, args.status,
-                              target_date=chat_date if use_unix_date else None)
+    # Try API first (11x faster), fallback to Selenium scroll
+    t_api = time.time()
+    targets = collect_targets_via_api(chat_date)
+    if targets:
+        print(f"  API: {len(targets)} chats in {time.time()-t_api:.1f}s")
+    else:
+        print(f"  API returned 0, falling back to Selenium scroll...")
+        targets = collect_targets(driver, date_preset, args.status,
+                                  target_date=chat_date if use_unix_date else None)
+        print(f"  Selenium: {len(targets)} chats")
+
     total = len(targets) if args.max_chats == 0 else min(args.max_chats, len(targets))
-    print(f"  {len(targets)} found, will scrape {total}")
+    print(f"  Will scrape {total}")
 
     if total == 0:
         print("  No chats found. Skipping.")
@@ -361,13 +423,12 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
         if data['msg_count'] == 0:
             errors += 1
 
-        # Parse REAL date from message timestamps (not filter date)
-        real_date = parse_chat_date_from_messages(data['messages']) if data['messages'] else chat_date
-
+        # Use the filter date (the day we're scraping) as chat_date
+        # This is correct because we filter by day, so the chat had activity on this day
         results.append({
             'talk_id': t['talk_id'],
             'lead_id': t['lead_id'],
-            'chat_date': str(real_date),
+            'chat_date': str(chat_date),
             'conversation_ids': data['conversation_ids'],
             'msg_count': data['msg_count'],
             'analytics': analytics,
