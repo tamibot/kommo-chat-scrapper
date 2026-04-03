@@ -3,7 +3,12 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="page-title mb-0"><i class="bi bi-speedometer2"></i> Dashboard</h4>
-    {% if latest_date %}<span class="text-muted-custom">Ultima actualizacion: <strong>{{ latest_date }}</strong></span>{% endif %}
+    <div>
+        {% if latest_date %}<span class="text-muted-custom">Ultima actualizacion: <strong>{{ latest_date }}</strong></span>{% endif %}
+        <a href="https://propertamibotcom.kommo.com/chats/" target="_blank" class="btn btn-sm btn-outline-primary ms-2">
+            <i class="bi bi-box-arrow-up-right"></i> Abrir Kommo
+        </a>
+    </div>
 </div>
 
 <!-- Stat Cards -->
@@ -47,7 +52,6 @@
 </div>
 
 <div class="row g-3 mb-4">
-    <!-- Attention Status -->
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-header"><i class="bi bi-pie-chart"></i> Estado de Atencion</div>
@@ -65,14 +69,10 @@
                     <strong style="font-size:1.3rem">{{ s.cnt }}</strong>
                 </div>
                 {% endfor %}
-                {% else %}
-                <p class="text-muted text-center py-3">Sin datos aun</p>
-                {% endif %}
+                {% else %}<p class="text-muted text-center py-3">Sin datos</p>{% endif %}
             </div>
         </div>
     </div>
-
-    <!-- DB Tables -->
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-header"><i class="bi bi-database"></i> Base de Datos</div>
@@ -86,28 +86,14 @@
             </div>
         </div>
     </div>
-
-    <!-- Quick Info -->
     <div class="col-md-4">
         <div class="card h-100">
-            <div class="card-header"><i class="bi bi-info-circle"></i> Comandos de Scraping</div>
-            <div class="card-body">
-                <div class="mb-2">
-                    <small class="text-muted">Scrape de ayer:</small><br>
-                    <code class="text-dark">python scripts/scrape_v3.py</code>
-                </div>
-                <div class="mb-2">
-                    <small class="text-muted">Scrape de hoy:</small><br>
-                    <code class="text-dark">python scripts/scrape_v3.py --date current_day</code>
-                </div>
-                <div class="mb-2">
-                    <small class="text-muted">Test rapido (15 chats):</small><br>
-                    <code class="text-dark">python scripts/scrape_v3.py --max-chats 15</code>
-                </div>
-                <div>
-                    <small class="text-muted">Validar setup:</small><br>
-                    <code class="text-dark">python scripts/validate_setup.py</code>
-                </div>
+            <div class="card-header"><i class="bi bi-terminal"></i> Comandos</div>
+            <div class="card-body" style="font-size:0.82rem">
+                <div class="mb-2"><span class="text-muted">Ayer:</span><br><code>python scripts/scrape_v3.py</code></div>
+                <div class="mb-2"><span class="text-muted">Hoy:</span><br><code>python scripts/scrape_v3.py --date current_day</code></div>
+                <div class="mb-2"><span class="text-muted">Test:</span><br><code>python scripts/scrape_v3.py --max-chats 15</code></div>
+                <div><span class="text-muted">Validar:</span><br><code>python scripts/validate_setup.py</code></div>
             </div>
         </div>
     </div>
@@ -115,17 +101,13 @@
 
 <!-- Daily Metrics -->
 <div class="card mb-4">
-    <div class="card-header"><i class="bi bi-calendar-day"></i> Metricas Diarias</div>
+    <div class="card-header d-flex justify-content-between"><span><i class="bi bi-calendar-day"></i> Metricas Diarias</span></div>
     <div class="card-body p-0">
         {% if metrics %}
         <div class="table-responsive">
             <table class="table table-hover mb-0">
                 <thead>
-                    <tr>
-                        <th>Fecha</th><th>Chats</th><th>Mensajes</th>
-                        <th>Bot</th><th>Humano</th><th>Con Humano</th>
-                        <th>Solo Bot</th><th>Avg Interac.</th><th>Agentes</th>
-                    </tr>
+                    <tr><th>Fecha</th><th>Chats</th><th>Mensajes</th><th>Bot</th><th>Humano</th><th>Con Humano</th><th>Solo Bot</th><th>Avg Interac.</th><th>Agentes</th></tr>
                 </thead>
                 <tbody>
                     {% for m in metrics %}
@@ -144,9 +126,7 @@
                 </tbody>
             </table>
         </div>
-        {% else %}
-        <p class="text-muted text-center py-4">Ejecuta el scraper para ver metricas aqui</p>
-        {% endif %}
+        {% else %}<p class="text-muted text-center py-4">Ejecuta el scraper para ver metricas</p>{% endif %}
     </div>
 </div>
 {% endblock %}

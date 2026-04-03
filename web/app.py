@@ -233,12 +233,14 @@ def chat_detail(talk_id):
 
     chat_info = query("""
         SELECT c.*, l.name as lead_name, l.pipeline_name, l.stage_name,
-               l.responsible_user_name, l.tags,
-               ct.name as contact_name, ct.phone
+               l.responsible_user_name, l.tags, l.price, l.source,
+               l.created_at as lead_created, l.updated_at as lead_updated,
+               ct.name as contact_name, ct.phone, ct.email
         FROM kommo_chats c
         LEFT JOIN kommo_leads l ON c.lead_id = l.lead_id
         LEFT JOIN kommo_contacts ct ON l.contact_id = ct.contact_id
         WHERE c.talk_id = %s
+        ORDER BY c.chat_date DESC
         LIMIT 1
     """, (talk_id,), fetchone=True)
 

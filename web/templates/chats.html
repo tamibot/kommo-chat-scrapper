@@ -3,12 +3,25 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="page-title mb-0"><i class="bi bi-chat-left-text"></i> Chats del {{ current_date }}</h4>
-    <select class="form-select" style="width:180px"
-            onchange="window.location='/chats?date='+this.value">
-        {% for d in dates %}
-        <option value="{{ d.chat_date }}" {% if d.chat_date|string == current_date %}selected{% endif %}>{{ d.chat_date }}</option>
-        {% endfor %}
-    </select>
+    <div class="d-flex gap-2 align-items-center">
+        <select class="form-select" style="width:180px" onchange="window.location='/chats?date='+this.value">
+            {% for d in dates %}
+            <option value="{{ d.chat_date }}" {% if d.chat_date|string == current_date %}selected{% endif %}>{{ d.chat_date }}</option>
+            {% endfor %}
+        </select>
+        <a href="https://propertamibotcom.kommo.com/chats/" target="_blank" class="btn btn-sm btn-outline-primary">
+            <i class="bi bi-box-arrow-up-right"></i> Kommo
+        </a>
+    </div>
+</div>
+
+<!-- Quick stats for this date -->
+<div class="row g-2 mb-3">
+    <div class="col"><div class="card stat-card py-2"><div class="stat-number fs-4" style="color:var(--primary)">{{ chats|length }}</div><div class="stat-label">Chats</div></div></div>
+    <div class="col"><div class="card stat-card py-2"><div class="stat-number fs-4" style="color:var(--success)">{{ chats|selectattr('attention_status','equalto','attended')|list|length }}</div><div class="stat-label">Atendidos</div></div></div>
+    <div class="col"><div class="card stat-card py-2"><div class="stat-number fs-4" style="color:var(--warning)">{{ chats|selectattr('attention_status','equalto','pending_response')|list|length }}</div><div class="stat-label">Pendientes</div></div></div>
+    <div class="col"><div class="card stat-card py-2"><div class="stat-number fs-4" style="color:var(--bot-color)">{{ chats|selectattr('attention_status','equalto','bot_only')|list|length }}</div><div class="stat-label">Solo Bot</div></div></div>
+    <div class="col"><div class="card stat-card py-2"><div class="stat-number fs-4" style="color:var(--info)">{{ chats|sum(attribute='total_messages') }}</div><div class="stat-label">Mensajes</div></div></div>
 </div>
 
 <div class="card">
@@ -19,26 +32,32 @@
                     <tr>
                         <th>Lead</th><th>Contacto</th><th>Telefono</th>
                         <th>Pipeline / Etapa</th><th>Estado</th><th>Msgs</th>
-                        <th>Bot</th><th>Humano</th><th>Responsable</th>
+                        <th><i class="bi bi-robot"></i></th><th><i class="bi bi-person"></i></th>
+                        <th>Responsable</th><th>Kommo</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for c in chats %}
-                    <tr>
-                        <td><a href="/chat/{{ c.talk_id }}?date={{ current_date }}" style="text-decoration:none;font-weight:600">{{ c.lead_name or ('Lead #' ~ c.lead_id) }}</a></td>
+                    <tr style="cursor:pointer" onclick="window.location='/chat/{{ c.talk_id }}?date={{ current_date }}'">
+                        <td><a href="/chat/{{ c.talk_id }}?date={{ current_date }}" style="text-decoration:none;font-weight:600" onclick="event.stopPropagation()">{{ c.lead_name or ('Lead #' ~ c.lead_id) }}</a></td>
                         <td>{{ c.contact_name or '-' }}</td>
                         <td><small class="text-muted">{{ c.phone or '-' }}</small></td>
                         <td><small>{{ c.pipeline_name or '' }}{% if c.stage_name %} <i class="bi bi-chevron-right" style="font-size:0.6rem"></i> {{ c.stage_name }}{% endif %}</small></td>
                         <td>
-                            {% if c.attention_status == 'attended' %}<span class="badge badge-attended">Atendido</span>
-                            {% elif c.attention_status == 'pending_response' %}<span class="badge badge-pending">Pendiente</span>
-                            {% elif c.attention_status == 'bot_only' %}<span class="badge badge-bot-only">Solo Bot</span>
+                            {% if c.attention_status == 'attended' %}<span class="badge badge-attended"><i class="bi bi-check-circle"></i> Atendido</span>
+                            {% elif c.attention_status == 'pending_response' %}<span class="badge badge-pending"><i class="bi bi-clock"></i> Pendiente</span>
+                            {% elif c.attention_status == 'bot_only' %}<span class="badge badge-bot-only"><i class="bi bi-robot"></i> Solo Bot</span>
                             {% else %}<span class="badge badge-outbound">{{ c.attention_status }}</span>{% endif %}
                         </td>
                         <td><strong>{{ c.total_messages }}</strong></td>
                         <td><span class="badge badge-bot">{{ c.total_bot }}</span></td>
                         <td><span class="badge badge-human">{{ c.total_human }}</span></td>
                         <td><small>{{ c.responsible_user_name or '-' }}</small></td>
+                        <td onclick="event.stopPropagation()">
+                            <a href="https://propertamibotcom.kommo.com/leads/detail/{{ c.lead_id }}" target="_blank" class="btn btn-sm btn-outline-secondary py-0 px-1" title="Ver en Kommo">
+                                <i class="bi bi-box-arrow-up-right"></i>
+                            </a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
