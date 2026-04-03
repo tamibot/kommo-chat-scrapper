@@ -136,11 +136,30 @@ def login(driver):
     return False
 
 
-def collect_targets(driver, date_preset, status):
-    """Scroll virtual list and accumulate ALL chat targets."""
-    url = (f"https://{SUBDOMAIN}.kommo.com/chats/"
-           f"?filter%5Bdate%5D%5Bdate_preset%5D={date_preset}"
-           f"&filter%5Bstatus%5D%5B%5D={status}")
+def get_day_unix_range(target_date):
+    """Get Unix timestamp range for a single day in Peru time (UTC-5).
+    Kommo uses these in URL filters: filter[date][from]=X&filter[date][to]=Y"""
+    from datetime import datetime
+    # Midnight Peru = 5:00 UTC
+    dt = datetime(target_date.year, target_date.month, target_date.day, 5, 0, 0)
+    from_ts = int(dt.timestamp())
+    to_ts = from_ts + 86399  # 23:59:59
+    return from_ts, to_ts
+
+
+def collect_targets(driver, date_preset, status, target_date=None):
+    """Scroll virtual list and accumulate ALL chat targets.
+    If target_date is provided, uses Unix timestamp filter (more reliable)."""
+    if target_date:
+        from_ts, to_ts = get_day_unix_range(target_date)
+        url = (f"https://{SUBDOMAIN}.kommo.com/chats/"
+               f"?filter%5Bdate%5D%5Bfrom%5D={from_ts}"
+               f"&filter%5Bdate%5D%5Bto%5D={to_ts}"
+               f"&filter%5Bstatus%5D%5B%5D={status}")
+    else:
+        url = (f"https://{SUBDOMAIN}.kommo.com/chats/"
+               f"?filter%5Bdate%5D%5Bdate_preset%5D={date_preset}"
+               f"&filter%5Bstatus%5D%5B%5D={status}")
     driver.get(url)
     time.sleep(6)
 
@@ -297,8 +316,9 @@ def compute_analytics(messages):
 
 # ── Main ─────────────────────────────────────────────────────────────
 
-def run_single_day(args, chat_date, date_preset):
-    """Run scraper for a single day. Core logic extracted for historical reuse."""
+def run_single_day(args, chat_date, date_preset, use_unix_date=False):
+    """Run scraper for a single day. Core logic extracted for historical reuse.
+    If use_unix_date=True, uses exact Unix timestamp filter instead of preset."""
     ts = datetime.now().strftime('%Y%m%d_%H%M%S')
     out_dir = os.path.join(os.path.dirname(__file__), '..', 'output', f'{date_preset}_{ts}')
     os.makedirs(out_dir, exist_ok=True)
@@ -318,7 +338,8 @@ def run_single_day(args, chat_date, date_preset):
     print("  OK")
 
     print(f"[2/6] Collecting chat targets...")
-    targets = collect_targets(driver, date_preset, args.status)
+    targets = collect_targets(driver, date_preset, args.status,
+                              target_date=chat_date if use_unix_date else None)
     total = len(targets) if args.max_chats == 0 else min(args.max_chats, len(targets))
     print(f"  {len(targets)} found, will scrape {total}")
 
@@ -488,7 +509,7 @@ def main():
                 # For older dates, use custom date filter via URL
                 preset = f'custom_{current.isoformat()}'
 
-            summary = run_single_day(args, current, preset)
+            summary = run_single_day(args, current, preset, use_unix_date=True)
             if summary:
                 day_results.append({'date': str(current), 'summary': summary})
             current += timedelta(days=1)
@@ -505,21 +526,31 @@ def main():
     now = datetime.now(timezone.utc) - timedelta(hours=5)
 
     if args.date == 'previous_week':
-        # previous_week: Mon-Sun of last week
+        # Scrape each day of last week individually (more reliable)
         today = now.date()
         last_monday = today - timedelta(days=today.weekday() + 7)
-        last_sunday = last_monday + timedelta(days=6)
-        # Scrape as single batch using Kommo's previous_week filter
-        run_single_day(args, last_monday, 'previous_week')
+        print(f"{'='*60}")
+        print(f"  PREVIOUS WEEK: {last_monday} to {last_monday + timedelta(days=6)}")
+        print(f"  Scraping 7 days individually with Unix timestamp filters")
+        print(f"{'='*60}")
+        for i in range(7):
+            day = last_monday + timedelta(days=i)
+            run_single_day(args, day, f'day_{day}', use_unix_date=True)
 
     elif args.date == 'current_week':
         today = now.date()
         monday = today - timedelta(days=today.weekday())
-        run_single_day(args, monday, 'current_week')
+        days_so_far = (today - monday).days + 1
+        print(f"{'='*60}")
+        print(f"  CURRENT WEEK: {monday} to {today} ({days_so_far} days)")
+        print(f"{'='*60}")
+        for i in range(days_so_far):
+            day = monday + timedelta(days=i)
+            run_single_day(args, day, f'day_{day}', use_unix_date=True)
 
     elif args.date == 'yesterday':
         chat_date = (now - timedelta(days=1)).date()
-        run_single_day(args, chat_date, 'yesterday')
+        run_single_day(args, chat_date, 'yesterday', use_unix_date=True)
 
     elif args.date == 'current_day':
         run_single_day(args, now.date(), 'current_day')
