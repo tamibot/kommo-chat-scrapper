@@ -1,7 +1,13 @@
 {
-  "account_id": 30050693,
-  "subdomain": "propertamibotcom",
-  "amojo_id": "46db3794-cd6c-4506-a0a6-6205b2f546e9",
+  "account": {
+    "id": 30050693,
+    "name": "Proper Tamibot",
+    "subdomain": "propertamibotcom",
+    "amojo_id": "46db3794-cd6c-4506-a0a6-6205b2f546e9",
+    "country": "PE",
+    "currency": "PEN",
+    "language": "en"
+  },
   "pipelines": {
     "10131524": {
       "name": "MASIVOS",
@@ -9,7 +15,7 @@
       "is_main": true,
       "stages": {
         "77755860": {
-          "name": "Incoming leads",
+          "name": "Leads Entrantes",
           "sort": 10,
           "color": "#c1c1c1"
         },
@@ -66,7 +72,7 @@
       "is_main": false,
       "stages": {
         "69395708": {
-          "name": "Incoming leads",
+          "name": "Leads Entrantes",
           "sort": 10,
           "color": "#c1c1c1"
         },
@@ -2168,5 +2174,1084 @@
       "name": "Carlos Patiño",
       "email": "carlos.patino@proper.com.pe"
     }
-  }
+  },
+  "channels": [
+    {
+      "origin": "waba",
+      "source_id": 23040845,
+      "count": 144
+    },
+    {
+      "origin": "waba",
+      "source_id": 23041007,
+      "count": 10
+    },
+    {
+      "origin": "waba",
+      "source_id": 23041732,
+      "count": 17
+    },
+    {
+      "origin": "waba",
+      "source_id": 23041441,
+      "count": 16
+    },
+    {
+      "origin": "instagram_business",
+      "source_id": 23040499,
+      "count": 12
+    },
+    {
+      "origin": "waba",
+      "source_id": 23040807,
+      "count": 11
+    },
+    {
+      "origin": "waba",
+      "source_id": 23041009,
+      "count": 7
+    },
+    {
+      "origin": "waba",
+      "source_id": 23040997,
+      "count": 3
+    },
+    {
+      "origin": "waba",
+      "source_id": 23041029,
+      "count": 4
+    },
+    {
+      "origin": "tiktok_kommo",
+      "source_id": 23041227,
+      "count": 3
+    },
+    {
+      "origin": "waba",
+      "source_id": 23041001,
+      "count": 4
+    },
+    {
+      "origin": "waba",
+      "source_id": 23041460,
+      "count": 10
+    },
+    {
+      "origin": "waba",
+      "source_id": 23040999,
+      "count": 4
+    },
+    {
+      "origin": "instagram_business",
+      "source_id": 23040655,
+      "count": 4
+    },
+    {
+      "origin": "facebook",
+      "source_id": 23040501,
+      "count": 1
+    }
+  ],
+  "tags": [
+    {
+      "id": 230007,
+      "name": "|"
+    },
+    {
+      "id": 160051,
+      "name": "1"
+    },
+    {
+      "id": 33492,
+      "name": "24"
+    },
+    {
+      "id": 250253,
+      "name": "actualizacion bbdd modo"
+    },
+    {
+      "id": 136529,
+      "name": "actualizado"
+    },
+    {
+      "id": 31700,
+      "name": "Agendar cita"
+    },
+    {
+      "id": 192223,
+      "name": "AGENDAR LLAMADA"
+    },
+    {
+      "id": 255960,
+      "name": "AGENTE_INVERSIONES_IA"
+    },
+    {
+      "id": 191649,
+      "name": "ASESOR"
+    },
+    {
+      "id": 191651,
+      "name": "ASESOR POST SOLICITUD"
+    },
+    {
+      "id": 255970,
+      "name": "ASESOR_IA_INVERSIONES"
+    },
+    {
+      "id": 257084,
+      "name": "ASESORES_IA"
+    },
+    {
+      "id": 148737,
+      "name": "bitrix"
+    },
+    {
+      "id": 199787,
+      "name": "BITRIX"
+    },
+    {
+      "id": 216213,
+      "name": "bre"
+    },
+    {
+      "id": 157007,
+      "name": "CAMPAÑA"
+    },
+    {
+      "id": 248801,
+      "name": "CONTACTAR MODO"
+    },
+    {
+      "id": 40630,
+      "name": "Contacto"
+    },
+    {
+      "id": 230871,
+      "name": "CREDITO"
+    },
+    {
+      "id": 240429,
+      "name": "DIEGO"
+    },
+    {
+      "id": 186039,
+      "name": "DZ"
+    },
+    {
+      "id": 226781,
+      "name": "DZ-BARRANCO"
+    },
+    {
+      "id": 216205,
+      "name": "Dz-breña"
+    },
+    {
+      "id": 226023,
+      "name": "DZ-CARRION"
+    },
+    {
+      "id": 230245,
+      "name": "DZ-HELIO"
+    },
+    {
+      "id": 208595,
+      "name": "ELANT"
+    },
+    {
+      "id": 191511,
+      "name": "ELEANA"
+    },
+    {
+      "id": 191509,
+      "name": "ELENA"
+    },
+    {
+      "id": 226783,
+      "name": "ELENA-BARRANCO"
+    },
+    {
+      "id": 216207,
+      "name": "Elena-breña"
+    },
+    {
+      "id": 226025,
+      "name": "ELENA-CARRION"
+    },
+    {
+      "id": 230247,
+      "name": "ELENA-HELIO"
+    },
+    {
+      "id": 198615,
+      "name": "EMPUJE"
+    },
+    {
+      "id": 205399,
+      "name": "ENCUESTA SATIS &lt; 2024"
+    },
+    {
+      "id": 205391,
+      "name": "ENCUESTA SATIS < 2024"
+    },
+    {
+      "id": 203811,
+      "name": "Encuesta Satis. Oct"
+    },
+    {
+      "id": 203607,
+      "name": "Encuesta Workshop Oct"
+    },
+    {
+      "id": 217541,
+      "name": "ENCUESTA.FEB"
+    },
+    {
+      "id": 206869,
+      "name": "Entrevista perfil cliente 2.0"
+    },
+    {
+      "id": 258948,
+      "name": "ENVIADO"
+    },
+    {
+      "id": 258936,
+      "name": "ERROR 24.03"
+    },
+    {
+      "id": 238813,
+      "name": "ERROR MASIVO 05.09"
+    },
+    {
+      "id": 248799,
+      "name": "ERROR MASIVO MODO 02.12"
+    },
+    {
+      "id": 211343,
+      "name": "ERROR MASIVO REFERIDOS"
+    },
+    {
+      "id": 186645,
+      "name": "ERROR MENSAJE"
+    },
+    {
+      "id": 220953,
+      "name": "euromotors"
+    },
+    {
+      "id": 192323,
+      "name": "evento"
+    },
+    {
+      "id": 244753,
+      "name": "Evento elena"
+    },
+    {
+      "id": 247737,
+      "name": "Evento germain"
+    },
+    {
+      "id": 256474,
+      "name": "EVENTO INVERSION"
+    },
+    {
+      "id": 244751,
+      "name": "Evento leidy"
+    },
+    {
+      "id": 244757,
+      "name": "Evento marcos"
+    },
+    {
+      "id": 244759,
+      "name": "Evento sebastian"
+    },
+    {
+      "id": 244755,
+      "name": "Evento sharon"
+    },
+    {
+      "id": 122887,
+      "name": "Facebook"
+    },
+    {
+      "id": 243587,
+      "name": "FALLA - DIEGO - 16.10.2025"
+    },
+    {
+      "id": 251810,
+      "name": "fb-Arise"
+    },
+    {
+      "id": 36916,
+      "name": "fb160622826172202"
+    },
+    {
+      "id": 253958,
+      "name": "fb1606854277182454"
+    },
+    {
+      "id": 247925,
+      "name": "fb2248479448969983"
+    },
+    {
+      "id": 251822,
+      "name": "fb2281751522320946"
+    },
+    {
+      "id": 258044,
+      "name": "fb2429668000801140"
+    },
+    {
+      "id": 257952,
+      "name": "fb896633719999466"
+    },
+    {
+      "id": 143479,
+      "name": "felix"
+    },
+    {
+      "id": 169013,
+      "name": "Fin funfest"
+    },
+    {
+      "id": 258120,
+      "name": "FORM_INV_META_09.03"
+    },
+    {
+      "id": 258118,
+      "name": "FORM_INVERSIONES"
+    },
+    {
+      "id": 186045,
+      "name": "GERMAIN"
+    },
+    {
+      "id": 121969,
+      "name": "Guisse"
+    },
+    {
+      "id": 121963,
+      "name": "Guisse102"
+    },
+    {
+      "id": 187093,
+      "name": "HABLAR CON ASESOR"
+    },
+    {
+      "id": 257080,
+      "name": "IA_INVERSIONES"
+    },
+    {
+      "id": 227223,
+      "name": "IMPORT - 26.05"
+    },
+    {
+      "id": 131557,
+      "name": "Importar_03052023_1829"
+    },
+    {
+      "id": 177020,
+      "name": "Importar_12032024_1154"
+    },
+    {
+      "id": 259054,
+      "name": "Importar_25032026_1311"
+    },
+    {
+      "id": 160063,
+      "name": "INQUILINO"
+    },
+    {
+      "id": 225237,
+      "name": "inquilinos"
+    },
+    {
+      "id": 142957,
+      "name": "internacional"
+    },
+    {
+      "id": 253368,
+      "name": "inve"
+    },
+    {
+      "id": 247361,
+      "name": "INVERSIONES_IA"
+    },
+    {
+      "id": 257082,
+      "name": "INVERSIONESIA"
+    },
+    {
+      "id": 225505,
+      "name": "JEAN"
+    },
+    {
+      "id": 226789,
+      "name": "JEAN-BARRANCO"
+    },
+    {
+      "id": 212119,
+      "name": "JOAQUIN"
+    },
+    {
+      "id": 212129,
+      "name": "JOAQUÍN"
+    },
+    {
+      "id": 216209,
+      "name": "Joaquin-breña"
+    },
+    {
+      "id": 211857,
+      "name": "jueves02"
+    },
+    {
+      "id": 188337,
+      "name": "juniozoom"
+    },
+    {
+      "id": 67288,
+      "name": "Lead F.L - Linkedin"
+    },
+    {
+      "id": 38910,
+      "name": "Lead Web"
+    },
+    {
+      "id": 38874,
+      "name": "Lead Web-Flow"
+    },
+    {
+      "id": 39002,
+      "name": "Leads Flow.P"
+    },
+    {
+      "id": 145803,
+      "name": "lei"
+    },
+    {
+      "id": 145679,
+      "name": "leidy"
+    },
+    {
+      "id": 186041,
+      "name": "LEIDY"
+    },
+    {
+      "id": 226775,
+      "name": "LEIDY-BARRANCO"
+    },
+    {
+      "id": 216203,
+      "name": "Leidy-breña"
+    },
+    {
+      "id": 225995,
+      "name": "LEIDY-CARRION"
+    },
+    {
+      "id": 230243,
+      "name": "LEIDY-HELIO"
+    },
+    {
+      "id": 195871,
+      "name": "Llamada Proper Rentas"
+    },
+    {
+      "id": 141782,
+      "name": "llamadahecha"
+    },
+    {
+      "id": 216211,
+      "name": "Luis-breña"
+    },
+    {
+      "id": 186047,
+      "name": "LUNES"
+    },
+    {
+      "id": 226787,
+      "name": "MARCO-BARRANCO"
+    },
+    {
+      "id": 226029,
+      "name": "MARCO-CARRION"
+    },
+    {
+      "id": 219733,
+      "name": "MARCOS"
+    },
+    {
+      "id": 230251,
+      "name": "MARCOS-HELIO"
+    },
+    {
+      "id": 258950,
+      "name": "MASIVO 24.03 - 2"
+    },
+    {
+      "id": 258952,
+      "name": "MASIVO 24.03 - G1"
+    },
+    {
+      "id": 258964,
+      "name": "MASIVO 24.03 - G2"
+    },
+    {
+      "id": 259040,
+      "name": "MASIVO 24.03 - G2.1"
+    },
+    {
+      "id": 259050,
+      "name": "MASIVO 24.03 - G4"
+    },
+    {
+      "id": 258932,
+      "name": "MASIVO 25.03"
+    },
+    {
+      "id": 256810,
+      "name": "MASIVO EVENTO 25 FEB"
+    },
+    {
+      "id": 194081,
+      "name": "MasivoDz"
+    },
+    {
+      "id": 194089,
+      "name": "MasivoEleana"
+    },
+    {
+      "id": 194087,
+      "name": "MasivoElena"
+    },
+    {
+      "id": 194083,
+      "name": "MasivoGermain"
+    },
+    {
+      "id": 194079,
+      "name": "MasivoLeidy"
+    },
+    {
+      "id": 233615,
+      "name": "MASIVOLEIDY2025"
+    },
+    {
+      "id": 194077,
+      "name": "MasivoYanery"
+    },
+    {
+      "id": 183889,
+      "name": "mayo workshop"
+    },
+    {
+      "id": 191885,
+      "name": "medios/altos"
+    },
+    {
+      "id": 246909,
+      "name": "META_ADS"
+    },
+    {
+      "id": 253952,
+      "name": "meta_ads_form"
+    },
+    {
+      "id": 186049,
+      "name": "MIERCOLES"
+    },
+    {
+      "id": 242197,
+      "name": "MODOSUPP"
+    },
+    {
+      "id": 213189,
+      "name": "no asignados"
+    },
+    {
+      "id": 192229,
+      "name": "NO CONTESTO"
+    },
+    {
+      "id": 187095,
+      "name": "NO INTERESADO"
+    },
+    {
+      "id": 187091,
+      "name": "NO RESPONDIO"
+    },
+    {
+      "id": 226125,
+      "name": "NO SE ENCONTRO"
+    },
+    {
+      "id": 213653,
+      "name": "novo-dz"
+    },
+    {
+      "id": 213657,
+      "name": "novo-eleana"
+    },
+    {
+      "id": 213655,
+      "name": "novo-elena"
+    },
+    {
+      "id": 213659,
+      "name": "novo-joaquin"
+    },
+    {
+      "id": 213651,
+      "name": "novo-leidy"
+    },
+    {
+      "id": 213661,
+      "name": "novo-luis"
+    },
+    {
+      "id": 213649,
+      "name": "novo3"
+    },
+    {
+      "id": 225781,
+      "name": "NUEVO"
+    },
+    {
+      "id": 141784,
+      "name": "onhold"
+    },
+    {
+      "id": 216201,
+      "name": "OP.BREÑA"
+    },
+    {
+      "id": 226779,
+      "name": "OPOR.INV.BARRANCO"
+    },
+    {
+      "id": 225993,
+      "name": "OPOR.INV.CARRION"
+    },
+    {
+      "id": 186051,
+      "name": "OTRA FECHA"
+    },
+    {
+      "id": 141780,
+      "name": "p.abordaje"
+    },
+    {
+      "id": 203849,
+      "name": "PAD"
+    },
+    {
+      "id": 203809,
+      "name": "PAD.MEDIO-ALTO"
+    },
+    {
+      "id": 203671,
+      "name": "PADOVA"
+    },
+    {
+      "id": 203733,
+      "name": "PADOVA.IN"
+    },
+    {
+      "id": 199789,
+      "name": "PERSONAL"
+    },
+    {
+      "id": 192225,
+      "name": "PREGUNTAS FRECUENTES"
+    },
+    {
+      "id": 232005,
+      "name": "PROP.RENTAS"
+    },
+    {
+      "id": 25986,
+      "name": "PROPER"
+    },
+    {
+      "id": 30200,
+      "name": "Proper"
+    },
+    {
+      "id": 52818,
+      "name": "Proper prueba"
+    },
+    {
+      "id": 134683,
+      "name": "Proper Rentas"
+    },
+    {
+      "id": 246911,
+      "name": "PROPER_INVERSIONES"
+    },
+    {
+      "id": 160065,
+      "name": "PROPERBOT1"
+    },
+    {
+      "id": 160061,
+      "name": "PROPIETARIO"
+    },
+    {
+      "id": 225239,
+      "name": "propietarios"
+    },
+    {
+      "id": 136525,
+      "name": "Proyecto"
+    },
+    {
+      "id": 203841,
+      "name": "PRUEBA"
+    },
+    {
+      "id": 203839,
+      "name": "PRUEBAS"
+    },
+    {
+      "id": 211255,
+      "name": "REFERIDOS DIC24"
+    },
+    {
+      "id": 220851,
+      "name": "rentas"
+    },
+    {
+      "id": 234301,
+      "name": "RENTAS"
+    },
+    {
+      "id": 236527,
+      "name": "RENTAS IA - HORARIO INDICADO"
+    },
+    {
+      "id": 236525,
+      "name": "RENTAS IA - INTERESADO"
+    },
+    {
+      "id": 240607,
+      "name": "RENTAS IA - MODO"
+    },
+    {
+      "id": 243359,
+      "name": "RETAILSUPP"
+    },
+    {
+      "id": 32395,
+      "name": "S1"
+    },
+    {
+      "id": 33442,
+      "name": "S10"
+    },
+    {
+      "id": 33448,
+      "name": "S11"
+    },
+    {
+      "id": 33450,
+      "name": "S12"
+    },
+    {
+      "id": 33456,
+      "name": "S13"
+    },
+    {
+      "id": 33458,
+      "name": "S14"
+    },
+    {
+      "id": 33460,
+      "name": "S15"
+    },
+    {
+      "id": 33462,
+      "name": "S16"
+    },
+    {
+      "id": 33464,
+      "name": "S17"
+    },
+    {
+      "id": 33470,
+      "name": "S18"
+    },
+    {
+      "id": 33474,
+      "name": "S19"
+    },
+    {
+      "id": 33406,
+      "name": "S2"
+    },
+    {
+      "id": 33476,
+      "name": "S20"
+    },
+    {
+      "id": 33480,
+      "name": "S21"
+    },
+    {
+      "id": 33484,
+      "name": "S22"
+    },
+    {
+      "id": 33488,
+      "name": "S23"
+    },
+    {
+      "id": 33496,
+      "name": "S24"
+    },
+    {
+      "id": 33494,
+      "name": "S25"
+    },
+    {
+      "id": 33500,
+      "name": "S26"
+    },
+    {
+      "id": 33502,
+      "name": "S27"
+    },
+    {
+      "id": 33504,
+      "name": "S28"
+    },
+    {
+      "id": 208597,
+      "name": "S29"
+    },
+    {
+      "id": 33412,
+      "name": "S3"
+    },
+    {
+      "id": 33414,
+      "name": "S4"
+    },
+    {
+      "id": 33416,
+      "name": "S5"
+    },
+    {
+      "id": 33418,
+      "name": "S6"
+    },
+    {
+      "id": 33422,
+      "name": "S7"
+    },
+    {
+      "id": 33424,
+      "name": "S8"
+    },
+    {
+      "id": 33432,
+      "name": "S9"
+    },
+    {
+      "id": 231439,
+      "name": "SANTA_BEATRIZ_10JULIO"
+    },
+    {
+      "id": 187087,
+      "name": "SEG"
+    },
+    {
+      "id": 187079,
+      "name": "SEG - 10D"
+    },
+    {
+      "id": 192215,
+      "name": "SEG - 12H"
+    },
+    {
+      "id": 187081,
+      "name": "SEG - 13D"
+    },
+    {
+      "id": 192221,
+      "name": "SEG - 168H"
+    },
+    {
+      "id": 187083,
+      "name": "SEG - 16D"
+    },
+    {
+      "id": 187075,
+      "name": "SEG - 1D"
+    },
+    {
+      "id": 192217,
+      "name": "SEG - 24H"
+    },
+    {
+      "id": 187073,
+      "name": "SEG - 3D"
+    },
+    {
+      "id": 190479,
+      "name": "SEG - 45D"
+    },
+    {
+      "id": 187085,
+      "name": "SEG - 5H"
+    },
+    {
+      "id": 190481,
+      "name": "SEG - 60D"
+    },
+    {
+      "id": 192219,
+      "name": "SEG - 72H"
+    },
+    {
+      "id": 187077,
+      "name": "SEG - 7D"
+    },
+    {
+      "id": 186059,
+      "name": "SEG-10H"
+    },
+    {
+      "id": 186065,
+      "name": "SEG-1S"
+    },
+    {
+      "id": 186061,
+      "name": "SEG-24H"
+    },
+    {
+      "id": 186055,
+      "name": "SEG-45MIN"
+    },
+    {
+      "id": 186053,
+      "name": "SEG-5H"
+    },
+    {
+      "id": 186063,
+      "name": "SEG-72H"
+    },
+    {
+      "id": 186057,
+      "name": "SEG-H5"
+    },
+    {
+      "id": 170181,
+      "name": "seg.rentas"
+    },
+    {
+      "id": 40632,
+      "name": "Seguimiento S1"
+    },
+    {
+      "id": 219731,
+      "name": "SHARON"
+    },
+    {
+      "id": 226785,
+      "name": "SHARON-BARRANCO"
+    },
+    {
+      "id": 226027,
+      "name": "SHARON-CARRION"
+    },
+    {
+      "id": 230249,
+      "name": "SHARON-HELIO"
+    },
+    {
+      "id": 186067,
+      "name": "SIN RESPUESTA"
+    },
+    {
+      "id": 31748,
+      "name": "Site request"
+    },
+    {
+      "id": 34574,
+      "name": "Solicitud de la página web"
+    },
+    {
+      "id": 210133,
+      "name": "sorteo"
+    },
+    {
+      "id": 52820,
+      "name": "Sprueba1"
+    },
+    {
+      "id": 52822,
+      "name": "Sprueba2"
+    },
+    {
+      "id": 52824,
+      "name": "Sprueba3"
+    },
+    {
+      "id": 244825,
+      "name": "st"
+    },
+    {
+      "id": 237703,
+      "name": "stop"
+    },
+    {
+      "id": 236411,
+      "name": "stop_ai"
+    },
+    {
+      "id": 245043,
+      "name": "TEST"
+    },
+    {
+      "id": 158835,
+      "name": "Última reacción: Buena"
+    },
+    {
+      "id": 158833,
+      "name": "Última reacción: Mala"
+    },
+    {
+      "id": 158831,
+      "name": "Última reacción: Neutral"
+    },
+    {
+      "id": 88836,
+      "name": "Webinar"
+    },
+    {
+      "id": 88850,
+      "name": "Webinar Link"
+    },
+    {
+      "id": 231617,
+      "name": "WK-JUL-25-DZ"
+    },
+    {
+      "id": 231621,
+      "name": "WK-JUL-25-ELENA"
+    },
+    {
+      "id": 231619,
+      "name": "WK-JUL-25-LEIDY"
+    },
+    {
+      "id": 231623,
+      "name": "WK-JUL-25-MARCOS"
+    },
+    {
+      "id": 231625,
+      "name": "WK-JUL-25-SHAROM"
+    }
+  ]
 }

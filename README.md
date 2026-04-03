@@ -1,308 +1,290 @@
 # Kommo Chat Scrapper
 
-> Herramienta automatizada para extraer, enriquecer y analizar conversaciones de chat desde Kommo CRM. Diseñada para ejecutarse con **Claude Code** como asistente de configuración.
+Herramienta automatizada para extraer, enriquecer y analizar conversaciones de WhatsApp desde Kommo CRM. Incluye dashboard web, deteccion de bots vs humanos, y metricas de atencion.
 
 ---
 
-## Que hace este proyecto?
+## Como funciona
 
-Este scraper extrae **todas las conversaciones de WhatsApp** desde Kommo CRM de forma automatizada:
+El sistema combina dos fuentes de datos:
 
-1. **Scraping** - Selenium headless navega la vista de chats y extrae cada mensaje
-2. **Enrichment** - La API de Kommo agrega datos del lead, contacto, pipeline, tags
-3. **Analytics** - Detecta bots vs humanos, tiempo de atención, chats sin respuesta
-4. **Storage** - PostgreSQL con 10 tablas optimizadas
-5. **LLM Ready** - Conversaciones compiladas en texto plano por cliente
+1. **Kommo API v4** - Extrae datos estructurados (leads, contactos, pipelines, tags, eventos, cambios de etapa)
+2. **Selenium headless** - Navega la vista de chats y extrae el contenido real de los mensajes (la API no expone mensajes de chat)
 
----
+### Flujo de ejecucion
 
-## Arquitectura
-
-```mermaid
-graph TB
-    subgraph "1. Scraping (Selenium)"
-        A[Login Kommo] --> B[Cargar lista de chats]
-        B --> C[Scroll virtual para todos los chats]
-        C --> D[Navegar a cada chat]
-        D --> E[Expandir 'Más X de Y']
-        E --> F[Extraer mensajes via JS]
-    end
-
-    subgraph "2. API Enrichment"
-        G[Batch fetch leads] --> H[Batch fetch contacts]
-        H --> I[Fetch tags y custom fields]
-        I --> J[Fetch stage changes events]
-        J --> K[Fetch all events del dia]
-    end
-
-    subgraph "3. Processing"
-        L[Detectar Bot vs Humano]
-        M[Calcular interacciones]
-        N[Detectar chats sin respuesta]
-        O[Compilar conversacion por cliente]
-    end
-
-    subgraph "4. Storage (PostgreSQL)"
-        P[(kommo_contacts)]
-        Q[(kommo_leads)]
-        R[(kommo_chats)]
-        S[(kommo_messages)]
-        T[(kommo_events)]
-        U[(kommo_stage_changes)]
-        V[(kommo_conversations_compiled)]
-        W[(kommo_daily_metrics)]
-    end
-
-    F --> L
-    L --> M --> N --> O
-    K --> T
-    J --> U
-    O --> V
-    G --> Q
-    H --> P
-    F --> S
-    N --> R
-    R --> W
+```
+1. Login automatico (usuario sin 2FA)
+2. Navegar a chats del dia con filtro Unix timestamp
+3. Scroll virtual para cargar todos los chats
+4. Por cada chat:
+   - Navegar a la URL del chat
+   - Expandir mensajes colapsados ("Mas X de Y")
+   - Extraer mensajes via JavaScript injection
+   - Detectar: autor, bot/humano, media, timestamp
+5. Enriquecer via API:
+   - Leads con campos custom, tags, pipeline, responsable
+   - Contactos con telefono y email
+   - Eventos del dia (tags, cambios etapa, creaciones)
+   - Stage changes historicos
+6. Guardar en PostgreSQL (10 tablas)
+7. Compilar conversaciones por cliente (JSON para LLM)
+8. Calcular metricas diarias
 ```
 
-## Flujo de datos por mensaje
+### Deteccion de Bot vs Humano
 
-```mermaid
-flowchart LR
-    A[Mensaje en Kommo] --> B{Es saliente?}
-    B -->|Si| C{Author contiene 'SalesBot'?}
-    C -->|Si| D[sender_type: bot]
-    C -->|No| E[sender_type: agent]
-    B -->|No| F[sender_type: contact]
+El scraper identifica automaticamente quien envio cada mensaje:
 
-    D --> G{Tiene media?}
-    E --> G
-    F --> G
-    G -->|Imagen| H[type: image]
-    G -->|Video| I[type: video]
-    G -->|Archivo| J[type: file]
-    G -->|Audio| K[type: audio]
-    G -->|Texto| L[type: text]
-```
+| Tipo | Como detecta | Ejemplo |
+|------|-------------|---------|
+| **Bot** | Author contiene "SalesBot" o "Tami Bot" | `SalesBot (INICIO INVERSIONES 25.07.25)` |
+| **Agente humano** | Mensaje OUT sin patron de bot | `Martin Velasco`, `Daisy` |
+| **Contacto** | Mensaje IN (entrante del cliente) | `Jose Junior Quispe Figueroa` |
+
+### Analisis de volumenes (Events API)
+
+Para entender los volumenes reales de un dia:
+
+| Tipo | Que es | Ejemplo Mar 31 |
+|------|--------|----------------|
+| **Conversaciones reales** | Leads con mensajes IN + OUT | 295 |
+| **Pendientes** | Solo IN (cliente escribio, sin respuesta) | 45 |
+| **Follow-up** | Solo 1-2 OUT (bot de seguimiento) | 109 |
+| **Masivo** | Solo 3+ OUT (campana masiva) | 11 |
+| **Selenium "opened"** | Solo chats activos abiertos | 95 |
 
 ---
 
-## Requisitos previos
+## Implementacion para un nuevo cliente
 
-| Herramienta | Version | Para que |
-|-------------|---------|----------|
-| Python | 3.9+ | Runtime principal |
-| Google Chrome | 120+ | Selenium headless |
-| PostgreSQL | 13+ | Base de datos (puede ser Railway, Supabase, local) |
-| pip | 21+ | Gestor de paquetes |
-
-## Instalacion rapida
+### Paso 1: Clonar repositorio
 
 ```bash
-# 1. Clonar
-git clone <repo-url>
-cd kommo_chat_scrapper
+git clone https://github.com/tamibot/kommo-chat-scrapper.git
+cd kommo-chat-scrapper
+```
 
-# 2. Instalar dependencias Python
-pip install selenium psycopg2-binary
+### Paso 2: Instalar dependencias
 
-# 3. Configurar credenciales
+```bash
+pip install selenium psycopg2-binary flask gunicorn
+```
+
+**Requisitos del sistema:**
+- Python 3.9+
+- Google Chrome instalado (para Selenium headless)
+- PostgreSQL (Railway, Supabase, local, etc.)
+
+### Paso 3: Configurar credenciales
+
+```bash
 cp .env.example .env
-# Editar .env con tus datos (ver seccion Credenciales)
+```
 
-# 4. Validar que todo funciona
+Editar `.env` con los datos del cliente:
+
+```env
+# === KOMMO API ===
+# URL de la cuenta (reemplazar subdominio)
+KOMMO_BASE_URL=https://MI-SUBDOMINIO.kommo.com
+
+# Token API v4
+# Obtener: Kommo > Configuracion > Integraciones > Tu integracion > Token
+KOMMO_ACCESS_TOKEN=eyJ0eXAiOiJKV1Q...
+
+# === LOGIN PARA SCRAPING ===
+# IMPORTANTE: Este usuario NO debe tener 2FA habilitado
+KOMMO_LOGIN_EMAIL=scraper@empresa.com
+KOMMO_LOGIN_PASSWORD=password123
+
+# === POSTGRESQL ===
+DATABASE_URL=postgresql://usuario:password@host:puerto/basededatos
+```
+
+### Paso 4: Descubrir la cuenta
+
+```bash
+python scripts/setup_account.py
+```
+
+Este script:
+- Valida la conexion API
+- Descubre todos los pipelines y etapas
+- Mapea campos personalizados (leads + contactos)
+- Lista usuarios y sus roles
+- Identifica canales de chat (WhatsApp, Telegram, etc.)
+- Detecta tags en uso
+- Guarda todo en `config/kommo_mappings.json`
+
+### Paso 5: Validar todo
+
+```bash
 python scripts/validate_setup.py
+```
 
-# 5. Ejecutar (test con 5 chats)
+Verifica:
+- `.env` con todas las variables
+- Python dependencies instaladas
+- Chrome headless funcional
+- Kommo API conecta y responde
+- Login Selenium sin 2FA funciona
+- PostgreSQL conecta y tiene tablas
+
+### Paso 6: Test inicial
+
+```bash
+# Scrapear 5 chats de ayer para validar
 python scripts/scrape_v3.py --max-chats 5
+```
 
-# 6. Scrape completo de ayer
+### Paso 7: Scrape completo
+
+```bash
+# Ayer completo
 python scripts/scrape_v3.py --date yesterday
+
+# Rango de fechas
+python scripts/scrape_v3.py --from-date 2026-03-24 --to-date 2026-03-31
 ```
 
 ---
 
-## Credenciales necesarias
+## Informacion que se necesita del cliente
 
-Edita el archivo `.env` con estos valores:
+| Dato | Donde obtenerlo | Obligatorio |
+|------|-----------------|-------------|
+| **Subdominio Kommo** | La URL de su cuenta (ejemplo: `miempresa.kommo.com`) | Si |
+| **Token API v4** | Kommo > Configuracion > Integraciones > Crear integracion privada > Generar token | Si |
+| **Usuario sin 2FA** | Crear un usuario dedicado para el scraper SIN autenticacion de 2 factores | Si |
+| **PostgreSQL URL** | Crear una base de datos (Railway, Supabase, local) | Si |
+| **Scopes del token** | Minimo: `crm`, `files`, `notifications` | Si |
 
-### Kommo CRM
+### Como crear el token API
 
-| Variable | Descripcion | Donde obtenerla |
-|----------|-------------|-----------------|
-| `KOMMO_BASE_URL` | URL de tu cuenta Kommo | `https://TU-SUBDOMINIO.kommo.com` |
-| `KOMMO_ACCESS_TOKEN` | Token API v4 | Kommo > Configuracion > Integraciones > Tu integracion > Token |
-| `KOMMO_LOGIN_EMAIL` | Email de usuario **sin 2FA** | Un usuario con acceso a chats, sin verificacion de 2 pasos |
-| `KOMMO_LOGIN_PASSWORD` | Password del usuario | |
+1. Ir a `https://SUBDOMINIO.kommo.com/settings/widgets/`
+2. Click en "Crear integracion" > "Integracion privada"
+3. Nombre: "Chat Scrapper"
+4. Permisos: marcar todo
+5. Click en "Instalar"
+6. Copiar el token de acceso
 
-### PostgreSQL
+### Como crear usuario sin 2FA
 
-| Variable | Descripcion |
-|----------|-------------|
-| `DATABASE_URL` | Connection string completo: `postgresql://user:pass@host:port/dbname` |
-
-### Como crear un usuario sin 2FA en Kommo
-
-1. Ir a Configuracion > Usuarios
-2. Crear nuevo usuario con rol que tenga acceso a Chats
-3. Asegurarse de que NO tenga habilitada la autenticacion de 2 factores
-4. Este usuario sera usado exclusivamente por el scraper
+1. Ir a `https://SUBDOMINIO.kommo.com/settings/users/`
+2. Crear nuevo usuario: `scraper@empresa.com`
+3. Rol: con acceso a Chats, Leads, Contactos
+4. **Importante**: NO habilitar autenticacion de 2 factores
+5. Este usuario sera usado exclusivamente por el scraper automatizado
 
 ---
 
 ## Comandos disponibles
 
 ```bash
-# Scrape de ayer (el mas comun)
-python scripts/scrape_v3.py --date yesterday
+# === SETUP ===
+python scripts/setup_account.py         # Descubrir cuenta (pipelines, campos, usuarios)
+python scripts/validate_setup.py        # Validar credenciales y conexiones
+python scripts/extract_mappings.py      # Re-generar mapeos de la cuenta
 
-# Scrape de hoy
-python scripts/scrape_v3.py --date current_day
+# === SCRAPING DIARIO ===
+python scripts/scrape_v3.py                         # Ayer (default)
+python scripts/scrape_v3.py --date yesterday        # Ayer explicito
+python scripts/scrape_v3.py --date current_day      # Hoy
+python scripts/scrape_v3.py --max-chats 15          # Test con 15 chats
 
-# Test rapido (15 chats)
-python scripts/scrape_v3.py --max-chats 15
+# === SCRAPING SEMANAL ===
+python scripts/scrape_v3.py --date previous_week    # Semana pasada (7 scrapes individuales)
+python scripts/scrape_v3.py --date current_week     # Semana actual
 
-# Sin enrichment de API (solo scraping)
-python scripts/scrape_v3.py --skip-enrich
+# === SCRAPING HISTORICO ===
+python scripts/scrape_v3.py --from-date 2026-03-01 --to-date 2026-03-31
 
-# Historico: rango de fechas
-python scripts/scrape_v3.py --from-date 2026-03-25 --to-date 2026-03-31
-
-# Regenerar mapeos de cuenta
-python scripts/extract_mappings.py
-
-# Validar setup
-python scripts/validate_setup.py
+# === OPCIONES AVANZADAS ===
+python scripts/scrape_v3.py --skip-enrich           # Sin enrichment API
+python scripts/scrape_v3.py --skip-compile           # Sin compilar conversaciones
+python scripts/scrape_v3.py --skip-stages            # Sin cambios de etapa
 ```
+
+---
+
+## Dashboard Web
+
+La aplicacion web se deploya en Railway (o cualquier hosting que soporte Python/Flask).
+
+### Deploy en Railway desde GitHub
+
+1. Crear proyecto en Railway
+2. Conectar repositorio GitHub
+3. Agregar variable de entorno: `DATABASE_URL`
+4. Railway detecta el `Procfile` y deploya automaticamente
+
+### Paginas disponibles
+
+| Pagina | URL | Descripcion |
+|--------|-----|-------------|
+| **Dashboard** | `/` | Stats generales, graficos por dia, tags, bots, agentes |
+| **Chats** | `/chats` | Lista de chats con filtros por fecha y estado |
+| **Chat Detail** | `/chat/{id}` | Conversacion completa con burbujas, lead info, links a Kommo |
+| **Pendientes** | `/pending` | Chats donde el cliente escribio y NO hemos respondido |
+| **Sin Respuesta** | `/no-reply` | Chats donde nosotros escribimos y el cliente NO respondio |
+| **Etapas** | `/stages` | Historial de cambios de pipeline/stage |
+| **Config** | `/settings` | Credenciales, validacion de token, configuracion |
 
 ---
 
 ## Base de datos (10 tablas)
 
-```mermaid
-erDiagram
-    kommo_contacts {
-        bigint contact_id PK
-        text name
-        text phone
-        text email
-    }
-    kommo_leads {
-        bigint lead_id PK
-        bigint contact_id FK
-        text pipeline_name
-        text stage_name
-        text responsible_user_name
-        text[] tags
-        jsonb custom_fields
-    }
-    kommo_chats {
-        serial id PK
-        bigint talk_id
-        bigint lead_id FK
-        date chat_date
-        int total_messages
-        int total_bot
-        int total_human
-        text attention_status
-        text[] bot_names
-        text[] human_agents
-    }
-    kommo_messages {
-        serial id PK
-        bigint talk_id
-        bigint lead_id FK
-        text direction
-        text sender_type
-        text author
-        boolean is_bot
-        text bot_name
-        text msg_type
-        text msg_text
-        text msg_timestamp
-    }
-    kommo_stage_changes {
-        serial id PK
-        bigint lead_id FK
-        text old_stage_name
-        text new_stage_name
-        timestamp changed_at
-    }
-    kommo_events {
-        serial id PK
-        text event_type
-        bigint entity_id
-        jsonb value_after
-        timestamp created_at
-    }
-    kommo_conversations_compiled {
-        serial id PK
-        bigint lead_id FK
-        jsonb conversation_json
-        text conversation_text
-        text attention_status
-    }
-    kommo_daily_metrics {
-        serial id PK
-        date metric_date UK
-        int total_chats
-        int total_bot
-        int total_human
-        int chats_with_human
-    }
-    kommo_scrape_errors {
-        serial id PK
-        bigint talk_id
-        text error_type
-        text error_message
-    }
-    kommo_no_reply_tracking {
-        serial id PK
-        bigint lead_id UK
-        text contact_name
-        text contact_phone
-        int consecutive_out
-        text status
-    }
-
-    kommo_contacts ||--o{ kommo_leads : "tiene"
-    kommo_leads ||--o{ kommo_chats : "tiene"
-    kommo_leads ||--o{ kommo_messages : "tiene"
-    kommo_leads ||--o{ kommo_stage_changes : "tiene"
-    kommo_leads ||--o{ kommo_conversations_compiled : "tiene"
-```
+| Tabla | Descripcion | Registros tipicos/dia |
+|-------|-------------|----------------------|
+| `kommo_contacts` | Nombre, telefono, email | ~100 |
+| `kommo_leads` | Pipeline, stage, tags, responsable, custom fields (JSONB) | ~100 |
+| `kommo_chats` | Analytics: bot/human, attention_status, interactions | ~100 |
+| `kommo_messages` | Cada mensaje: author, is_bot, type, text, timestamp | ~1,000 |
+| `kommo_stage_changes` | Cambios de etapa (pipeline movement) | ~200 |
+| `kommo_events` | Todos los eventos (tags, links, creaciones) | ~1,000 |
+| `kommo_conversations_compiled` | Conversacion JSON + texto plano por cliente (para LLM) | ~100 |
+| `kommo_daily_metrics` | Metricas agregadas por dia | 1 |
+| `kommo_scrape_errors` | Errores de scraping (no bloquea el proceso) | 0-5 |
+| `kommo_no_reply_tracking` | Chats sin respuesta del cliente | ~50 |
 
 ### Campos clave de `kommo_chats`
 
-| Campo | Tipo | Descripcion |
-|-------|------|-------------|
-| `attention_status` | text | `attended`, `pending_response`, `bot_only`, `outbound_only` |
-| `total_bot` | int | Mensajes enviados por SalesBots |
-| `total_human` | int | Mensajes enviados por agentes humanos |
-| `has_human_response` | bool | Si un humano respondio en este chat |
-| `human_takeover_at_msg` | int | En que mensaje # intervino el humano |
-| `bot_names` | text[] | Lista de bots que participaron |
-| `human_agents` | text[] | Lista de agentes humanos que participaron |
+| Campo | Valores posibles | Descripcion |
+|-------|-----------------|-------------|
+| `attention_status` | `attended`, `pending_response`, `bot_only`, `outbound_only` | Estado de atencion |
+| `total_bot` | 0-N | Mensajes enviados por SalesBots |
+| `total_human` | 0-N | Mensajes enviados por agentes humanos |
+| `has_human_response` | true/false | Si un humano respondio |
+| `human_takeover_at_msg` | 0-N | En que mensaje intervino el humano |
+| `bot_names` | TEXT[] | Bots que participaron |
+| `human_agents` | TEXT[] | Agentes humanos que participaron |
+| `last_message_direction` | `IN`/`OUT` | Quien hablo ultimo |
 
 ---
 
 ## Estructura del proyecto
 
 ```
-kommo_chat_scrapper/
+kommo-chat-scrapper/
 ├── scripts/
+│   ├── setup_account.py        # Descubrir cuenta (PRIMER PASO)
+│   ├── validate_setup.py       # Validar credenciales
 │   ├── scrape_v3.py            # Scraper principal (produccion)
-│   ├── extract_mappings.py     # Extrae pipelines, campos, usuarios
-│   └── validate_setup.py       # Valida credenciales y conexiones
-├── src/
-│   └── kommo/
-│       ├── api_client.py       # Cliente REST API v4
-│       ├── enrichment.py       # Enrichment con rate limiting
-│       └── database.py         # PostgreSQL operations
+│   └── extract_mappings.py     # Re-generar mapeos
+├── src/kommo/
+│   ├── api_client.py           # Cliente REST API v4
+│   ├── enrichment.py           # Enrichment con rate limiting (6 req/s)
+│   ├── chat_scraper.py         # Modulo Selenium (clase reutilizable)
+│   └── database.py             # PostgreSQL operations (10 tablas)
+├── web/
+│   ├── app.py                  # Flask web app
+│   └── templates/              # HTML templates (Bootstrap 5 + Chart.js)
 ├── config/
-│   └── kommo_mappings.json     # Mapeos de pipelines, stages, users
+│   └── kommo_mappings.json     # Mapeos de pipelines, campos, usuarios
 ├── output/                     # JSON output por ejecucion
 ├── .env.example                # Template de credenciales
+├── Procfile                    # Para Railway deployment
 ├── CLAUDE.md                   # Contexto para Claude Code
 ├── CHANGELOG.md                # Historial de cambios
 └── README.md                   # Este archivo
@@ -310,32 +292,29 @@ kommo_chat_scrapper/
 
 ---
 
-## Metricas que extrae
+## Limitaciones conocidas
 
-| Metrica | Fuente | Descripcion |
-|---------|--------|-------------|
-| Bot vs Humano | Scraping | Detecta SalesBot por nombre del author |
-| Interacciones | Scraping | Cambios de direccion IN/OUT en la conversacion |
-| Tiempo primer contacto | Scraping | Timestamp del primer mensaje entrante |
-| Tiempo respuesta humana | Scraping | Timestamp del primer mensaje de agente |
-| Chats sin respuesta | Analytics | Leads con multiples OUT sin IN de vuelta |
-| Cambios de etapa | API Events | Movimiento de leads entre stages del pipeline |
-| Tags aplicados | API Events | Tags como "RENTAS", "stop_ai" |
-| Tipo de media | Scraping | image, video, file, audio, pdf, sticker |
+| Limitacion | Causa | Workaround |
+|-----------|-------|------------|
+| API no da mensajes de chat | Requiere scope "chats" + amojo HMAC | Selenium extrae mensajes del DOM |
+| Selenium es lento (~15 chats/min) | Delays anti-ban + page load | Reducir delay a 1.5s, paralelizar en futuro |
+| Virtual scroll no carga todo | Kommo recicla DOM elements | Acumulador global en JS + paciencia |
+| Timestamps relativos | "Yesterday 14:11" vs "DD.MM.YYYY HH:MM" | Parser que detecta ambos formatos |
+| Envios masivos inflan conteos | Bots envian miles de follow-ups | Filtrar por conversaciones con IN+OUT |
 
 ---
 
-## Anti-ban y robustez
+## Seguridad y anti-ban
 
-- Delays aleatorios 2-4 segundos entre cada chat
-- Rate limiting de API: maximo 6 requests/segundo
-- Retries automaticos en caso de error (2 intentos)
-- Errores se loguean en `kommo_scrape_errors` sin detener el proceso
-- UPSERT en todas las tablas (re-ejecutar no duplica datos)
+- Delays aleatorios 1.5-2.5 segundos entre chats
+- Rate limiting API: maximo 6 requests/segundo
+- Retries automaticos con backoff exponencial
 - Session de Chrome persistida en `/tmp/kommo_scraper_session`
+- Errores se loguean sin detener el proceso
+- UPSERT en todas las tablas (re-ejecutar no duplica)
 
 ---
 
 ## Licencia
 
-Proyecto privado - Antigravity
+Proyecto privado - Antigravity / Tamibot
