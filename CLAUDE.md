@@ -85,6 +85,14 @@ Scrapper de chats de Kommo CRM con enfoque hibrido: API v4 + Selenium browser au
 - Session dir: /tmp/kommo_scraper_session
 - Anti-ban: delays aleatorios 1.5-2.5s entre chats
 
+## Troubleshooting: reCAPTCHA
+Si Kommo muestra "Please check reCaptcha" al hacer login headless:
+1. Borrar la sesion: `rm -rf /tmp/kommo_scraper_session`
+2. Cambiar la clave del usuario en Kommo
+3. Esperar unos minutos y volver a intentar
+4. Si persiste, hacer login manual desde Chrome real una vez
+Causa: muchos intentos de login headless seguidos activan captcha
+
 ## Convenciones
 - Credenciales en .env, nunca hardcodear
 - Salida en output/YYYY-MM-DD_HHMMSS/

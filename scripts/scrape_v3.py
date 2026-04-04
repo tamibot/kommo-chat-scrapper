@@ -53,47 +53,91 @@ JS_EXTRACT = """
 return (function() {
     var notes = document.querySelectorAll('.feed-note-wrapper-amojo');
     var msgs = []; var convIds = new Set();
+
     for (var i = 0; i < notes.length; i++) {
         var n = notes[i];
+
+        // === DIRECTION: check for outgoing marker OR incoming class ===
         var isOut = n.querySelector('.feed-note__talk-outgoing') !== null;
+        var isIn = n.querySelector('.feed-note-incoming') !== null;
+        if (!isOut && !isIn) {
+            // Fallback: check parent js-note for incoming class
+            var jsNote = n.querySelector('.js-note');
+            if (jsNote && jsNote.className.indexOf('incoming') >= 0) isIn = true;
+        }
+        var dir = isOut ? 'OUT' : 'IN';
+
+        // === TIMESTAMP: works for both IN and OUT ===
         var dateEl = n.querySelector('.js-feed-note__date, .feed-note__date');
         var timestamp = dateEl ? dateEl.textContent.trim() : '';
+
+        // === AUTHOR: works for both IN and OUT ===
         var authorEl = n.querySelector('.feed-note__amojo-user, .js-amojo-author');
         var author = authorEl ? authorEl.textContent.trim() : '';
-        var titleEl = n.querySelector('.feed-note__talk-outgoing-title, .feed-note__talk-outgoing-title_opened');
+
+        // === CONVERSATION ID: from outgoing title (only in OUT, normal) ===
         var convId = '';
-        if (titleEl) { var cm = titleEl.textContent.match(/A(\\d+)/); if (cm) { convId = cm[1]; convIds.add(cm[1]); } }
-        var wrapEl = n.querySelector('.feed-note__talk-outgoing-wrapper');
-        var channel = '';
-        if (wrapEl) {
-            var wt = wrapEl.textContent;
-            if (wt.indexOf('WhatsApp Business')>=0) channel='WhatsApp Business';
-            else if (wt.indexOf('WhatsApp')>=0) channel='WhatsApp';
-            else if (wt.indexOf('Telegram')>=0) channel='Telegram';
-            else if (wt.indexOf('Instagram')>=0) channel='Instagram';
-            else if (wt.indexOf('Facebook')>=0) channel='Facebook';
+        var titleEl = n.querySelector('.feed-note__talk-outgoing-title, .feed-note__talk-outgoing-title_opened, .info-bubble__text');
+        if (titleEl) {
+            var cm = titleEl.textContent.match(/A(\\d+)/);
+            if (cm) { convId = cm[1]; convIds.add(cm[1]); }
         }
-        var statusEl = n.querySelector('.message_delivery-status_checkmark, .feed-note__talk-outgoing-read');
+
+        // === DELIVERY STATUS: Read/Delivered (only on OUT, normal) ===
+        var statusEl = n.querySelector('.message_delivery-status_checkmark, .feed-note__delivery-status');
         var deliveryStatus = statusEl ? statusEl.textContent.trim() : '';
+
+        // === MESSAGE TEXT ===
         var msgEl = n.querySelector('.feed-note__message_paragraph');
         var msg = msgEl ? msgEl.textContent.substring(0, 1500) : '';
+
+        // === BOT DETECTION: only on OUT messages ===
         var isBot = false; var botName = '';
-        if (author.match(/salesbot/i)) { isBot=true; var bm=author.match(/SalesBot\\s*\\((.+?)\\)/i); botName=bm?bm[1]:'SalesBot'; }
-        else if (author.match(/tami\\s*bot/i)) { isBot=true; botName='TamiBot'; }
-        var senderType = isOut ? (isBot ? 'bot' : 'agent') : 'contact';
+        if (isOut) {
+            var authorLower = author.toLowerCase();
+            if (authorLower.indexOf('salesbot') >= 0) {
+                isBot = true;
+                var bm = author.match(/SalesBot\\s*\\((.+?)\\)/i);
+                botName = bm ? bm[1] : 'SalesBot';
+            } else if (authorLower.indexOf('tami bot') >= 0 || authorLower.indexOf('tamibot') >= 0) {
+                isBot = true; botName = 'TamiBot';
+            } else if (authorLower.indexOf('bot ') >= 0 || authorLower.indexOf(' bot') >= 0) {
+                isBot = true; botName = author;
+            }
+        }
+
+        // === SENDER TYPE: improved logic ===
+        var senderType;
+        if (isOut) {
+            if (isBot) {
+                senderType = 'bot';
+            } else if (author === 'WhatsApp Business' || author === 'TikTok') {
+                // These are channel names, not agents - treat as system/channel
+                senderType = 'system';
+            } else {
+                senderType = 'agent';
+            }
+        } else {
+            senderType = 'contact';
+        }
+
+        // === MEDIA TYPE DETECTION ===
         var mediaType = 'text';
-        if (n.querySelectorAll('[class*="sticker"]').length) mediaType='sticker';
-        else if (n.querySelectorAll('[class*="audio"],[class*="voice"]').length) mediaType='audio';
-        else if (n.querySelectorAll('[class*="video"]').length) mediaType='video';
-        else if (n.querySelectorAll('img[src*="file"],[class*="image"],[class*="photo"],[class*="picture"]').length) mediaType='image';
-        else if (n.querySelectorAll('[class*="file"],[class*="attach"],[class*="document"]').length) mediaType='file';
-        else if (n.querySelectorAll('[class*="location"],[class*="map"]').length) mediaType='location';
-        if (msg && msg.match(/\\.pdf$/im)) mediaType='pdf';
+        if (n.querySelectorAll('[class*="sticker"]').length) mediaType = 'sticker';
+        else if (n.querySelectorAll('[class*="audio"],[class*="voice"]').length) mediaType = 'audio';
+        else if (n.querySelectorAll('[class*="video"]').length) mediaType = 'video';
+        else if (n.querySelectorAll('img[src*="file"],[class*="image"],[class*="photo"],[class*="picture"]').length) mediaType = 'image';
+        else if (n.querySelectorAll('[class*="file"],[class*="attach"],[class*="document"]').length) mediaType = 'file';
+        else if (n.querySelectorAll('[class*="location"],[class*="map"]').length) mediaType = 'location';
+        else if (n.querySelectorAll('[class*="rich-link"]').length) mediaType = 'link';
+
         if (msg || mediaType !== 'text') {
-            msgs.push({dir:isOut?'OUT':'IN', timestamp:timestamp, author:author,
-                sender_type:senderType, is_bot:isBot, bot_name:botName,
-                channel:channel, conv_id:convId, delivery_status:deliveryStatus,
-                type:mediaType, text:msg});
+            msgs.push({
+                dir: dir, timestamp: timestamp, author: author,
+                sender_type: senderType, is_bot: isBot, bot_name: botName,
+                conv_id: convId, delivery_status: deliveryStatus,
+                type: mediaType, text: msg
+            });
         }
     }
     return {messages:msgs, conversation_ids:Array.from(convIds), msg_count:msgs.length};

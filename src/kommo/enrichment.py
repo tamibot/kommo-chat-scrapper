@@ -60,8 +60,8 @@ class KommoEnrichment:
                         env[k.strip()] = v.strip()
         return env
 
-    def _api_get(self, path: str) -> Optional[dict]:
-        """GET request with rate limiting and error handling."""
+    def _api_get(self, path: str, _retry_count: int = 0) -> Optional[dict]:
+        """GET request with rate limiting, retry on 429 (max 3 retries)."""
         self.rate.wait()
         url = f"{self.base_url}{path}"
         req = urllib.request.Request(url, headers={
@@ -74,11 +74,11 @@ class KommoEnrichment:
                     return None
                 return json.loads(resp.read())
         except urllib.error.HTTPError as e:
-            if e.code == 429:
+            if e.code == 429 and _retry_count < 3:
                 retry = int(e.headers.get('Retry-After', 3))
-                logger.warning(f"Rate limited, sleeping {retry}s")
+                logger.warning(f"Rate limited, sleeping {retry}s (attempt {_retry_count+1}/3)")
                 time.sleep(retry)
-                return self._api_get(path)  # retry once
+                return self._api_get(path, _retry_count + 1)
             elif e.code == 204:
                 return None
             else:
