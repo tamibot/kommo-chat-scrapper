@@ -39,7 +39,7 @@ with open(os.path.join(os.path.dirname(__file__), '..', '.env')) as f:
             k, v = line.split('=', 1); ENV[k.strip()] = v.strip()
 
 SESSION_DIR = '/tmp/kommo_scraper_session'
-SUBDOMAIN = 'propertamibotcom'
+SUBDOMAIN = ENV.get('KOMMO_BASE_URL', 'https://tu-dominio.kommo.com').replace('https://', '').replace('.kommo.com', '').strip('/')
 
 # ── Anti-ban config ──────────────────────────────────────────────────
 MIN_DELAY = 1.5       # min seconds between chat navigations
@@ -51,8 +51,9 @@ SCROLL_WAIT = 0.5     # wait between scroll iterations
 
 JS_EXTRACT = """
 return (function() {
+    window.__chatAccumulator = window.__chatAccumulator || new Map();
+    window.__convIds = window.__convIds || new Set();
     var notes = document.querySelectorAll('.feed-note-wrapper-amojo');
-    var msgs = []; var convIds = new Set();
     for (var i = 0; i < notes.length; i++) {
         var n = notes[i];
         var isOut = n.querySelector('.feed-note__talk-outgoing') !== null;
@@ -62,7 +63,7 @@ return (function() {
         var author = authorEl ? authorEl.textContent.trim() : '';
         var titleEl = n.querySelector('.feed-note__talk-outgoing-title, .feed-note__talk-outgoing-title_opened');
         var convId = '';
-        if (titleEl) { var cm = titleEl.textContent.match(/A(\\d+)/); if (cm) { convId = cm[1]; convIds.add(cm[1]); } }
+        if (titleEl) { var cm = titleEl.textContent.match(/A(\\d+)/); if (cm) { convId = cm[1]; window.__convIds.add(cm[1]); } }
         var wrapEl = n.querySelector('.feed-note__talk-outgoing-wrapper');
         var channel = '';
         if (wrapEl) {
@@ -80,6 +81,7 @@ return (function() {
         var isBot = false; var botName = '';
         if (author.match(/salesbot/i)) { isBot=true; var bm=author.match(/SalesBot\\s*\\((.+?)\\)/i); botName=bm?bm[1]:'SalesBot'; }
         else if (author.match(/tami\\s*bot/i)) { isBot=true; botName='TamiBot'; }
+        else if (author.match(/funy/i) || author.match(/funpark/i)) { isBot=true; botName='Funy'; }
         var senderType = isOut ? (isBot ? 'bot' : 'agent') : 'contact';
         var mediaType = 'text';
         if (n.querySelectorAll('[class*="sticker"]').length) mediaType='sticker';
@@ -90,13 +92,18 @@ return (function() {
         else if (n.querySelectorAll('[class*="location"],[class*="map"]').length) mediaType='location';
         if (msg && msg.match(/\\.pdf$/im)) mediaType='pdf';
         if (msg || mediaType !== 'text') {
-            msgs.push({dir:isOut?'OUT':'IN', timestamp:timestamp, author:author,
-                sender_type:senderType, is_bot:isBot, bot_name:botName,
-                channel:channel, conv_id:convId, delivery_status:deliveryStatus,
-                type:mediaType, text:msg});
+            // Clave unica para evadir limites del Virtual DOM al hacer scroll
+            var key = timestamp + '_' + author + '_' + senderType + '_' + mediaType + '_' + msg.substring(0, 40);
+            if (!window.__chatAccumulator.has(key)) {
+                window.__chatAccumulator.set(key, {dir:isOut?'OUT':'IN', timestamp:timestamp, author:author,
+                    sender_type:senderType, is_bot:isBot, bot_name:botName,
+                    channel:channel, conv_id:convId, delivery_status:deliveryStatus,
+                    type:mediaType, text:msg});
+            }
         }
     }
-    return {messages:msgs, conversation_ids:Array.from(convIds), msg_count:msgs.length};
+    // Convertir de regreso a Array para mandar al Python (Mantiene inserciones unicas)
+    return {messages:Array.from(window.__chatAccumulator.values()), conversation_ids:Array.from(window.__convIds), msg_count:window.__chatAccumulator.size};
 })()
 """
 
@@ -124,9 +131,31 @@ def login(driver):
             time.sleep(4)
             if 'Authorization' not in driver.title and 'Autorización' not in driver.title:
                 return True
-            driver.find_element(By.CSS_SELECTOR, 'input[type="text"]').send_keys(ENV['KOMMO_LOGIN_EMAIL'])
-            driver.find_element(By.CSS_SELECTOR, 'input[type="password"]').send_keys(ENV['KOMMO_LOGIN_PASSWORD'])
-            driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
+            # Try multiple login form selectors (Kommo varies by account)
+            email_el = None
+            for sel in ['#session_end_login', 'input[type="text"]', 'input[name="username"]']:
+                try:
+                    email_el = driver.find_element(By.CSS_SELECTOR, sel)
+                    break
+                except: pass
+            pwd_el = None
+            for sel in ['#password', 'input[type="password"]', '#session_end_password']:
+                try:
+                    pwd_el = driver.find_element(By.CSS_SELECTOR, sel)
+                    break
+                except: pass
+            btn_el = None
+            for sel in ['#auth_submit', '#auth_button', 'button[type="submit"]']:
+                try:
+                    btn_el = driver.find_element(By.CSS_SELECTOR, sel)
+                    break
+                except: pass
+            if email_el and pwd_el and btn_el:
+                email_el.send_keys(ENV['KOMMO_LOGIN_EMAIL'])
+                pwd_el.send_keys(ENV['KOMMO_LOGIN_PASSWORD'])
+                btn_el.click()
+            else:
+                raise Exception(f"Login form not found: email={email_el is not None}, pwd={pwd_el is not None}, btn={btn_el is not None}")
             time.sleep(6)
             if 'Authorization' not in driver.title and 'Autorización' not in driver.title:
                 return True
@@ -136,14 +165,54 @@ def login(driver):
     return False
 
 
+def preflight_check():
+    """Valida la integridad de la cuenta API antes de abrir Selenium evitando fallos inutiles."""
+    import ssl, urllib.request
+    try:
+        ctx = ssl.create_default_context()
+        req = urllib.request.Request(f"https://{SUBDOMAIN}.kommo.com/api/v4/account?with=amojo_id", 
+                                    headers={'Authorization': f"Bearer {ENV.get('KOMMO_ACCESS_TOKEN', '')}"})
+        with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
+            data = json.loads(resp.read())
+            print(f"  [Integracion Valida] Cuenta: '{data.get('name')}' / Amojo ID: {data.get('amojo_id')} ✅")
+            return True
+    except Exception as e:
+        print(f"  [ERROR GRAVE] Integracion API Fallo: {e}. Abortando Scraper ❌")
+        return False
+
+_cached_tz_offset = None
+
 def get_day_unix_range(target_date):
-    """Get Unix timestamp range for a single day in Peru time (UTC-5).
-    Matches exactly what Kommo UI uses: filter[date][from]=X&filter[date][to]=Y
-    Example: Apr 1 -> from=1775019600 to=1775105999"""
-    PERU = timezone(timedelta(hours=-5))
-    day_start = datetime(target_date.year, target_date.month, target_date.day, 0, 0, 0, tzinfo=PERU)
-    day_end = datetime(target_date.year, target_date.month, target_date.day, 23, 59, 59, tzinfo=PERU)
-    return int(day_start.timestamp()), int(day_end.timestamp())
+    """Obtiene el rango de Unix dinamicamente en base al timezone de la cuenta Kommo.
+    Lee el campo 'timezone' del endpoint /api/v4/account para ser agnóstico al país.
+    Ejemplo: 'America/Lima' (-5), 'Europe/Madrid' (+1), etc. Fallback: UTC-5."""
+    global _cached_tz_offset
+    from datetime import datetime, timezone, timedelta
+    import ssl, urllib.request, json
+
+    if _cached_tz_offset is None:
+        try:
+            ctx = ssl.create_default_context()
+            req = urllib.request.Request(f"https://{SUBDOMAIN}.kommo.com/api/v4/account",
+                                        headers={'Authorization': f"Bearer {ENV.get('KOMMO_ACCESS_TOKEN', '')}"})
+            with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
+                data = json.loads(resp.read())
+                tz_str = data.get('timezone', 'America/Lima')
+                import zoneinfo
+                tz_obj = zoneinfo.ZoneInfo(tz_str)
+                now = datetime.now(timezone.utc)
+                offset_seconds = tz_obj.utcoffset(now).total_seconds()
+                _cached_tz_offset = int(offset_seconds / 3600)
+                print(f"  [Timezone] Detectado: {tz_str} (UTC{_cached_tz_offset:+d})")
+        except Exception as e:
+            print(f"  [Aviso] Fallo consultando timezone nativo: {e}. Defaulting a UTC-5.")
+            _cached_tz_offset = -5
+
+    tz_dinamico = timezone(timedelta(hours=_cached_tz_offset))
+    dt = datetime(target_date.year, target_date.month, target_date.day, 0, 0, 0, tzinfo=tz_dinamico)
+    from_ts = int(dt.timestamp())
+    to_ts = from_ts + 86399
+    return from_ts, to_ts
 
 
 def collect_targets_via_api(target_date, filter_mode='conversations'):
@@ -222,33 +291,21 @@ def collect_targets_via_api(target_date, filter_mode='conversations'):
         elif act['out'] <= 2:
             category = 'follow_up'
             stats['follow_up'] += 1
-            continue  # Skip follow-ups
         else:
             category = 'masivo'
             stats['masivo'] += 1
-            continue  # Skip masivos
 
-        # Apply filter
-        include = False
-        if filter_mode == 'all':
-            include = True
-        elif filter_mode == 'conversations' and category == 'conversation':
-            include = True
-        elif filter_mode == 'conversations+pending' and category in ('conversation', 'pending'):
-            include = True
-
-        if include:
-            # Use the most recent talk_id for this lead
-            for tid in act['talk_ids']:
-                targets.append({
-                    'talk_id': str(tid),
-                    'lead_id': str(lid),
-                    'contact_id': act['contact_id'],
-                    'in_events': act['in'],
-                    'out_events': act['out'],
-                    'category': category,
-                })
-                break  # One target per lead (most recent talk)
+        # We scrape everything regardless of the logical category (Removing Spam Skippers)
+        for tid in act['talk_ids']:
+            targets.append({
+                'talk_id': str(tid),
+                'lead_id': str(lid),
+                'contact_id': act['contact_id'],
+                'in_events': act['in'],
+                'out_events': act['out'],
+                'category': category,
+            })
+            break  # One target per lead (most recent talk)
 
     print(f"    Events: {page} pages | Leads: {len(leads)} | Conv: {stats['conversations']} | "
           f"Pending: {stats['pending']} | Follow-up: {stats['follow_up']} | Masivo: {stats['masivo']}")
@@ -303,30 +360,43 @@ def collect_targets(driver, date_preset, status, target_date=None):
 
 
 def extract_chat_robust(driver, talk_id, lead_id, max_retries=2):
-    """Extract chat with retries and error recovery."""
+    """Extract chat with retries and error recovery utilizing a Virtual DOM Accumulator."""
     for attempt in range(max_retries):
         try:
             url = f"https://{SUBDOMAIN}.kommo.com/chats/{talk_id}/leads/detail/{lead_id}"
             driver.get(url)
+            # Init empty accumulator inside DOM for this chat session
+            driver.execute_script("window.__chatAccumulator = new Map(); window.__convIds = new Set();")
             delay = random.uniform(MIN_DELAY, MAX_DELAY)
             time.sleep(delay)
 
-            # Expand collapsed messages (up to 5 rounds)
-            for _ in range(5):
+            # Iterative scroll up expanding history logic
+            for _ in range(8):
+                # 1. Acumular mensajes actuales en la memoria virtual JS
+                driver.execute_script(JS_EXTRACT)
+                
+                # 2. Clic en "Cargar Mensajes" y Scroll arriba
                 expanded = driver.execute_script("""
                     var c=0;
-                    document.querySelectorAll('a,span,div').forEach(function(el){
-                        if(el.innerText && el.innerText.trim().match(/^Más \\d+ de \\d+$/)){el.click();c++;}
+                    document.querySelectorAll('a,span,div,button').forEach(function(el){
+                        var txt = el.innerText ? el.innerText.trim() : '';
+                        if(txt.match(/^Más \d+ de \d+$/i) || txt.match(/Cargar mensajes/i)){ el.click(); c++; }
                     });
+                    var sc = document.querySelector('.js-msg-list, .message-list-scrollable');
+                    if (sc) { sc.scrollBy(0, -1200); }
                     return c;
                 """)
-                if expanded:
+                if expanded > 0:
                     time.sleep(EXPAND_WAIT)
                 else:
+                    time.sleep(SCROLL_WAIT) # allow any triggered ajax scroll to render
                     break
 
+            # Extraccion Final Consolidada
             result = driver.execute_script(JS_EXTRACT)
             if result and result.get('messages') is not None:
+                # Ordenamiento cronologico basico dado que hicimos scroll inverso
+                result['messages'].reverse()
                 return result
             return {'messages': [], 'conversation_ids': [], 'msg_count': 0}
 
@@ -439,8 +509,12 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
 
     t0 = time.time()
 
+    print(f"\n[0/6] Pre-Flight API Check...")
+    if not preflight_check():
+        return None
+
     # PHASE 1: Scrape
-    print(f"\n[1/6] Login...")
+    print(f"\n[1/6] Login Selenium...")
     driver = create_driver()
     if not login(driver):
         print("  FAILED. Skipping."); driver.quit(); return None

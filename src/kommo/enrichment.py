@@ -37,7 +37,7 @@ class KommoEnrichment:
 
     def __init__(self, base_url: str = None, token: str = None, mappings_path: str = None):
         env = self._load_env()
-        self.base_url = base_url or env.get('KOMMO_BASE_URL', 'https://propertamibotcom.kommo.com')
+        self.base_url = base_url or env.get('KOMMO_BASE_URL', 'https://tu-dominio.kommo.com')
         self.token = token or env.get('KOMMO_ACCESS_TOKEN', '')
         self.ctx = ssl.create_default_context()
         self.rate = RateLimiter(max_per_sec=6)
@@ -133,6 +133,15 @@ class KommoEnrichment:
         contacts = lead.get('_embedded', {}).get('contacts', [])
         contact_id = contacts[0]['id'] if contacts else None
 
+        # Catalog Elements (Products and Subscriptions)
+        catalog_elements = []
+        for cat in lead.get('_embedded', {}).get('catalog_elements', []):
+            catalog_elements.append({
+                'id': cat.get('id'),
+                'quantity': cat.get('metadata', {}).get('quantity', 1),
+                'catalog_id': cat.get('metadata', {}).get('catalog_id')
+            })
+
         return {
             'lead_id': lead['id'],
             'name': lead.get('name', ''),
@@ -146,11 +155,14 @@ class KommoEnrichment:
             'price': lead.get('price', 0),
             'tags': tags,
             'source': cfields.get('utm_source', ''),
+            'utm_campaign': cfields.get('utm_campaign', ''),
+            'utm_medium': cfields.get('utm_medium', ''),
             'loss_reason_id': lead.get('loss_reason_id'),
             'created_at': datetime.fromtimestamp(lead['created_at']) if lead.get('created_at') else None,
             'updated_at': datetime.fromtimestamp(lead['updated_at']) if lead.get('updated_at') else None,
             'closed_at': datetime.fromtimestamp(lead['closed_at']) if lead.get('closed_at') else None,
             'custom_fields': cfields,
+            'catalog_elements': catalog_elements,
         }
 
     # ── Batch Contact Fetch ──────────────────────────────────────────
@@ -203,7 +215,7 @@ class KommoEnrichment:
         page = 1
         while True:
             data = self._api_get(
-                f'/api/v4/events?limit=100&page={page}'
+                f'/api/v4/events?limit=250&page={page}'
                 f'&filter[type]=lead_status_changed'
                 f'&filter[created_at][from]={ts_from}'
                 f'&filter[created_at][to]={ts_to}'
@@ -217,7 +229,7 @@ class KommoEnrichment:
                 change = self._parse_stage_change(ev)
                 if change:
                     changes.append(change)
-            if len(events) < 100:
+            if len(events) < 250:
                 break
             page += 1
         logger.info(f"Found {len(changes)} stage changes in date range")
@@ -231,7 +243,7 @@ class KommoEnrichment:
             params = '&'.join(f'filter[entity][]={lid}' for lid in batch)
             data = self._api_get(
                 f'/api/v4/events?{params}&filter[entity_type]=lead'
-                f'&filter[type][]=lead_status_changed&limit=100'
+                f'&filter[type][]=lead_status_changed&limit=250'
             )
             if data:
                 for ev in data.get('_embedded', {}).get('events', []):
@@ -258,7 +270,7 @@ class KommoEnrichment:
             page = 1
             while True:
                 data = self._api_get(
-                    f'/api/v4/events?limit=100&page={page}'
+                    f'/api/v4/events?limit=250&page={page}'
                     f'&filter[type]={etype}'
                     f'&filter[created_at][from]={ts_from}'
                     f'&filter[created_at][to]={ts_to}'
@@ -279,7 +291,7 @@ class KommoEnrichment:
                         'created_by': ev.get('created_by', 0),
                         'created_at': datetime.fromtimestamp(ev['created_at']) if ev.get('created_at') else None,
                     })
-                if len(events) < 100:
+                if len(events) < 250:
                     break
                 page += 1
 

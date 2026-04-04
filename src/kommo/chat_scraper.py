@@ -125,7 +125,7 @@ class KommoChatScraper:
 
     def __init__(
         self,
-        subdomain: str = "propertamibotcom",
+        subdomain: str = "tu-dominio",
         session_dir: str = None,
         headless: bool = False,
         wait_timeout: int = 10,
