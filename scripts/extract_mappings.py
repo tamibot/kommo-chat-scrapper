@@ -16,7 +16,7 @@ with open(env_path) as f:
             env_vars[key.strip()] = val.strip()
 
 TOKEN = env_vars.get('KOMMO_ACCESS_TOKEN', '')
-BASE = env_vars.get('KOMMO_BASE_URL', 'https://propertamibotcom.kommo.com')
+BASE = env_vars.get('KOMMO_BASE_URL', '').rstrip('/')
 
 ctx = ssl.create_default_context()
 
@@ -73,10 +73,16 @@ def main():
     for u in data4['_embedded']['users']:
         users[str(u['id'])] = {'name': u['name'], 'email': u['email']}
 
+    # Account Metadata
+    acc_data = api_get('/api/v4/account?with=amojo_id')
+    account_id = acc_data.get('id', '')
+    subdomain = acc_data.get('subdomain', '')
+    amojo_id = acc_data.get('amojo_id', '')
+
     result = {
-        'account_id': 30050693,
-        'subdomain': 'propertamibotcom',
-        'amojo_id': '46db3794-cd6c-4506-a0a6-6205b2f546e9',
+        'account_id': account_id,
+        'subdomain': subdomain,
+        'amojo_id': amojo_id,
         'pipelines': pipelines,
         'lead_custom_fields': lead_fields,
         'contact_custom_fields': contact_fields,

@@ -1,370 +1,330 @@
 {
   "account": {
-    "id": 30050693,
-    "name": "Proper Tamibot",
-    "subdomain": "propertamibotcom",
-    "amojo_id": "46db3794-cd6c-4506-a0a6-6205b2f546e9",
-    "country": "PE",
-    "currency": "PEN",
-    "language": "en"
+    "id": 32588403,
+    "name": "generalfunparkcl",
+    "subdomain": "generalfunparkcl",
+    "amojo_id": "922e25b3-de38-40e2-8762-0adfc8aa9d12",
+    "country": "ES",
+    "currency": "CLP",
+    "language": "es"
   },
   "pipelines": {
-    "10131524": {
-      "name": "MASIVOS",
+    "11644004": {
+      "name": "2.0 Cumpleaños",
       "sort": 1,
       "is_main": true,
       "stages": {
-        "77755860": {
+        "89443936": {
           "name": "Leads Entrantes",
           "sort": 10,
           "color": "#c1c1c1"
         },
-        "78572156": {
-          "name": "BBDD",
+        "90022960": {
+          "name": "RECUPERO Otras Preguntas",
           "sort": 20,
           "color": "#99ccff"
         },
-        "103391551": {
-          "name": "EVENTO 23.03",
+        "90303104": {
+          "name": "Dia 1",
           "sort": 30,
           "color": "#99ccff"
         },
-        "103394395": {
-          "name": "DERIVADOS EVENTO 24.03",
+        "90303108": {
+          "name": "Dia 2",
           "sort": 40,
           "color": "#99ccff"
         },
-        "101575091": {
-          "name": "EVENTO 18 FEB",
+        "100725124": {
+          "name": "Prospectando",
           "sort": 50,
           "color": "#99ccff"
         },
-        "101575203": {
-          "name": "DERIVADOS EVENTO 18 FEB",
+        "102321800": {
+          "name": "Prospectando 2",
           "sort": 60,
           "color": "#99ccff"
         },
-        "90873528": {
-          "name": "EVENTO 26.11.25",
+        "102641580": {
+          "name": "Prospectando 3",
           "sort": 70,
           "color": "#99ccff"
         },
-        "77755872": {
-          "name": "Tomar decisión",
-          "sort": 80,
-          "color": "#ffcc66"
-        },
-        "142": {
-          "name": "Logrado con éxito",
-          "sort": 10000,
-          "color": "#CCFF66"
-        },
-        "143": {
-          "name": "Ventas Perdidos",
-          "sort": 11000,
-          "color": "#D5D8DB"
-        }
-      }
-    },
-    "8874156": {
-      "name": "Pruebas MVO",
-      "sort": 2,
-      "is_main": false,
-      "stages": {
-        "69395708": {
-          "name": "Leads Entrantes",
-          "sort": 10,
-          "color": "#c1c1c1"
-        },
-        "69395712": {
-          "name": "BACKUP",
-          "sort": 20,
-          "color": "#99ccff"
-        },
-        "101959003": {
-          "name": "LEADS - ASESORES_IA",
-          "sort": 30,
-          "color": "#99ccff"
-        },
-        "96388008": {
-          "name": "LEAD NUEVO",
-          "sort": 40,
-          "color": "#99ccff"
-        },
-        "99948007": {
-          "name": "META ADS FORM",
-          "sort": 50,
-          "color": "#99ccff"
-        },
-        "97504460": {
-          "name": "CLASIFICACION",
-          "sort": 60,
-          "color": "#99ccff"
-        },
-        "99685027": {
-          "name": "SEGUIMIENTO",
-          "sort": 70,
-          "color": "#99ccff"
-        },
-        "99685031": {
-          "name": "DESCARTADO",
+        "94974352": {
+          "name": "RECUPERO RESPUESTAS",
           "sort": 80,
           "color": "#99ccff"
         },
-        "99685035": {
-          "name": "CASO ESPECIAL",
+        "94352688": {
+          "name": "NUEVO GPT",
           "sort": 90,
           "color": "#99ccff"
         },
-        "97504464": {
-          "name": "INV: DATOS (LOOP)",
+        "89443940": {
+          "name": "Primer contacto / Calificación",
           "sort": 100,
           "color": "#99ccff"
         },
-        "97504468": {
-          "name": "INV: EVALUACION",
+        "90644996": {
+          "name": "Envio compra Online",
           "sort": 110,
           "color": "#99ccff"
         },
-        "97504472": {
-          "name": "INV: ASIGNADO",
+        "96701524": {
+          "name": "ESPERANDO EJECUTIVO",
           "sort": 120,
           "color": "#99ccff"
         },
-        "98000340": {
-          "name": "RENTAS: IDENTIFICADO",
+        "102327128": {
+          "name": "Esperando Ejecutivo \"Prospectando\"",
           "sort": 130,
           "color": "#99ccff"
         },
-        "99685039": {
-          "name": "RENTAS: DERIVADO",
+        "102321804": {
+          "name": "Esperando Ejecutivo \"Prospectando 2\"",
           "sort": 140,
           "color": "#99ccff"
         },
-        "99685043": {
-          "name": "PROP: IDENTIFICADO",
+        "90131324": {
+          "name": "Ejecutivo 1 - Asignado",
           "sort": 150,
           "color": "#99ccff"
         },
-        "99685047": {
-          "name": "PROP: DERIVADO",
+        "102054672": {
+          "name": "Ejecutivo 1 - Cotizando",
           "sort": 160,
           "color": "#99ccff"
         },
-        "99685051": {
-          "name": "CLI: IDENTIFICADO",
+        "102145392": {
+          "name": "Ejecutivo 1 - Esperando Respuesta",
           "sort": 170,
           "color": "#99ccff"
         },
-        "99685055": {
-          "name": "CLI: DERIVADO",
+        "90131328": {
+          "name": "Ejecutivo 2 - Asignado",
           "sort": 180,
           "color": "#99ccff"
         },
-        "69395716": {
-          "name": "BBDD",
+        "102054676": {
+          "name": "Ejecutivo 2 - Cotizando",
           "sort": 190,
-          "color": "#ffff99"
+          "color": "#99ccff"
         },
-        "78209224": {
-          "name": "LINKEDIN",
+        "102139260": {
+          "name": "Ejecutivo 2 - Esperando Respuesta",
           "sort": 200,
           "color": "#99ccff"
         },
-        "69395840": {
-          "name": "INICIO",
+        "102076944": {
+          "name": "Ejecutivo 4 - Asignado",
           "sort": 210,
           "color": "#99ccff"
         },
-        "69622856": {
-          "name": "NO APROBADO - NACIONAL",
+        "90131336": {
+          "name": "Ejecutivo 4 - Cotizando",
           "sort": 220,
-          "color": "#ff8f92"
+          "color": "#99ccff"
         },
-        "69622860": {
-          "name": "NO APROBADO - INTERNACIONAL",
+        "102145408": {
+          "name": "Ejecutivo 4 - Esperando Respuesta",
           "sort": 230,
-          "color": "#ff8f92"
+          "color": "#99ccff"
         },
-        "77046356": {
-          "name": "WEBINARS",
+        "90790992": {
+          "name": "Ejecutivo 7 - Asignado",
           "sort": 240,
           "color": "#99ccff"
         },
-        "77077656": {
-          "name": "FERIAS B2B",
+        "102054680": {
+          "name": "Ejecutivo 7 - Cotizando",
           "sort": 250,
           "color": "#99ccff"
         },
-        "69622864": {
-          "name": "APROBADOS",
+        "102145412": {
+          "name": "Ejecutivo 7 - Esperando Respuesta",
           "sort": 260,
-          "color": "#ccc8f9"
-        },
-        "77190828": {
-          "name": "APROBADOS / CHARLAS",
-          "sort": 270,
           "color": "#99ccff"
         },
-        "69665104": {
-          "name": "SIN CLASIFICAR",
+        "90312912": {
+          "name": "Enviar a Dia 1",
+          "sort": 270,
+          "color": "#ff8f92"
+        },
+        "90314404": {
+          "name": "NO ES CUMPLEAÑOS",
           "sort": 280,
           "color": "#99ccff"
         },
-        "69622868": {
-          "name": "WORKSHOP - ALTO",
+        "89443944": {
+          "name": "Cotización enviada Hoy",
           "sort": 290,
-          "color": "#deff81"
+          "color": "#87f2c0"
         },
-        "69622872": {
-          "name": "WORKSHOP - MEDIO",
+        "94992480": {
+          "name": "CUMPLEAÑOS > 45 días",
           "sort": 300,
-          "color": "#fff000"
+          "color": "#99ccff"
         },
-        "69622876": {
-          "name": "WORKSHOP - EMPUJE",
+        "102025092": {
+          "name": "Cotización Arauco Quilicura",
           "sort": 310,
+          "color": "#99ccff"
+        },
+        "94352640": {
+          "name": "Cotizacion Parque Araucano",
+          "sort": 320,
+          "color": "#99ccff"
+        },
+        "102666856": {
+          "name": "GPT Recuperar + 45, Quilicura, Araucano",
+          "sort": 330,
+          "color": "#99ccff"
+        },
+        "95858880": {
+          "name": "SEGUIMIENTO COTIZACION D1",
+          "sort": 340,
           "color": "#ffce5a"
         },
-        "69622880": {
-          "name": "SOLICITO CITA - INTERNACIONAL",
-          "sort": 320,
-          "color": "#98cbff"
+        "102021012": {
+          "name": "SEGUIMIENTO COTIZACION D2",
+          "sort": 350,
+          "color": "#ffdc7f"
         },
-        "69622884": {
-          "name": "SOLICITO CITA N.G. - ALTO",
-          "sort": 330,
-          "color": "#deff81"
+        "102021016": {
+          "name": "SEGUIMIENTO COTIZACION D4",
+          "sort": 360,
+          "color": "#ffeab2"
         },
-        "69622888": {
-          "name": "SOLICITÓ CITA N.G - MEDIO",
-          "sort": 340,
+        "102021020": {
+          "name": "SEGUIMIENTO COTIZACION D7",
+          "sort": 370,
           "color": "#fff000"
         },
-        "69622892": {
-          "name": "SOLICITÓ CITA N.G - EMPUJE",
-          "sort": 350,
-          "color": "#ffce5a"
-        },
-        "69622896": {
-          "name": "ABORDADO POR ASESOR",
-          "sort": 360,
-          "color": "#e6e8ea"
-        },
-        "69622900": {
-          "name": "REUNIÓN AGENDADA",
-          "sort": 370,
-          "color": "#e6e8ea"
-        },
-        "69622904": {
-          "name": "REUNIÓN AGENDADA LUNES",
+        "102860488": {
+          "name": "Esperando Seguimiento",
           "sort": 380,
-          "color": "#d6eaff"
+          "color": "#99ccff"
         },
-        "69622908": {
-          "name": "REUNIÓN AGENDADA MIÉRCOLES",
+        "102667236": {
+          "name": "GTP Seguimiento Cotización",
           "sort": 390,
-          "color": "#deff81"
+          "color": "#99ccff"
         },
-        "69623280": {
-          "name": "COORDINAR REUNION",
+        "89443948": {
+          "name": "En negociación / Link Pago Enviado",
           "sort": 400,
-          "color": "#ffce5a"
+          "color": "#ccc8f9"
         },
-        "69797504": {
-          "name": "HABLAR CON ASESOR",
+        "102326584": {
+          "name": "Verificación Compra Online",
           "sort": 410,
-          "color": "#fffeb2"
+          "color": "#99ccff"
         },
-        "69623284": {
-          "name": "SEGUIMIENTO INICIAL",
+        "89443988": {
+          "name": "Reserva Confirmada",
           "sort": 420,
-          "color": "#ff8f92"
+          "color": "#99ccff"
         },
-        "69781148": {
-          "name": "NO ASISTIO A REUNION",
+        "89443992": {
+          "name": "Pago final confirmado",
           "sort": 430,
           "color": "#99ccff"
         },
-        "69622912": {
-          "name": "SIN RESPUESTA",
+        "89994988": {
+          "name": "Evaluación Post Cumpleaños",
           "sort": 440,
           "color": "#99ccff"
         },
-        "69666864": {
-          "name": "ERROR MENSAJE",
+        "90174132": {
+          "name": "Año 2026",
           "sort": 450,
-          "color": "#eb93ff"
+          "color": "#99ccff"
         },
-        "69623288": {
-          "name": "ENVIO A INMOBILIARIA",
+        "90988796": {
+          "name": "PAGO SIN EJECUTIVO",
           "sort": 460,
-          "color": "#e6e8ea"
-        },
-        "69623292": {
-          "name": "SOLICITUD DOCUMENTOS",
-          "sort": 470,
-          "color": "#e6e8ea"
-        },
-        "71069588": {
-          "name": "ATENCION SOLICITUD DOCUMENTOS",
-          "sort": 480,
-          "color": "#f2f3f4"
-        },
-        "71334484": {
-          "name": "COTIZACION ENVIADA",
-          "sort": 490,
           "color": "#99ccff"
         },
-        "74034020": {
-          "name": "SEG - COTIZACION ENVIADA",
-          "sort": 500,
+        "142": {
+          "name": "Venta exitosa (cumpleaños realizado)",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "12518400": {
+      "name": "Convenios",
+      "sort": 2,
+      "is_main": false,
+      "stages": {
+        "96689544": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "96689548": {
+          "name": "CONTACTO INICIAL",
+          "sort": 20,
           "color": "#99ccff"
         },
-        "74323956": {
-          "name": "RPTA - ASESOR COT",
-          "sort": 510,
+        "98054344": {
+          "name": "CLASIFICACIÓN Inicial EJECUTIVO 1",
+          "sort": 30,
           "color": "#99ccff"
         },
-        "69622916": {
-          "name": "PRECA - BANCO",
-          "sort": 520,
-          "color": "#e6e8ea"
-        },
-        "69623296": {
-          "name": "VISITA PROYECTO",
-          "sort": 530,
-          "color": "#e6e8ea"
-        },
-        "69622924": {
-          "name": "CALIENTES",
-          "sort": 540,
-          "color": "#e6e8ea"
-        },
-        "71766716": {
-          "name": "ENFRIADOS",
-          "sort": 550,
+        "98060052": {
+          "name": "CLASIFICACIÓN Inicial EJECUTIVO 4",
+          "sort": 40,
           "color": "#99ccff"
         },
-        "69622928": {
-          "name": "SEPARACIÓN",
-          "sort": 560,
-          "color": "#e6e8ea"
+        "98060056": {
+          "name": "CLASIFICACIÓN Inicial EJECUTIVO 7",
+          "sort": 50,
+          "color": "#99ccff"
         },
-        "69622932": {
-          "name": "CARTA APROBACIÓN",
-          "sort": 570,
-          "color": "#e6e8ea"
+        "98054464": {
+          "name": "No Aplica a segmento",
+          "sort": 60,
+          "color": "#99ccff"
         },
-        "69623300": {
-          "name": "MINUTA ENVIADA",
-          "sort": 580,
-          "color": "#98cbff"
+        "98216460": {
+          "name": "PRIMER CONTACTO",
+          "sort": 70,
+          "color": "#fffeb2"
         },
-        "69622936": {
-          "name": "CLIENTES PERDIDOS F2",
-          "sort": 590,
+        "99064128": {
+          "name": "reunion",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "98054348": {
+          "name": "Envío Propuesta",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "96689552": {
+          "name": "Negociación",
+          "sort": 100,
+          "color": "#ffdc7f"
+        },
+        "96689556": {
+          "name": "Cierre Positivo",
+          "sort": 110,
+          "color": "#deff81"
+        },
+        "98054352": {
+          "name": "Cierre Negativo",
+          "sort": 120,
           "color": "#ff8f92"
+        },
+        "99064320": {
+          "name": "revisión de contrato",
+          "sort": 130,
+          "color": "#99ccff"
         },
         "142": {
           "name": "Logrado con éxito",
@@ -378,402 +338,347 @@
         }
       }
     },
-    "9165176": {
-      "name": "PROPER RENTAS",
+    "10155436": {
+      "name": "Venta Empresa",
       "sort": 3,
       "is_main": false,
       "stages": {
-        "71239024": {
-          "name": "Incoming leads",
+        "77934964": {
+          "name": "Leads Entrantes",
           "sort": 10,
           "color": "#c1c1c1"
         },
-        "90694444": {
-          "name": "BACKUP",
+        "89969856": {
+          "name": "\"PERDIdos ve\"",
           "sort": 20,
           "color": "#99ccff"
         },
-        "71239028": {
-          "name": "CON COBERTURA",
+        "89969860": {
+          "name": "\"ganados ve\"",
           "sort": 30,
           "color": "#99ccff"
         },
-        "92821220": {
-          "name": "PRIMER CONTACTO",
+        "77934968": {
+          "name": "Contacto inicial",
           "sort": 40,
           "color": "#99ccff"
         },
-        "92821224": {
-          "name": "CONSULTANDO SERVICIOS",
+        "98981428": {
+          "name": "no califica",
           "sort": 50,
           "color": "#99ccff"
         },
-        "92821228": {
-          "name": "INTERESADO",
+        "99107960": {
+          "name": "SIN DATOS",
           "sort": 60,
           "color": "#99ccff"
         },
-        "92822272": {
-          "name": "SEGUIMIENTO",
+        "98320476": {
+          "name": "correo enviado",
           "sort": 70,
           "color": "#99ccff"
         },
-        "92821232": {
-          "name": "HORARIOS DADOS",
+        "98320480": {
+          "name": "seguimiento correo enviado",
           "sort": 80,
           "color": "#99ccff"
         },
-        "92821236": {
-          "name": "CASO ESPECIAL",
+        "98320484": {
+          "name": "reunión agendada",
           "sort": 90,
           "color": "#99ccff"
         },
-        "92821424": {
-          "name": "CLIENTE/INQ/PROP",
+        "98320488": {
+          "name": "cotización enviada",
           "sort": 100,
           "color": "#99ccff"
         },
-        "89803176": {
-          "name": "CONTACTOS",
+        "98320492": {
+          "name": "seguimiento cotización",
           "sort": 110,
           "color": "#99ccff"
         },
-        "71239372": {
-          "name": "SIN COBERTURA",
+        "99467908": {
+          "name": "no está interesado",
           "sort": 120,
-          "color": "#ff8f92"
+          "color": "#99ccff"
         },
-        "72769428": {
-          "name": "SEGUIMIENTO INICIAL",
+        "77934992": {
+          "name": "No responde",
           "sort": 130,
-          "color": "#ffeab2"
+          "color": "#99ccff"
         },
-        "87066984": {
-          "name": "EN ATENCION",
+        "77934972": {
+          "name": "Negociación",
           "sort": 140,
-          "color": "#87f2c0"
+          "color": "#ffff99"
         },
-        "71239376": {
-          "name": "SOLICITA LLAMADA",
+        "99677800": {
+          "name": "ESPERA DE OC",
           "sort": 150,
-          "color": "#d6eaff"
+          "color": "#99ccff"
         },
-        "72466296": {
-          "name": "LLAMADA  AGENDADA",
+        "99677804": {
+          "name": "COMPRA REALIZADA",
           "sort": 160,
-          "color": "#c1e0ff"
+          "color": "#99ccff"
         },
-        "72769436": {
-          "name": "LLAMADA HECHA",
+        "77934976": {
+          "name": "Tomar decisión",
           "sort": 170,
-          "color": "#99ccff"
-        },
-        "72769520": {
-          "name": "CALIENTES",
-          "sort": 180,
-          "color": "#ffce5a"
-        },
-        "87066328": {
-          "name": "CONTRATO ENVIADO",
-          "sort": 190,
-          "color": "#87f2c0"
-        },
-        "87066332": {
-          "name": "CONTRATO FIRMADO",
-          "sort": 200,
-          "color": "#deff81"
-        },
-        "87124592": {
-          "name": "ENTREGA DE LLAVES AGENDADA",
-          "sort": 210,
-          "color": "#ffce5a"
-        },
-        "87124836": {
-          "name": "NECESITA IMPLEMENTACION",
-          "sort": 220,
-          "color": "#ffdbdb"
-        },
-        "87124876": {
-          "name": "INMUEBLE IMPLEMENTADO LISTO",
-          "sort": 230,
-          "color": "#99ccff"
-        },
-        "88470452": {
-          "name": "CORRETAJE",
-          "sort": 240,
-          "color": "#ff8f92"
-        },
-        "71251772": {
-          "name": "PERDIDOS",
-          "sort": 250,
-          "color": "#f2f3f4"
+          "color": "#ffcc66"
         },
         "142": {
-          "name": "Closed - won",
+          "name": "Logrado con éxito",
           "sort": 10000,
           "color": "#CCFF66"
         },
         "143": {
-          "name": "Closed - lost",
+          "name": "Ventas Perdidos",
           "sort": 11000,
           "color": "#D5D8DB"
         }
       }
     },
-    "10231420": {
-      "name": "ATENCIÓN AL CLIENTE RENTAS",
+    "11939384": {
+      "name": "Venta Paseos de Curso",
       "sort": 4,
       "is_main": false,
       "stages": {
-        "78496816": {
-          "name": "Incoming leads",
+        "92027956": {
+          "name": "Leads Entrantes",
           "sort": 10,
           "color": "#c1c1c1"
         },
-        "85429080": {
-          "name": "CREACION",
+        "92027960": {
+          "name": "Contacto inicial / Calificación",
           "sort": 20,
           "color": "#99ccff"
         },
-        "78496820": {
-          "name": "EN ATENCION",
+        "96821088": {
+          "name": "Leads a repartir",
           "sort": 30,
           "color": "#99ccff"
         },
-        "85427336": {
-          "name": "URGENTE",
-          "sort": 40,
-          "color": "#ff8f92"
-        },
-        "85427340": {
-          "name": "EN ESPERA",
-          "sort": 50,
-          "color": "#fff000"
-        },
-        "86605476": {
-          "name": "EVALUACION",
-          "sort": 60,
-          "color": "#87f2c0"
-        },
-        "85270572": {
-          "name": "TICKET CERRADO",
-          "sort": 70,
-          "color": "#e6e8ea"
-        },
-        "85600524": {
-          "name": "EQUIPO PROPER",
-          "sort": 80,
-          "color": "#99ccff"
-        },
-        "86023808": {
-          "name": "BBDD RENTAS",
-          "sort": 90,
-          "color": "#99ccff"
-        },
-        "142": {
-          "name": "Closed - won",
-          "sort": 10000,
-          "color": "#CCFF66"
-        },
-        "143": {
-          "name": "Closed - lost",
-          "sort": 11000,
-          "color": "#D5D8DB"
-        }
-      }
-    },
-    "11240224": {
-      "name": "PRE INQUILINOS",
-      "sort": 5,
-      "is_main": false,
-      "stages": {
-        "86254208": {
-          "name": "Incoming leads",
-          "sort": 10,
-          "color": "#c1c1c1"
-        },
-        "89094404": {
-          "name": "pre creacion",
-          "sort": 10,
-          "color": "#fff000"
-        },
-        "100557183": {
-          "name": "LEAD - BOT IA",
-          "sort": 20,
-          "color": "#99ccff"
-        },
-        "96812756": {
-          "name": "LEADS FORM - MODO",
-          "sort": 30,
-          "color": "#99ccff"
-        },
-        "98770531": {
-          "name": "LEADS FORM - ARISE",
+        "95429876": {
+          "name": "recupero preguntas",
           "sort": 40,
           "color": "#99ccff"
         },
-        "97996236": {
-          "name": "leads form - digital",
+        "95429880": {
+          "name": "recupero respuesta",
           "sort": 50,
           "color": "#99ccff"
         },
-        "90801072": {
-          "name": "INGRESO CON PROPIEDAD",
+        "92028520": {
+          "name": "Ejecutivo 1 - Calificación",
           "sort": 60,
           "color": "#99ccff"
         },
-        "96205400": {
-          "name": "CORREDORES",
+        "92028524": {
+          "name": "Ejecutivo 2 - Calificación",
           "sort": 70,
           "color": "#99ccff"
         },
-        "90801076": {
-          "name": "DEFINIENDO PROPIEDAD",
+        "92028528": {
+          "name": "Ejecutivo 4 - Calificación",
           "sort": 80,
           "color": "#99ccff"
         },
-        "90801080": {
-          "name": "INTERACTUANDO",
+        "92028536": {
+          "name": "Ejecutivo 7 - Calificación",
           "sort": 90,
           "color": "#99ccff"
         },
-        "90801084": {
-          "name": "CASO ESPECIAL",
+        "93090632": {
+          "name": "Día 1",
           "sort": 100,
           "color": "#99ccff"
         },
-        "91040128": {
-          "name": "inquilino/prop/otros",
+        "93090636": {
+          "name": "Día 2",
           "sort": 110,
           "color": "#99ccff"
         },
-        "90801088": {
-          "name": "SEGUIMIENTO",
+        "93090640": {
+          "name": "Día 3",
           "sort": 120,
           "color": "#99ccff"
         },
-        "96290432": {
-          "name": "SEGUIMIENTO - MANUAL",
+        "92027964": {
+          "name": "Cotización enviada",
           "sort": 130,
-          "color": "#99ccff"
+          "color": "#ffff99"
         },
-        "96290436": {
-          "name": "SEGUIMIENTO - MODO",
+        "95493544": {
+          "name": "APURANDO COTIZACION",
           "sort": 140,
           "color": "#99ccff"
         },
-        "95827936": {
-          "name": "respuesta manual",
+        "95493548": {
+          "name": "COTIZACION CON RESPUESTA",
           "sort": 150,
           "color": "#99ccff"
         },
-        "90801092": {
-          "name": "INTERESADO",
+        "92027968": {
+          "name": "En negociación / seguimiento",
           "sort": 160,
-          "color": "#99ccff"
+          "color": "#ffcc66"
         },
-        "90801096": {
-          "name": "HORARIO INDICADO",
+        "92028540": {
+          "name": "reserva confirmada",
           "sort": 170,
           "color": "#99ccff"
         },
-        "92800052": {
-          "name": "VISITA MODO",
+        "92028544": {
+          "name": "pago final confirmado",
           "sort": 180,
           "color": "#99ccff"
         },
-        "86277776": {
-          "name": "CREACION",
+        "92028548": {
+          "name": "NPS",
           "sort": 190,
           "color": "#99ccff"
         },
-        "88281952": {
-          "name": "creacion2",
-          "sort": 200,
-          "color": "#ffce5a"
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
         },
-        "86823652": {
-          "name": "SIN RESPUESTA",
-          "sort": 210,
-          "color": "#ffc8c8"
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "12835404": {
+      "name": "Influencers Adquisición",
+      "sort": 5,
+      "is_main": false,
+      "stages": {
+        "98990412": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
         },
-        "86254212": {
-          "name": "SEGUIMIENTO - SIN RESPUESTA",
-          "sort": 220,
+        "98992236": {
+          "name": "Backlog",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "99369360": {
+          "name": "DDBB ENTREKIDS",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "98990416": {
+          "name": "Contactabilidad 1",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "99176528": {
+          "name": "RECICLAR INFLUENCER",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "98990420": {
+          "name": "Envío Terminos y condiciones",
+          "sort": 60,
+          "color": "#ffff99"
+        },
+        "98990424": {
+          "name": "Envío de Formulario",
+          "sort": 70,
+          "color": "#ffcc66"
+        },
+        "98994884": {
+          "name": "Revisión Formulario (Humano)",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "99086364": {
+          "name": "MANUEL",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "99086368": {
+          "name": "VERONICA",
+          "sort": 100,
+          "color": "#99ccff"
+        },
+        "99023600": {
+          "name": "DÍA 1",
+          "sort": 110,
+          "color": "#99ccff"
+        },
+        "99023604": {
+          "name": "DÍA 2",
+          "sort": 120,
+          "color": "#99ccff"
+        },
+        "99023608": {
+          "name": "DÍA 3",
+          "sort": 130,
+          "color": "#99ccff"
+        },
+        "99064176": {
+          "name": "PENDIENTE ENVIO CORTESIA",
+          "sort": 140,
+          "color": "#99ccff"
+        },
+        "98992116": {
+          "name": "Envío Cortesía",
+          "sort": 150,
           "color": "#fff000"
         },
-        "86254216": {
-          "name": "SOLICITA VISITA",
-          "sort": 230,
-          "color": "#87f2c0"
+        "98992120": {
+          "name": "Gestión Contenido",
+          "sort": 160,
+          "color": "#deff81"
         },
-        "88749392": {
-          "name": "CALENDARIO DE OPCIONES",
+        "98992124": {
+          "name": "publicación ok",
+          "sort": 170,
+          "color": "#99ccff"
+        },
+        "98992144": {
+          "name": "Evaluacion",
+          "sort": 180,
+          "color": "#99ccff"
+        },
+        "98992128": {
+          "name": "pauta",
+          "sort": 190,
+          "color": "#99ccff"
+        },
+        "99232828": {
+          "name": "NO CALIFICA",
+          "sort": 200,
+          "color": "#99ccff"
+        },
+        "99774520": {
+          "name": "CALIFICA SIN DATA",
+          "sort": 210,
+          "color": "#99ccff"
+        },
+        "99596724": {
+          "name": "INCUMPLIMIENTO",
+          "sort": 220,
+          "color": "#deff81"
+        },
+        "99244804": {
+          "name": "FUTURO",
+          "sort": 230,
+          "color": "#99ccff"
+        },
+        "98994000": {
+          "name": "NO QUIERE",
           "sort": 240,
           "color": "#99ccff"
         },
-        "86445656": {
-          "name": "VISITA AGENDADA",
-          "sort": 250,
-          "color": "#deff81"
-        },
-        "86445660": {
-          "name": "VISITA REALIZADA",
-          "sort": 260,
-          "color": "#f3beff"
-        },
-        "86445664": {
-          "name": "VISITA NO REALIZADA",
-          "sort": 270,
-          "color": "#99ccff"
-        },
-        "86445668": {
-          "name": "CALIENTES",
-          "sort": 280,
-          "color": "#ff8f92"
-        },
-        "86445672": {
-          "name": "SEPARACION DEPA",
-          "sort": 290,
-          "color": "#99ccff"
-        },
-        "87064368": {
-          "name": "CONTRATO CREADO",
-          "sort": 300,
-          "color": "#ffce5a"
-        },
-        "86445676": {
-          "name": "CONTRATO FIRMADO",
-          "sort": 310,
-          "color": "#87f2c0"
-        },
-        "86479424": {
-          "name": "ENTREGA DEL DEPA",
-          "sort": 320,
-          "color": "#99ccff"
-        },
-        "86781368": {
-          "name": "ADMINISTRACIÓN",
-          "sort": 330,
-          "color": "#ff8f92"
-        },
-        "86781372": {
-          "name": "EQUIPO PROPER",
-          "sort": 340,
-          "color": "#99ccff"
-        },
-        "86781376": {
-          "name": "PROPIETARIOS",
-          "sort": 350,
-          "color": "#fff000"
-        },
-        "86876208": {
-          "name": "perdidos",
-          "sort": 360,
-          "color": "#e6e8ea"
-        },
         "142": {
-          "name": "DEAL WON",
+          "name": "Closed - won",
           "sort": 10000,
           "color": "#CCFF66"
         },
@@ -784,63 +689,850 @@
         }
       }
     },
-    "11251596": {
-      "name": "MODO - TICKET",
+    "12940956": {
+      "name": "Influencers Mantención",
       "sort": 6,
       "is_main": false,
       "stages": {
-        "86343224": {
-          "name": "Incoming leads",
+        "99783092": {
+          "name": "Leads Entrantes",
           "sort": 10,
           "color": "#c1c1c1"
         },
-        "86343228": {
-          "name": "CREACIÓN",
-          "sort": 10,
+        "99856220": {
+          "name": "BACKLOG",
+          "sort": 20,
           "color": "#99ccff"
         },
-        "86343232": {
-          "name": "ATENCIÓN",
-          "sort": 20,
-          "color": "#ffff99"
-        },
-        "86343236": {
-          "name": "URGENTE",
+        "99783096": {
+          "name": "Initial Contact",
           "sort": 30,
-          "color": "#ffcc66"
+          "color": "#99ccff"
         },
-        "86343284": {
-          "name": "EN ESPERA",
+        "99855880": {
+          "name": "LICUADORA",
           "sort": 40,
           "color": "#99ccff"
         },
-        "86603240": {
-          "name": "EVALUACION",
+        "99783100": {
+          "name": "FORM SENT",
           "sort": 50,
-          "color": "#87f2c0"
+          "color": "#ffff99"
         },
-        "86343288": {
-          "name": "TICKET CERRADO",
+        "99783716": {
+          "name": "PENDIENTE CORTESIA",
           "sort": 60,
-          "color": "#e6e8ea"
+          "color": "#ffce5a"
         },
-        "98205984": {
-          "name": "actualizacion bbdd",
+        "99783720": {
+          "name": "CORTESIA ENVIADA",
           "sort": 70,
+          "color": "#fff000"
+        },
+        "99783104": {
+          "name": "REEL INSIST DAY 1",
+          "sort": 80,
+          "color": "#98cbff"
+        },
+        "99783724": {
+          "name": "REEL INSIST DAY 2",
+          "sort": 90,
           "color": "#99ccff"
         },
-        "86495536": {
-          "name": "EQUIPO PROPER",
-          "sort": 80,
+        "99783728": {
+          "name": "REEL INSIST DAY 3",
+          "sort": 100,
           "color": "#99ccff"
+        },
+        "99783732": {
+          "name": "GESTIÓN CONTENIDO",
+          "sort": 110,
+          "color": "#99ccff"
+        },
+        "99783736": {
+          "name": "PUBLICACIÓN OK",
+          "sort": 120,
+          "color": "#99ccff"
+        },
+        "99783740": {
+          "name": "EVALUACIÓN",
+          "sort": 130,
+          "color": "#99ccff"
+        },
+        "99783744": {
+          "name": "PAUTA",
+          "sort": 140,
+          "color": "#99ccff"
+        },
+        "99856820": {
+          "name": "NO QUIERE",
+          "sort": 150,
+          "color": "#99ccff"
+        },
+        "101532688": {
+          "name": "VEDADO",
+          "sort": 160,
+          "color": "#ff8f92"
         },
         "142": {
-          "name": "Closed - won",
+          "name": "END",
           "sort": 10000,
           "color": "#CCFF66"
         },
         "143": {
-          "name": "Closed - lost",
+          "name": "LOST",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "8407695": {
+      "name": "Cumpleaños",
+      "sort": 7,
+      "is_main": false,
+      "stages": {
+        "66563095": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "90006112": {
+          "name": "no usar",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "89969832": {
+          "name": "\"perdido cumpleaños\"",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "89969936": {
+          "name": "\"ganado Cumpleaños\"",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "66563099": {
+          "name": "Contacto inicial",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "75962276": {
+          "name": "No responde",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "84989860": {
+          "name": "recontactados",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "66563107": {
+          "name": "En negociación",
+          "sort": 80,
+          "color": "#ffcc66"
+        },
+        "66563111": {
+          "name": "Esperando Pago",
+          "sort": 90,
+          "color": "#ffcccc"
+        },
+        "66563359": {
+          "name": "Cliente Cumpleaños",
+          "sort": 100,
+          "color": "#f9deff"
+        },
+        "66566499": {
+          "name": "Perdido por precio",
+          "sort": 110,
+          "color": "#99ccff"
+        },
+        "84045540": {
+          "name": "no responde",
+          "sort": 120,
+          "color": "#99ccff"
+        },
+        "90142776": {
+          "name": "Cumpleaños Realizado",
+          "sort": 130,
+          "color": "#99ccff"
+        },
+        "66563103": {
+          "name": "Propuesta Enviada",
+          "sort": 140,
+          "color": "#ffff99"
+        },
+        "90129844": {
+          "name": "Recuperar Cumpleaños 1",
+          "sort": 150,
+          "color": "#99ccff"
+        },
+        "90129848": {
+          "name": "Recuperar Cumpleaños 2",
+          "sort": 160,
+          "color": "#99ccff"
+        },
+        "90129852": {
+          "name": "Recuperar Cumpleaños 3",
+          "sort": 170,
+          "color": "#99ccff"
+        },
+        "90761588": {
+          "name": "a recuperar",
+          "sort": 180,
+          "color": "#99ccff"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Venta Perdido",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "11651184": {
+      "name": "Outbound Cumpleaños",
+      "sort": 8,
+      "is_main": false,
+      "stages": {
+        "89513432": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "89513436": {
+          "name": "Backlog Cumpleaños",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "91079824": {
+          "name": "Arauco Maipu",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "91079828": {
+          "name": "La Florida",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "91079832": {
+          "name": "Quilin, Oeste, Sur",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "91079836": {
+          "name": "Serena, Viña, Otros",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "89513716": {
+          "name": "Contacto Whatsapp",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "91434344": {
+          "name": "Contacto Whatsapp 2",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "91233456": {
+          "name": "Contacto Whatsapp 3",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "90045240": {
+          "name": "próximo año",
+          "sort": 100,
+          "color": "#99ccff"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "11708868": {
+      "name": "NPS",
+      "sort": 9,
+      "is_main": false,
+      "stages": {
+        "90027328": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "90027332": {
+          "name": "Cumpleaños a llamar",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "90027336": {
+          "name": "Llamando",
+          "sort": 30,
+          "color": "#ffff99"
+        },
+        "90027340": {
+          "name": "Encuesta Contestada",
+          "sort": 40,
+          "color": "#ffcc66"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "11741496": {
+      "name": "Otros",
+      "sort": 10,
+      "is_main": false,
+      "stages": {
+        "90313788": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "90313792": {
+          "name": "MARKETING",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "90313796": {
+          "name": "cUMPLEAÑOS 2026",
+          "sort": 30,
+          "color": "#ffff99"
+        },
+        "90313800": {
+          "name": "OTRAS PREGUNTAS",
+          "sort": 40,
+          "color": "#ffcc66"
+        },
+        "95429744": {
+          "name": "Ingreso lead sin respuesta",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "11766796": {
+      "name": "Funnel Año 2026",
+      "sort": 11,
+      "is_main": false,
+      "stages": {
+        "90532220": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "90629244": {
+          "name": "OTRO",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "90532224": {
+          "name": "Enero 2026",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "90532228": {
+          "name": "Febrero 2026",
+          "sort": 40,
+          "color": "#ffff99"
+        },
+        "90532232": {
+          "name": "Marzo 2026",
+          "sort": 50,
+          "color": "#ffcc66"
+        },
+        "90532544": {
+          "name": "Abril 2026",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "90532548": {
+          "name": "MaYO 2026",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "90532552": {
+          "name": "JUNIO 2026",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "90532556": {
+          "name": "Julio 2026",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "90532560": {
+          "name": "AGOSTO 2026",
+          "sort": 100,
+          "color": "#99ccff"
+        },
+        "90532564": {
+          "name": "SEPTIEMBRE 2026",
+          "sort": 110,
+          "color": "#99ccff"
+        },
+        "90532568": {
+          "name": "OCTUBRE 2026",
+          "sort": 120,
+          "color": "#99ccff"
+        },
+        "90532572": {
+          "name": "Noviembre 2026",
+          "sort": 130,
+          "color": "#99ccff"
+        },
+        "90532576": {
+          "name": "Diciembre 2026",
+          "sort": 140,
+          "color": "#99ccff"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "11805784": {
+      "name": "Chatgpt",
+      "sort": 12,
+      "is_main": false,
+      "stages": {
+        "90868076": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "90868080": {
+          "name": "Contacto inicial",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "90868084": {
+          "name": "Tickets",
+          "sort": 30,
+          "color": "#ffff99"
+        },
+        "90868088": {
+          "name": "Esperando Ejecutivo OUTBOUND",
+          "sort": 40,
+          "color": "#ffcc66"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "11830684": {
+      "name": "Cumpleaños Realizado",
+      "sort": 13,
+      "is_main": false,
+      "stages": {
+        "91091664": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "91091668": {
+          "name": "Envío Encuesta Satisfacción",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "91308656": {
+          "name": "TRANSITO",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "91091816": {
+          "name": "Ordenar Mes",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "91091820": {
+          "name": "Enero",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "91091824": {
+          "name": "Febrero",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "91091828": {
+          "name": "Marzo",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "91091832": {
+          "name": "Abril",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "91091836": {
+          "name": "Mayo",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "91091840": {
+          "name": "Junio",
+          "sort": 100,
+          "color": "#99ccff"
+        },
+        "91091844": {
+          "name": "Julio",
+          "sort": 110,
+          "color": "#99ccff"
+        },
+        "91091848": {
+          "name": "Agosto",
+          "sort": 120,
+          "color": "#99ccff"
+        },
+        "91091852": {
+          "name": "Septiembre",
+          "sort": 130,
+          "color": "#99ccff"
+        },
+        "91091856": {
+          "name": "Octubre",
+          "sort": 140,
+          "color": "#99ccff"
+        },
+        "91091860": {
+          "name": "Noviembre",
+          "sort": 150,
+          "color": "#99ccff"
+        },
+        "91091864": {
+          "name": "Diciembre",
+          "sort": 160,
+          "color": "#99ccff"
+        },
+        "91092108": {
+          "name": "SIN MES",
+          "sort": 170,
+          "color": "#99ccff"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "11968712": {
+      "name": "Venta Empresa",
+      "sort": 14,
+      "is_main": false,
+      "stages": {
+        "92288444": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "92288448": {
+          "name": "Contacto inicial / Calificación",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "92288520": {
+          "name": "carol",
+          "sort": 30,
+          "color": "#99ccff"
+        },
+        "92288524": {
+          "name": "AMPARO",
+          "sort": 40,
+          "color": "#99ccff"
+        },
+        "92288528": {
+          "name": "ejecutivo 4 - calificación",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "92288532": {
+          "name": "Ejecutivo 5 - calificación",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "92288536": {
+          "name": "ejecutivo 7 - calificación",
+          "sort": 70,
+          "color": "#99ccff"
+        },
+        "98083624": {
+          "name": "contacto realizado (mail,llamado)",
+          "sort": 80,
+          "color": "#99ccff"
+        },
+        "98083628": {
+          "name": "reunión agendada",
+          "sort": 90,
+          "color": "#99ccff"
+        },
+        "98083632": {
+          "name": "en nogociación",
+          "sort": 100,
+          "color": "#99ccff"
+        },
+        "92288452": {
+          "name": "cotización enviada",
+          "sort": 110,
+          "color": "#ffff99"
+        },
+        "92288456": {
+          "name": "en negociación / seguimiento",
+          "sort": 120,
+          "color": "#ffcc66"
+        },
+        "99164056": {
+          "name": "convenio confirmado",
+          "sort": 130,
+          "color": "#99ccff"
+        },
+        "92288540": {
+          "name": "VENTA confirmada",
+          "sort": 140,
+          "color": "#99ccff"
+        },
+        "92288544": {
+          "name": "pago final confirmado",
+          "sort": 150,
+          "color": "#99ccff"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "12815680": {
+      "name": "DIFUSIÖN",
+      "sort": 15,
+      "is_main": false,
+      "stages": {
+        "98849792": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "98849796": {
+          "name": "Quilín",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "98849800": {
+          "name": "Quilín Envío",
+          "sort": 30,
+          "color": "#ffff99"
+        },
+        "98849804": {
+          "name": "Maipu",
+          "sort": 40,
+          "color": "#ffcc66"
+        },
+        "99687892": {
+          "name": "Maipu Envío",
+          "sort": 50,
+          "color": "#99ccff"
+        },
+        "99691296": {
+          "name": "Maipú 2",
+          "sort": 60,
+          "color": "#99ccff"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "13319036": {
+      "name": "Instagram Funpark",
+      "sort": 16,
+      "is_main": false,
+      "stages": {
+        "102714248": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "102714252": {
+          "name": "Contacto inicial",
+          "sort": 20,
+          "color": "#99ccff"
+        },
+        "102714256": {
+          "name": "Negociación",
+          "sort": 30,
+          "color": "#ffff99"
+        },
+        "102714260": {
+          "name": "Tomar decisión",
+          "sort": 40,
+          "color": "#ffcc66"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
+          "sort": 11000,
+          "color": "#D5D8DB"
+        }
+      }
+    },
+    "13363048": {
+      "name": "Funpark AI - mvo",
+      "sort": 17,
+      "is_main": false,
+      "stages": {
+        "103068444": {
+          "name": "Leads Entrantes",
+          "sort": 10,
+          "color": "#c1c1c1"
+        },
+        "103068448": {
+          "name": "FN Bot: Explorando",
+          "sort": 20,
+          "color": "#98cbff"
+        },
+        "103068452": {
+          "name": "FN Bot: Cotización Enviada",
+          "sort": 30,
+          "color": "#87f2c0"
+        },
+        "103068456": {
+          "name": "FN Bot: Link Enviado",
+          "sort": 40,
+          "color": "#deff81"
+        },
+        "103069356": {
+          "name": "FN Bot: Recotizando",
+          "sort": 50,
+          "color": "#ffdc7f"
+        },
+        "103069360": {
+          "name": "FN Seguimiento - Día 1",
+          "sort": 60,
+          "color": "#fffeb2"
+        },
+        "103069364": {
+          "name": "FN Seguimiento - Día 2",
+          "sort": 70,
+          "color": "#fffd7f"
+        },
+        "103069368": {
+          "name": "FN Seguimiento - Día 3",
+          "sort": 80,
+          "color": "#ffce5a"
+        },
+        "103069372": {
+          "name": "FN Esperando Ejecutivo",
+          "sort": 90,
+          "color": "#f3beff"
+        },
+        "103069376": {
+          "name": "FN Ejecutivo Atendiendo",
+          "sort": 100,
+          "color": "#ccc8f9"
+        },
+        "103069380": {
+          "name": "FN Ejecutivo Esperando Resp",
+          "sort": 110,
+          "color": "#f9deff"
+        },
+        "103069384": {
+          "name": "FN Seguimiento Ejecutivo",
+          "sort": 120,
+          "color": "#ffeab2"
+        },
+        "103069388": {
+          "name": "FN Caso Especial",
+          "sort": 130,
+          "color": "#ffc8c8"
+        },
+        "103069392": {
+          "name": "FN Negociando",
+          "sort": 140,
+          "color": "#ffdbdb"
+        },
+        "103069396": {
+          "name": "FN Reserva Confirmada",
+          "sort": 150,
+          "color": "#ebffb1"
+        },
+        "103069400": {
+          "name": "FN Pago Total Confirmado",
+          "sort": 160,
+          "color": "#deff81"
+        },
+        "142": {
+          "name": "Logrado con éxito",
+          "sort": 10000,
+          "color": "#CCFF66"
+        },
+        "143": {
+          "name": "Ventas Perdidos",
           "sort": 11000,
           "color": "#D5D8DB"
         }
@@ -848,2410 +1540,1660 @@
     }
   },
   "lead_custom_fields": {
-    "522512": {
+    "180818": {
       "name": "utm_content",
       "type": "tracking_data",
       "code": "UTM_CONTENT",
       "enums": null
     },
-    "522514": {
+    "180820": {
       "name": "utm_medium",
       "type": "tracking_data",
       "code": "UTM_MEDIUM",
       "enums": null
     },
-    "522516": {
+    "180822": {
       "name": "utm_campaign",
       "type": "tracking_data",
       "code": "UTM_CAMPAIGN",
       "enums": null
     },
-    "522518": {
+    "180824": {
       "name": "utm_source",
       "type": "tracking_data",
       "code": "UTM_SOURCE",
       "enums": null
     },
-    "522520": {
+    "180826": {
       "name": "utm_term",
       "type": "tracking_data",
       "code": "UTM_TERM",
       "enums": null
     },
-    "522522": {
+    "180828": {
       "name": "utm_referrer",
       "type": "tracking_data",
       "code": "UTM_REFERRER",
       "enums": null
     },
-    "522524": {
+    "180830": {
       "name": "referrer",
       "type": "tracking_data",
       "code": "REFERRER",
       "enums": null
     },
-    "522526": {
+    "180832": {
       "name": "gclientid",
       "type": "tracking_data",
       "code": "GCLIENTID",
       "enums": null
     },
-    "522528": {
+    "180834": {
       "name": "gclid",
       "type": "tracking_data",
       "code": "GCLID",
       "enums": null
     },
-    "522530": {
+    "180836": {
       "name": "fbclid",
       "type": "tracking_data",
       "code": "FBCLID",
       "enums": null
     },
-    "793257": {
-      "name": "problem",
+    "1266377": {
+      "name": "Tipo de Promo",
       "type": "text",
       "code": null,
       "enums": null
     },
-    "793259": {
-      "name": "quest1",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "793261": {
-      "name": "quest2",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "793283": {
-      "name": "TimeOut",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "793293": {
-      "name": "NPS",
-      "type": "numeric",
-      "code": null,
-      "enums": null
-    },
-    "793347": {
-      "name": "usuario",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "497257": "Propietario",
-        "497259": "Inquilino"
-      }
-    },
-    "793349": {
-      "name": "atencion",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "497261": "bot",
-        "497263": "asesor"
-      }
-    },
-    "793359": {
-      "name": "NPS",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "497271": "1",
-        "497273": "2",
-        "497275": "3",
-        "497277": "4",
-        "497279": "5",
-        "497281": "6",
-        "497283": "7",
-        "497285": "8",
-        "497287": "9",
-        "497289": "10"
-      }
-    },
-    "795209": {
-      "name": "Pipeline",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "795211": {
-      "name": "Lead Status",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "795213": {
-      "name": "Lead Title",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "796109": {
-      "name": "AgendarCitaAsesor",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "796943": {
-      "name": "tipocliente",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "501525": "Inquilino",
-        "501527": "Propietario",
-        "501529": "Proveedor",
-        "501601": "AdminEdificio",
-        "501935": "Proper"
-      }
-    },
-    "796945": {
-      "name": "categoría",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "501531": "Contrato - renovación",
-        "501533": "Contrato - no renovación",
-        "501535": "Contrato - consultas",
-        "501537": "Contrato - salida anticipada",
-        "501539": "Contrato - contrato firmado",
-        "501541": "Instalaciones",
-        "501543": "Pagos - liquidaciones",
-        "501545": "Reparaciones",
-        "501547": "Pagos - envío comprobantes",
-        "501549": "Solicitud de autorización para modificación",
-        "501551": "Pagos - servicios",
-        "501553": "Solicitudes - entrega de llaves",
-        "501555": "Solicitudes - tasación",
-        "501557": "Coordinaciones - visita",
-        "501559": "Pagos - impuestos",
-        "501561": "Pagos - envío de recibos",
-        "501563": "Pagos - alquiler",
-        "501565": "Pagos - arbitrios",
-        "501567": "Solicitudes - cambio cuenta de pago",
-        "501569": "Quejas - conducta inquilino",
-        "501575": "Áreas comunes - reserva",
-        "501577": "Pagos - información suministros",
-        "501579": "Visita inspección - gas",
-        "501581": "Pagos - garantías",
-        "501583": "Corretaje",
-        "501585": "Uso estacionamiento",
-        "501587": "Coordinación salida inquilino",
-        "501589": "Pagos - moras",
-        "501591": "Proveedor - solicitud gas",
-        "501593": "Administración edificio - pago mantenimiento",
-        "501595": "Administración edificio - registro inquilino",
-        "501597": "Administración edificio - solicitud contacto",
-        "501599": "Equipo interno Proper Rentas",
-        "501603": "Contrato - coordinación firma",
-        "501605": "Proveedor - pago servicio",
-        "501607": "Proveedor - consulta compra",
-        "501609": "Administración edificio - comunicados",
-        "501611": "Acceso a Homming",
-        "501613": "Municipalidad - datos acceso",
-        "501615": "Administración edificio - queja sobre inquilino",
-        "501617": "Sin información",
-        "501619": "Alertas sobre el edificio",
-        "501621": "Municipalidad - comunicados",
-        "501623": "Proveedor - status envio",
-        "501967": "Solicitud de recibos de alquiler para declaración de impuestos",
-        "501969": "Seguimiento a pagos",
-        "501971": "Solicitud de datos a propietario",
-        "501973": "Coordinación de devolución de llaves"
-      }
-    },
-    "797003": {
-      "name": "fechaCreacion",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797005": {
-      "name": "fechaPrimeraAtencion",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797007": {
-      "name": "fechaResolucion",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797011": {
-      "name": "fechaUrgente",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797013": {
-      "name": "fechaEnEspera",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797015": {
-      "name": "sePudoResolver",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "501649": "sí",
-        "501651": "no"
-      }
-    },
-    "797017": {
-      "name": "puntajeAtencion",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "501653": "1 (nada satisfecho)",
-        "501655": "2 (poco satisfecho)",
-        "501657": "3 (neutro)",
-        "501659": "4 (satisfecho)",
-        "501661": "5 (muy satisfecho)"
-      }
-    },
-    "797019": {
-      "name": "fechaCerrado",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797051": {
-      "name": "codigoInmueble",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "797053": {
-      "name": "nombreCliente",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "797105": {
-      "name": "statusIntegracion",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "501743": "seEncontro",
-        "501745": "noSeEncontro"
-      }
-    },
-    "797275": {
-      "name": "fechaSolicitaVisita",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797277": {
-      "name": "solicitaVisita",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "502031": "Si",
-        "502033": "No"
-      }
-    },
-    "797279": {
-      "name": "fechaSeguimientoInicial",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797281": {
-      "name": "fechaVisitaAgendada",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797283": {
-      "name": "visitaAgendada",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "502035": "Si",
-        "502037": "No"
-      }
-    },
-    "797285": {
-      "name": "visitaRealizada",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "502039": "Si",
-        "502041": "No"
-      }
-    },
-    "797287": {
-      "name": "fechaVisitaRealizada",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797289": {
-      "name": "fechaCaliente",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797291": {
-      "name": "caliente",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "502043": "Si",
-        "502045": "No"
-      }
-    },
-    "797293": {
-      "name": "separoDepa",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "502047": "Si",
-        "502049": "No"
-      }
-    },
-    "797295": {
-      "name": "fechaSeparoDepa",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797297": {
-      "name": "firmaContrato",
-      "type": "select",
-      "code": null,
-      "enums": {
-        "502051": "Si",
-        "502053": "No"
-      }
-    },
-    "797299": {
-      "name": "fechaInicioContrato",
+    "1266379": {
+      "name": "Fecha Cumpleaños",
       "type": "date",
       "code": null,
       "enums": null
     },
-    "797319": {
-      "name": "fechatest",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797341": {
-      "name": "enAtencion",
-      "type": "multiselect",
-      "code": null,
-      "enums": {
-        "502087": "Si",
-        "502089": "No"
-      }
-    },
-    "797343": {
-      "name": "fechaEnAtencion",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797393": {
-      "name": "distrito",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797397": {
-      "name": "cantidadInmuebles",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797399": {
-      "name": "etapaInmueble",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797401": {
-      "name": "fechaEntrega",
-      "type": "date",
-      "code": null,
-      "enums": null
-    },
-    "797429": {
-      "name": "primerMensaje",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "797511": {
-      "name": "LinkUrbania",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797609": {
-      "name": "fechaLlamadaHecha",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797617": {
-      "name": "fechaCalientes",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797619": {
-      "name": "fechaSolicitaLlamada",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797621": {
-      "name": "fechaLlamadaAgendada",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797699": {
-      "name": "visitaNoRealizada",
-      "type": "multiselect",
-      "code": null,
-      "enums": {
-        "502301": "Si",
-        "502303": "No"
-      }
-    },
-    "797823": {
-      "name": "solicitaLlamada",
-      "type": "multiselect",
-      "code": null,
-      "enums": {
-        "502337": "si",
-        "502339": "no"
-      }
-    },
-    "797825": {
-      "name": "seguimientoInicial",
-      "type": "multiselect",
-      "code": null,
-      "enums": {
-        "502341": "si",
-        "502343": "no"
-      }
-    },
-    "797827": {
-      "name": "llamadaHecha",
-      "type": "multiselect",
-      "code": null,
-      "enums": {
-        "502345": "si",
-        "502347": "no"
-      }
-    },
-    "797829": {
-      "name": "fechaSeguimientoInicial",
-      "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "797831": {
-      "name": "llamadaAgendada",
-      "type": "multiselect",
-      "code": null,
-      "enums": {
-        "502349": "si",
-        "502351": "no"
-      }
-    },
-    "797869": {
-      "name": "n8n - nombre",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797871": {
-      "name": "n8n - unidad",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797875": {
-      "name": "n8n - etapa",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797877": {
-      "name": "n8n - solicitud",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797879": {
-      "name": "n8n - animo",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797917": {
-      "name": "n8n - rent - seg1",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "797919": {
-      "name": "n8n - rent - seg2",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "797921": {
-      "name": "n8n - rent - seg3",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "797923": {
-      "name": "n8n - casoEspecial",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "797925": {
-      "name": "n8n - infoPrevia",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798001": {
-      "name": "n8n - fecha1",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798003": {
-      "name": "n8n - fecha2",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798195": {
-      "name": "DealDzANuevoAsesor",
+    "1266455": {
+      "name": "PartyPass Adulto",
       "type": "numeric",
       "code": null,
       "enums": null
     },
-    "798327": {
-      "name": "n8n - fechaMODO",
+    "1266457": {
+      "name": "Booster Adulto",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1266459": {
+      "name": "Invitados cumple",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1266461": {
+      "name": "Parque",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "924867": "Mall Plaza Oeste",
+        "924869": "Arauco Quilicura",
+        "924871": "Mall Paseo Quilín",
+        "924873": "Arauco Maipú",
+        "924875": "Mall Puerta Del Mar - La Serena",
+        "924877": "Jumbo 1 Norte - Viña del Mar",
+        "924979": "Florida Center",
+        "924981": "Mall Plaza Trébol",
+        "931269": "Espacio Urbano - Puente Alto",
+        "934377": "Parque Araucano - Las Condes (Centro Parque)",
+        "934793": "0"
+      }
+    },
+    "1266463": {
+      "name": "Tipo Cumpleaños",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "924879": "Jump",
+        "924881": "Star",
+        "924883": "Rocket",
+        "934795": "0"
+      }
+    },
+    "1266479": {
+      "name": "Nombre Apellido Cumpleañero",
       "type": "text",
       "code": null,
       "enums": null
     },
-    "798329": {
-      "name": "n8n - diego - nombreCliente",
+    "1266481": {
+      "name": "Colegio",
       "type": "text",
       "code": null,
       "enums": null
     },
-    "798331": {
-      "name": "n8n - diego - telefonoCliente",
+    "1266483": {
+      "name": "Curso",
       "type": "text",
       "code": null,
       "enums": null
     },
-    "798333": {
-      "name": "n8n - diego - correoCliente",
-      "type": "text",
+    "1266485": {
+      "name": "Dia Nacimiento",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "924893": "01",
+        "924895": "02",
+        "924897": "03",
+        "924899": "04",
+        "924901": "05",
+        "924903": "07",
+        "924905": "08",
+        "924907": "09",
+        "924909": "10",
+        "924911": "11",
+        "924913": "12",
+        "924915": "13",
+        "924917": "14",
+        "924919": "15",
+        "924921": "16",
+        "924923": "17",
+        "924925": "18",
+        "924927": "19",
+        "924929": "20",
+        "924931": "21",
+        "924933": "22",
+        "924935": "23",
+        "924937": "24",
+        "924939": "25",
+        "924941": "26",
+        "924943": "27",
+        "924945": "28",
+        "924947": "29",
+        "924949": "30",
+        "924951": "31",
+        "924977": "06",
+        "934801": "0"
+      }
+    },
+    "1266487": {
+      "name": "Mes Nacimiento",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "924953": "01",
+        "924955": "02",
+        "924957": "03",
+        "924959": "04",
+        "924961": "05",
+        "924963": "06",
+        "924965": "07",
+        "924967": "08",
+        "924969": "09",
+        "924971": "10",
+        "924973": "11",
+        "924975": "12",
+        "934797": "0"
+      }
+    },
+    "1266489": {
+      "name": "Año Nacimiento",
+      "type": "numeric",
       "code": null,
       "enums": null
     },
-    "798335": {
-      "name": "n8n - diego - fecha1",
-      "type": "text",
+    "1266493": {
+      "name": "Edad",
+      "type": "numeric",
       "code": null,
       "enums": null
     },
-    "798337": {
-      "name": "n8n - diego - seg1",
-      "type": "textarea",
-      "code": null,
+    "1266751": {
+      "name": "Formulario",
+      "type": "url",
+      "code": "FORM_CARD",
       "enums": null
     },
-    "798339": {
-      "name": "n8n - diego - seg2",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798341": {
-      "name": "n8n - diego - seg3",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798343": {
-      "name": "n8n - diego - animo",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798345": {
-      "name": "n8n - diego - solicitud",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798347": {
-      "name": "n8n - diego - etapa",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798349": {
-      "name": "n8n - diego - fecha2",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798353": {
-      "name": "n8n - Origen",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798355": {
-      "name": "n8n - CODPROPIEDAD",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798433": {
-      "name": "n8n - diego - origen",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798435": {
-      "name": "n8n - ClienteNuevo",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798463": {
-      "name": "n8n - TipoCliente",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798513": {
-      "name": "n8n - pregunta",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798515": {
-      "name": "n8n - puede responder",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798799": {
-      "name": "n8n - supp - persona",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798801": {
-      "name": "n8n - supp - codigoInmueble",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798803": {
-      "name": "n8n - supp - relacionTitular",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798805": {
-      "name": "n8n - supp - categoria_completa",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798807": {
-      "name": "n8n - supp - resumen_solicitud",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798809": {
-      "name": "n8n - supp - requiereTicket",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798811": {
-      "name": "n8n - supp - detalle_ticket",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798813": {
-      "name": "n8n - supp - caso_especial",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798815": {
-      "name": "n8n - supp - detalle_caso_especial",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798817": {
-      "name": "n8n - supp - estatusEmbudo",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798819": {
-      "name": "n8n - supp - clienteIdentificado",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798821": {
-      "name": "n8n - supp - es_error",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798823": {
-      "name": "n8n - supp - detalle_es_error",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798825": {
-      "name": "n8n - supp - seg1",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798827": {
-      "name": "n8n - supp - seg2",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798829": {
-      "name": "n8n - supp - animo",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798831": {
-      "name": "n8n - david - categoria",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798833": {
-      "name": "n8n - diego - categoria",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798835": {
-      "name": "n8n - supp - tiene_solucion",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798837": {
-      "name": "n8n - supp - descripcion_tiene_solucion",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "798839": {
-      "name": "bot - fecha_ult_msg",
+    "1266755": {
+      "name": "Fecha Nacimiento",
       "type": "date_time",
       "code": null,
       "enums": null
     },
-    "798893": {
-      "name": "n8n - corregido",
+    "1267063": {
+      "name": "Código Pago Reserva",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "1267065": {
+      "name": "Código Pago Total",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "1267067": {
+      "name": "Código Pago Complementario",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "1267321": {
+      "name": "Último Mensaje Entrante",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1267327": {
+      "name": "Horario Cumpleaños",
       "type": "select",
       "code": null,
       "enums": {
-        "503049": "SI",
-        "503051": "EN REVISION",
-        "503053": "ERROR",
-        "503055": "ALTERNATIVA"
+        "925637": "11:00",
+        "925639": "13:30",
+        "925641": "16:00",
+        "925643": "18:30",
+        "934791": "0"
       }
     },
-    "798895": {
-      "name": "n8n - detalle corregido",
+    "1267331": {
+      "name": "Última llamada conectada",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1267335": {
+      "name": "Último Mensaje Saliente",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1267337": {
+      "name": "Intento Llamada",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1267341": {
+      "name": "Número Interacciones Dia",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1267343": {
+      "name": "Cotización Enviada",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1267345": {
+      "name": "Reserva Confirmada",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1267353": {
+      "name": "Asignación Contador",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1267355": {
+      "name": "Ejecutivo Asignado",
+      "type": "text",
+      "code": null,
+      "enums": null
+    },
+    "1267373": {
+      "name": "Cambio Etapa",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1267375": {
+      "name": "Bot Killer",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "925697": "1",
+        "925699": "0"
+      }
+    },
+    "1269673": {
+      "name": "En negociación / Seguimiento",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1269685": {
+      "name": "Prioridad",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "926385": "Alta",
+        "926387": "Media",
+        "926389": "Baja",
+        "934805": "0"
+      }
+    },
+    "1269947": {
+      "name": "Entrada Leads",
+      "type": "multiselect",
+      "code": null,
+      "enums": {
+        "926825": "Web",
+        "926827": "Instagram",
+        "926829": "Pauta",
+        "926831": "Tótem",
+        "926833": "Google Ads",
+        "926835": "Outbaund",
+        "934807": "0"
+      }
+    },
+    "1270709": {
+      "name": "Fecha Paseo de Curso",
+      "type": "date",
+      "code": null,
+      "enums": null
+    },
+    "1270713": {
+      "name": "Niños Paseo",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1270719": {
+      "name": "Tiempo paseo",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "927419": "1 Hora",
+        "927421": "2 Horas",
+        "934803": "0"
+      }
+    },
+    "1270967": {
+      "name": "Pago Final Confirmado",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1271783": {
+      "name": "Link_Reserva",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272637": {
+      "name": "Creacion Lead",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272701": {
+      "name": "Fecha traspaso a ejecutivo",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272703": {
+      "name": "Paso a Día 1",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272729": {
+      "name": "Encuesta Satisfacción",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272801": {
+      "name": "Paso a Día 4",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272803": {
+      "name": "Paso a Día 2",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272805": {
+      "name": "Paso a Día 3",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272807": {
+      "name": "Paso a Día 5",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272809": {
+      "name": "Paso a Día 6",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1272811": {
+      "name": "Paso a Día 7",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1273729": {
+      "name": "Cumpleañero Adicional",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1273731": {
+      "name": "Calcetines",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1273733": {
+      "name": "Adultos Paseo",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1273831": {
+      "name": "Horario Paseo de Curso",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "932227": "11:00",
+        "932229": "13:30",
+        "932231": "16:00",
+        "932233": "18:30",
+        "934799": "0"
+      }
+    },
+    "1274003": {
+      "name": "Sucursales 01",
       "type": "textarea",
       "code": null,
       "enums": null
     },
-    "798905": {
-      "name": "rentas_mensajeia_salio",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798909": {
-      "name": "rentas_error_marcado",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798913": {
-      "name": "rentas_ia_generohorario",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798915": {
-      "name": "rentas_ia_generohorario_registrado",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798923": {
-      "name": "click_reu_lunes",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798925": {
-      "name": "click_reu_miercoles",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798927": {
-      "name": "click_coordinar_reu",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798931": {
-      "name": "rentas_bot_apagado_manual",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "798935": {
-      "name": "campaña_meta_ads",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799008": {
-      "name": "n8n - ingresos",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799010": {
-      "name": "n8n - inicial",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799012": {
-      "name": "rentas_ia_generohorario_notificado",
-      "type": "checkbox",
-      "code": null,
-      "enums": null
-    },
-    "799035": {
-      "name": "rentas - modo - plazo_mudanza",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799121": {
-      "name": "n8n - codpropiedad logico",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799123": {
-      "name": "n8n - origen logico",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799148": {
-      "name": "n8n - origen - form",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799214": {
-      "name": "botia - nombre",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799216": {
-      "name": "botia - interes",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799218": {
-      "name": "botia - ingreso_promedio_mensual",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799220": {
-      "name": "botia - capital_inicial",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799222": {
-      "name": "botia - egresos",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799224": {
-      "name": "botia - primera_vivienda",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799226": {
-      "name": "botia - edad",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799228": {
-      "name": "botia - dni",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799230": {
-      "name": "botia - tipo_ingreso",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799232": {
-      "name": "botia - cumple_ingresos",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799234": {
-      "name": "botia - cumple_inicial",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799236": {
-      "name": "botia - categoria_completa",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799238": {
-      "name": "botia - tiene_asesor",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799240": {
-      "name": "botia - nombre_asesor",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799242": {
-      "name": "botia - telefono_asesor",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799244": {
-      "name": "botia - charla_elegida",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799246": {
-      "name": "botia - derivado_a",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799248": {
-      "name": "botia - tipo_cliente",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799250": {
-      "name": "botia - distrito_propiedad",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799252": {
-      "name": "botia - zona_interes",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799254": {
-      "name": "botia - edificio_actual",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799256": {
-      "name": "botia - resumen_conversacion",
+    "1274005": {
+      "name": "Sucursales 02",
       "type": "textarea",
       "code": null,
       "enums": null
     },
-    "799258": {
-      "name": "botia - caso_especial",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799260": {
-      "name": "botia - detalle_caso_especial",
+    "1274007": {
+      "name": "Sucursales 03",
       "type": "textarea",
       "code": null,
       "enums": null
     },
-    "799262": {
-      "name": "botia - estatusEmbudo",
+    "1274027": {
+      "name": "Último correo enviado",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1274029": {
+      "name": "Último correo recibido",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1274515": {
+      "name": "Instagram",
       "type": "text",
       "code": null,
       "enums": null
     },
-    "799264": {
-      "name": "botia - statusId",
+    "1274517": {
+      "name": "# Seguidores Instagram",
       "type": "text",
       "code": null,
       "enums": null
     },
-    "799300": {
-      "name": "rango_ingresos",
+    "1276247": {
+      "name": "Próxima cita",
+      "type": "date_time",
+      "code": "CF_SCHEDULER_UPCOMING_APPOINTMENT",
+      "enums": null
+    },
+    "1276529": {
+      "name": "rpta_bot",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "1276849": {
+      "name": "rpta_asesor",
       "type": "text",
       "code": null,
       "enums": null
     },
-    "799302": {
-      "name": "rango_inicial",
+    "1277041": {
+      "name": "fn_parque",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "934995": "Arauco Maipú",
+        "934997": "Mall Plaza Oeste",
+        "934999": "Mall Paseo Quilín",
+        "935001": "Espacio Urbano Puente Alto",
+        "935003": "Arauco Quilicura",
+        "935005": "La Serena",
+        "935007": "Viña del Mar",
+        "935009": "Florida Center",
+        "935011": "Mall Plaza Trébol",
+        "935013": "Parque Araucano Las Condes"
+      }
+    },
+    "1277043": {
+      "name": "fn_plan",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "935015": "Jump",
+        "935017": "Star",
+        "935019": "Rocket"
+      }
+    },
+    "1277045": {
+      "name": "fn_fecha",
+      "type": "date",
+      "code": null,
+      "enums": null
+    },
+    "1277047": {
+      "name": "fn_horario",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "935021": "11:00",
+        "935023": "13:30",
+        "935025": "16:00",
+        "935027": "18:30"
+      }
+    },
+    "1277049": {
+      "name": "fn_ninos",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277051": {
+      "name": "fn_adultos_booster",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277053": {
+      "name": "fn_adultos_partypass",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277055": {
+      "name": "fn_nombre_cumpleanero",
       "type": "text",
       "code": null,
       "enums": null
     },
-    "799304": {
-      "name": "primera_vivienda",
+    "1277057": {
+      "name": "fn_edad_cumpleanero",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277059": {
+      "name": "fn_edades_ninos",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277061": {
+      "name": "fn_tipo_consulta",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "935029": "cumpleanos",
+        "935031": "venta_empresa",
+        "935033": "paseo_curso",
+        "935035": "otro"
+      }
+    },
+    "1277063": {
+      "name": "fn_caso_especial",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "935037": "NO",
+        "935039": "SI"
+      }
+    },
+    "1277065": {
+      "name": "fn_detalle_caso",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "1277067": {
+      "name": "fn_es_fds",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "935041": "NO",
+        "935043": "SI"
+      }
+    },
+    "1277069": {
+      "name": "fn_precio_base_nino",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277071": {
+      "name": "fn_precio_base_adulto",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277073": {
+      "name": "fn_subtotal_bruto",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277075": {
+      "name": "fn_descuento_pct",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277077": {
+      "name": "fn_descuento_monto",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277079": {
+      "name": "fn_codigo_promo",
       "type": "text",
       "code": null,
       "enums": null
     },
-    "799306": {
-      "name": "tipo_ingresos",
-      "type": "text",
+    "1277081": {
+      "name": "fn_subtotal_neto",
+      "type": "numeric",
       "code": null,
       "enums": null
     },
-    "799688": {
-      "name": "botia - bot_origen",
-      "type": "text",
+    "1277083": {
+      "name": "fn_extras_booster",
+      "type": "numeric",
       "code": null,
       "enums": null
     },
-    "799776": {
-      "name": "ttad_id",
-      "type": "tracking_data",
-      "code": "TIKTOK_AD_ID_TD",
+    "1277085": {
+      "name": "fn_extras_partypass",
+      "type": "numeric",
+      "code": null,
       "enums": null
     },
-    "799778": {
-      "name": "ttad_name",
-      "type": "tracking_data",
-      "code": "TIKTOK_AD_NAME_TD",
+    "1277087": {
+      "name": "fn_extras_calcetines",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277089": {
+      "name": "fn_extras_snackpack",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277091": {
+      "name": "fn_total_extras",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277093": {
+      "name": "fn_total_final",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277095": {
+      "name": "fn_etapa_embudo",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "935045": "nuevo",
+        "935047": "explorando",
+        "935049": "cotizacion_enviada",
+        "935051": "link_enviado",
+        "935053": "recotizando",
+        "935055": "seguimiento_d1",
+        "935057": "seguimiento_d2",
+        "935059": "seguimiento_d3",
+        "935061": "esperando_ejecutivo",
+        "935063": "atendiendo_ejecutivo",
+        "935065": "ejecutivo_esperando",
+        "935067": "negociando",
+        "935069": "caso_especial",
+        "935071": "reserva_confirmada",
+        "935073": "pago_confirmado",
+        "935075": "cerrado",
+        "935077": "perdido"
+      }
+    },
+    "1277097": {
+      "name": "fn_estado_bot",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "935079": "activo",
+        "935081": "recotizando",
+        "935083": "derivado",
+        "935085": "exitoso",
+        "935087": "perdido"
+      }
+    },
+    "1277099": {
+      "name": "fn_categoria_lead",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "935089": "FRIO",
+        "935091": "TIBIO",
+        "935093": "CALIENTE"
+      }
+    },
+    "1277101": {
+      "name": "fn_lead_score",
+      "type": "numeric",
+      "code": null,
+      "enums": null
+    },
+    "1277103": {
+      "name": "fn_resumen",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "1277105": {
+      "name": "fn_nota_ejecutivo",
+      "type": "textarea",
+      "code": null,
+      "enums": null
+    },
+    "1277107": {
+      "name": "fn_link_compra",
+      "type": "url",
+      "code": null,
+      "enums": null
+    },
+    "1277113": {
+      "name": "fn_ultimo_msg_entrada",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1277115": {
+      "name": "fn_ultimo_msg_salida",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1277117": {
+      "name": "fn_ts_cambio_etapa",
+      "type": "date_time",
+      "code": null,
+      "enums": null
+    },
+    "1277977": {
+      "name": "fn_error",
+      "type": "select",
+      "code": null,
+      "enums": {
+        "935617": "NO",
+        "935619": "SI"
+      }
+    },
+    "1277979": {
+      "name": "fn_detalle_error",
+      "type": "textarea",
+      "code": null,
       "enums": null
     }
   },
   "contact_custom_fields": {
-    "522502": {
-      "name": "Position",
+    "180808": {
+      "name": "Posición",
       "type": "text",
       "code": "POSITION",
       "enums": null
     },
-    "522504": {
-      "name": "Phone",
+    "180810": {
+      "name": "Teléfono",
       "type": "multitext",
       "code": "PHONE",
       "enums": {
-        "315940": "WORK",
-        "315942": "WORKDD",
-        "315944": "MOB",
-        "315946": "FAX",
-        "315948": "HOME",
-        "315950": "OTHER"
+        "128452": "WORK",
+        "128454": "WORKDD",
+        "128456": "MOB",
+        "128458": "FAX",
+        "128460": "HOME",
+        "128462": "OTHER"
       }
     },
-    "522506": {
+    "180812": {
       "name": "Email",
       "type": "multitext",
       "code": "EMAIL",
       "enums": {
-        "315952": "WORK",
-        "315954": "PRIV",
-        "315956": "OTHER"
+        "128464": "WORK",
+        "128466": "PRIV",
+        "128468": "OTHER"
       }
     },
-    "645934": {
+    "181194": {
       "name": "Términos y condiciones",
       "type": "checkbox",
       "code": "USER_AGREEMENT",
       "enums": null
     },
-    "793247": {
-      "name": "Categoria",
-      "type": "numeric",
-      "code": null,
-      "enums": null
-    },
-    "794335": {
-      "name": "Responsable",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "794337": {
-      "name": "Contact ID",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "794339": {
-      "name": "Deal ID",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "794825": {
-      "name": "Calendly - Mensaje",
-      "type": "textarea",
-      "code": null,
-      "enums": null
-    },
-    "794827": {
-      "name": "Calendly - Fecha",
+    "1267319": {
+      "name": "Último Mensaje",
       "type": "date_time",
-      "code": null,
-      "enums": null
-    },
-    "794829": {
-      "name": "Calendly - Reagendar",
-      "type": "url",
-      "code": null,
-      "enums": null
-    },
-    "794945": {
-      "name": "Categoria Cliente",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "794947": {
-      "name": "ID Embudo",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "794949": {
-      "name": "Nombre Embudo",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797109": {
-      "name": "Inicial",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797111": {
-      "name": "Ingresos",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "797395": {
-      "name": "DNI",
-      "type": "numeric",
-      "code": null,
-      "enums": null
-    },
-    "798461": {
-      "name": "n8n - tipoCliente",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798683": {
-      "name": "n8n - cuota inicial",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "798685": {
-      "name": "n8n - ingresos",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799004": {
-      "name": "n8n - ingresos",
-      "type": "text",
-      "code": null,
-      "enums": null
-    },
-    "799006": {
-      "name": "n8n - inicial",
-      "type": "text",
       "code": null,
       "enums": null
     }
   },
   "users": {
-    "7441186": {
-      "name": "Martin Velasco",
-      "email": "contacto@conceptstudio.pe"
+    "10997667": {
+      "name": "Administración General Fun Park",
+      "email": "general@funpark.cl"
     },
-    "7997675": {
-      "name": "Proper",
-      "email": "proper@tamibot.com"
+    "11313759": {
+      "name": "Carol Barra B",
+      "email": "eventos@funpark.cl"
     },
-    "9955003": {
-      "name": "Tami Bot",
-      "email": "tamibotperu@gmail.com"
+    "13614024": {
+      "name": "Ejecutivo 2",
+      "email": "eventos2@funpark.cl"
     },
-    "12437200": {
-      "name": "Valeria",
-      "email": "valeria.vega@proper.com.pe"
+    "13614028": {
+      "name": "Ejecutivo 3",
+      "email": "eventos3@funpark.cl"
     },
-    "13880744": {
-      "name": "Eduardo Salas",
-      "email": "eduardo.salas@proper.com.pe"
+    "13614036": {
+      "name": "Manuel López Ateaga",
+      "email": "eventos4@funpark.cl"
     },
-    "14267484": {
-      "name": "David",
-      "email": "soporte.corretaje@proper.com.pe"
+    "13614044": {
+      "name": "Ejecutivo 5",
+      "email": "eventos5@funpark.cl"
     },
-    "15046159": {
-      "name": "Carlos Patiño",
-      "email": "carlos.patino@proper.com.pe"
+    "13693432": {
+      "name": "Verónica Torres L.",
+      "email": "eventos7@funpark.cl"
+    },
+    "15042688": {
+      "name": "Nicolás Naour",
+      "email": "nicolas.naour@funpark.cl"
     }
   },
   "channels": [
     {
-      "origin": "waba",
-      "source_id": 23040845,
-      "count": 144
-    },
-    {
-      "origin": "waba",
-      "source_id": 23041007,
-      "count": 10
-    },
-    {
-      "origin": "waba",
-      "source_id": 23041732,
-      "count": 17
-    },
-    {
-      "origin": "waba",
-      "source_id": 23041441,
-      "count": 16
+      "origin": "instagram_business",
+      "source_id": 61057,
+      "count": 28
     },
     {
       "origin": "instagram_business",
-      "source_id": 23040499,
-      "count": 12
+      "source_id": 61059,
+      "count": 101
     },
     {
       "origin": "waba",
-      "source_id": 23040807,
-      "count": 11
-    },
-    {
-      "origin": "waba",
-      "source_id": 23041009,
-      "count": 7
-    },
-    {
-      "origin": "waba",
-      "source_id": 23040997,
-      "count": 3
-    },
-    {
-      "origin": "waba",
-      "source_id": 23041029,
-      "count": 4
-    },
-    {
-      "origin": "tiktok_kommo",
-      "source_id": 23041227,
-      "count": 3
-    },
-    {
-      "origin": "waba",
-      "source_id": 23041001,
-      "count": 4
-    },
-    {
-      "origin": "waba",
-      "source_id": 23041460,
-      "count": 10
-    },
-    {
-      "origin": "waba",
-      "source_id": 23040999,
-      "count": 4
-    },
-    {
-      "origin": "instagram_business",
-      "source_id": 23040655,
-      "count": 4
+      "source_id": 61181,
+      "count": 96
     },
     {
       "origin": "facebook",
-      "source_id": 23040501,
+      "source_id": 61055,
+      "count": 2
+    },
+    {
+      "origin": "com.amocrm.amocrmwa",
+      "source_id": 58683,
+      "count": 14
+    },
+    {
+      "origin": "com.amocrm.amocrmwa",
+      "source_id": 3558,
+      "count": 2
+    },
+    {
+      "origin": "com.amocrm.amocrmwa",
+      "source_id": 58691,
+      "count": 6
+    },
+    {
+      "origin": "facebook",
+      "source_id": 61053,
       "count": 1
     }
   ],
   "tags": [
     {
-      "id": 230007,
-      "name": "|"
+      "id": 165577,
+      "name": "10 más la cumpleañera"
     },
     {
-      "id": 160051,
-      "name": "1"
+      "id": 165187,
+      "name": "10:00 nm"
     },
     {
-      "id": 33492,
-      "name": "24"
+      "id": 167295,
+      "name": "19 junio 2026"
     },
     {
-      "id": 250253,
-      "name": "actualizacion bbdd modo"
+      "id": 171537,
+      "name": "2026-03-10 GPT"
     },
     {
-      "id": 136529,
-      "name": "actualizado"
+      "id": 171553,
+      "name": "2026-03-10 GPT V02"
     },
     {
-      "id": 31700,
-      "name": "Agendar cita"
+      "id": 170859,
+      "name": "20260226 Arauco Maipú"
     },
     {
-      "id": 192223,
-      "name": "AGENDAR LLAMADA"
+      "id": 166053,
+      "name": "6 ENERO"
     },
     {
-      "id": 255960,
-      "name": "AGENTE_INVERSIONES_IA"
+      "id": 166925,
+      "name": "7 ENERO 16:00 PM"
     },
     {
-      "id": 191649,
-      "name": "ASESOR"
+      "id": 170611,
+      "name": "ab"
     },
     {
-      "id": 191651,
-      "name": "ASESOR POST SOLICITUD"
+      "id": 165607,
+      "name": "abril 2024"
     },
     {
-      "id": 255970,
-      "name": "ASESOR_IA_INVERSIONES"
+      "id": 159579,
+      "name": "Abril 2026"
     },
     {
-      "id": 257084,
-      "name": "ASESORES_IA"
+      "id": 170357,
+      "name": "abril 2027"
     },
     {
-      "id": 148737,
-      "name": "bitrix"
+      "id": 168637,
+      "name": "abril 27"
     },
     {
-      "id": 199787,
-      "name": "BITRIX"
+      "id": 158185,
+      "name": "ABRIL2026"
     },
     {
-      "id": 216213,
-      "name": "bre"
+      "id": 171339,
+      "name": "agost"
     },
     {
-      "id": 157007,
-      "name": "CAMPAÑA"
+      "id": 149179,
+      "name": "Agosto Semana 2"
     },
     {
-      "id": 248801,
-      "name": "CONTACTAR MODO"
+      "id": 154369,
+      "name": "Agosto Semana 4"
     },
     {
-      "id": 40630,
-      "name": "Contacto"
+      "id": 163033,
+      "name": "AGOSTO2026"
     },
     {
-      "id": 230871,
-      "name": "CREDITO"
+      "id": 153671,
+      "name": "Andrea I"
     },
     {
-      "id": 240429,
-      "name": "DIEGO"
+      "id": 159549,
+      "name": "AÑO 2626"
     },
     {
-      "id": 186039,
-      "name": "DZ"
+      "id": 153683,
+      "name": "Aracelly Payacan"
     },
     {
-      "id": 226781,
-      "name": "DZ-BARRANCO"
+      "id": 153673,
+      "name": "Benja Barrientos"
     },
     {
-      "id": 216205,
-      "name": "Dz-breña"
+      "id": 154259,
+      "name": "CASO ESPECIAL"
     },
     {
-      "id": 226023,
-      "name": "DZ-CARRION"
+      "id": 157115,
+      "name": "CASO SOCIAL"
     },
     {
-      "id": 230245,
-      "name": "DZ-HELIO"
+      "id": 166809,
+      "name": "Concepción"
     },
     {
-      "id": 208595,
-      "name": "ELANT"
+      "id": 161241,
+      "name": "Contacto marzo 2026"
     },
     {
-      "id": 191511,
-      "name": "ELEANA"
+      "id": 163839,
+      "name": "COTIZADO"
     },
     {
-      "id": 191509,
-      "name": "ELENA"
+      "id": 158109,
+      "name": "CYBER2025"
     },
     {
-      "id": 226783,
-      "name": "ELENA-BARRANCO"
+      "id": 165595,
+      "name": "DATA_COLLECTION"
     },
     {
-      "id": 216207,
-      "name": "Elena-breña"
+      "id": 167293,
+      "name": "dic 2026"
     },
     {
-      "id": 226025,
-      "name": "ELENA-CARRION"
+      "id": 163205,
+      "name": "Diciembre 2026"
     },
     {
-      "id": 230247,
-      "name": "ELENA-HELIO"
+      "id": 153953,
+      "name": "DICIEMBRE2025"
     },
     {
-      "id": 198615,
-      "name": "EMPUJE"
+      "id": 161731,
+      "name": "dup"
     },
     {
-      "id": 205399,
-      "name": "ENCUESTA SATIS &lt; 2024"
+      "id": 149319,
+      "name": "Ejecutivo 1"
     },
     {
-      "id": 205391,
-      "name": "ENCUESTA SATIS < 2024"
+      "id": 149311,
+      "name": "Ejecutivo 2"
     },
     {
-      "id": 203811,
-      "name": "Encuesta Satis. Oct"
+      "id": 149313,
+      "name": "Ejecutivo 3"
     },
     {
-      "id": 203607,
-      "name": "Encuesta Workshop Oct"
+      "id": 149315,
+      "name": "Ejecutivo 4"
     },
     {
-      "id": 217541,
-      "name": "ENCUESTA.FEB"
+      "id": 149317,
+      "name": "Ejecutivo 5"
     },
     {
-      "id": 206869,
-      "name": "Entrevista perfil cliente 2.0"
+      "id": 155091,
+      "name": "EMAIL"
     },
     {
-      "id": 258948,
-      "name": "ENVIADO"
+      "id": 159809,
+      "name": "EMPRESA"
     },
     {
-      "id": 258936,
-      "name": "ERROR 24.03"
+      "id": 154079,
+      "name": "ENERO 2026"
     },
     {
-      "id": 238813,
-      "name": "ERROR MASIVO 05.09"
+      "id": 168923,
+      "name": "ENERO2027"
     },
     {
-      "id": 248799,
-      "name": "ERROR MASIVO MODO 02.12"
+      "id": 167347,
+      "name": "ENTREKIDS"
     },
     {
-      "id": 211343,
-      "name": "ERROR MASIVO REFERIDOS"
+      "id": 169157,
+      "name": "ENVIAR COTIZACION"
     },
     {
-      "id": 186645,
-      "name": "ERROR MENSAJE"
+      "id": 169159,
+      "name": "ENVIAR RESERVA"
     },
     {
-      "id": 220953,
-      "name": "euromotors"
+      "id": 155337,
+      "name": "Envío 01-09-2025"
     },
     {
-      "id": 192323,
-      "name": "evento"
+      "id": 157653,
+      "name": "Envío 01-10-2025"
     },
     {
-      "id": 244753,
-      "name": "Evento elena"
+      "id": 155433,
+      "name": "Envío 02-09-2025"
     },
     {
-      "id": 247737,
-      "name": "Evento germain"
+      "id": 157679,
+      "name": "Envío 02-10-2025"
     },
     {
-      "id": 256474,
-      "name": "EVENTO INVERSION"
+      "id": 155541,
+      "name": "Envío 03-09-2025"
     },
     {
-      "id": 244751,
-      "name": "Evento leidy"
+      "id": 155643,
+      "name": "Envío 04-08-2025"
     },
     {
-      "id": 244757,
-      "name": "Evento marcos"
+      "id": 157943,
+      "name": "Envío 06-10-2025"
     },
     {
-      "id": 244759,
-      "name": "Evento sebastian"
+      "id": 158043,
+      "name": "Envío 07-10-2025"
     },
     {
-      "id": 244755,
-      "name": "Evento sharon"
+      "id": 156007,
+      "name": "Envío 09-09-2025"
     },
     {
-      "id": 122887,
-      "name": "Facebook"
+      "id": 156311,
+      "name": "Envío 12-09-2025"
     },
     {
-      "id": 243587,
-      "name": "FALLA - DIEGO - 16.10.2025"
+      "id": 156903,
+      "name": "Envío 22-09-2025"
     },
     {
-      "id": 251810,
-      "name": "fb-Arise"
+      "id": 156961,
+      "name": "Envío 23-09-2025"
     },
     {
-      "id": 36916,
-      "name": "fb160622826172202"
+      "id": 157139,
+      "name": "Envío 24-09-2025"
     },
     {
-      "id": 253958,
-      "name": "fb1606854277182454"
+      "id": 157231,
+      "name": "Envío 25-09-2025"
     },
     {
-      "id": 247925,
-      "name": "fb2248479448969983"
+      "id": 154963,
+      "name": "Envío 27-08-2025"
     },
     {
-      "id": 251822,
-      "name": "fb2281751522320946"
+      "id": 155085,
+      "name": "Envío 28-08-2025"
     },
     {
-      "id": 258044,
-      "name": "fb2429668000801140"
+      "id": 167587,
+      "name": "ESPACIO URBANO VIÑA"
     },
     {
-      "id": 257952,
-      "name": "fb896633719999466"
+      "id": 161033,
+      "name": "ESPERANDO PAGO RESERVA"
     },
     {
-      "id": 143479,
-      "name": "felix"
+      "id": 160719,
+      "name": "ESPERANDO PAGO TOTAL"
     },
     {
-      "id": 169013,
-      "name": "Fin funfest"
+      "id": 154113,
+      "name": "FEB 2026"
     },
     {
-      "id": 258120,
-      "name": "FORM_INV_META_09.03"
+      "id": 159785,
+      "name": "febrero 2026"
     },
     {
-      "id": 258118,
-      "name": "FORM_INVERSIONES"
+      "id": 168925,
+      "name": "FEBRERO 2027"
     },
     {
-      "id": 186045,
-      "name": "GERMAIN"
+      "id": 153681,
+      "name": "Franco M"
     },
     {
-      "id": 121969,
-      "name": "Guisse"
+      "id": 171395,
+      "name": "GPT"
     },
     {
-      "id": 121963,
-      "name": "Guisse102"
+      "id": 172273,
+      "name": "HIJO ENFERMO POSTERGA CUMPLE"
     },
     {
-      "id": 187093,
-      "name": "HABLAR CON ASESOR"
+      "id": 167353,
+      "name": "import_12012026_1252"
     },
     {
-      "id": 257080,
-      "name": "IA_INVERSIONES"
+      "id": 167373,
+      "name": "import_12012026_1511"
     },
     {
-      "id": 227223,
-      "name": "IMPORT - 26.05"
+      "id": 167585,
+      "name": "import_14012026_1259"
     },
     {
-      "id": 131557,
-      "name": "Importar_03052023_1829"
+      "id": 165535,
+      "name": "import_16122025_1226"
     },
     {
-      "id": 177020,
-      "name": "Importar_12032024_1154"
+      "id": 166589,
+      "name": "Importar_02012026_1221"
     },
     {
-      "id": 259054,
-      "name": "Importar_25032026_1311"
+      "id": 149137,
+      "name": "Importar_04082025_1551"
     },
     {
-      "id": 160063,
-      "name": "INQUILINO"
+      "id": 149141,
+      "name": "Importar_04082025_1552"
     },
     {
-      "id": 225237,
-      "name": "inquilinos"
+      "id": 166835,
+      "name": "Importar_05012026_2031"
     },
     {
-      "id": 142957,
-      "name": "internacional"
+      "id": 149393,
+      "name": "Importar_06082025_2259"
     },
     {
-      "id": 253368,
-      "name": "inve"
+      "id": 144336,
+      "name": "Importar_08072025_1104"
     },
     {
-      "id": 247361,
-      "name": "INVERSIONES_IA"
+      "id": 120689,
+      "name": "Importar_09122024_1651"
     },
     {
-      "id": 257082,
-      "name": "INVERSIONESIA"
+      "id": 120757,
+      "name": "Importar_10122024_0927"
     },
     {
-      "id": 225505,
-      "name": "JEAN"
+      "id": 120761,
+      "name": "Importar_10122024_0943"
     },
     {
-      "id": 226789,
-      "name": "JEAN-BARRANCO"
+      "id": 120775,
+      "name": "Importar_10122024_0958"
     },
     {
-      "id": 212119,
-      "name": "JOAQUIN"
+      "id": 120783,
+      "name": "Importar_10122024_1016"
     },
     {
-      "id": 212129,
-      "name": "JOAQUÍN"
+      "id": 120807,
+      "name": "Importar_10122024_1119"
     },
     {
-      "id": 216209,
-      "name": "Joaquin-breña"
+      "id": 120841,
+      "name": "Importar_10122024_1204"
     },
     {
-      "id": 211857,
-      "name": "jueves02"
+      "id": 165197,
+      "name": "Importar_12122025_1716"
     },
     {
-      "id": 188337,
-      "name": "juniozoom"
+      "id": 165201,
+      "name": "Importar_12122025_1722"
     },
     {
-      "id": 67288,
-      "name": "Lead F.L - Linkedin"
+      "id": 167939,
+      "name": "Importar_16012026_1721"
     },
     {
-      "id": 38910,
-      "name": "Lead Web"
+      "id": 162447,
+      "name": "Importar_20112025_1027"
     },
     {
-      "id": 38874,
-      "name": "Lead Web-Flow"
+      "id": 162561,
+      "name": "Importar_21112025_0016"
     },
     {
-      "id": 39002,
-      "name": "Leads Flow.P"
+      "id": 154159,
+      "name": "Importar_22082025_2058"
     },
     {
-      "id": 145803,
-      "name": "lei"
+      "id": 154163,
+      "name": "Importar_22082025_2149"
     },
     {
-      "id": 145679,
-      "name": "leidy"
+      "id": 133863,
+      "name": "Importar_25032025_1921"
     },
     {
-      "id": 186041,
-      "name": "LEIDY"
+      "id": 146249,
+      "name": "Importar_26072025_2116"
     },
     {
-      "id": 226775,
-      "name": "LEIDY-BARRANCO"
+      "id": 146253,
+      "name": "Importar_26072025_2125"
     },
     {
-      "id": 216203,
-      "name": "Leidy-breña"
+      "id": 146257,
+      "name": "Importar_26072025_2127"
     },
     {
-      "id": 225995,
-      "name": "LEIDY-CARRION"
+      "id": 146261,
+      "name": "Importar_26072025_2128"
     },
     {
-      "id": 230243,
-      "name": "LEIDY-HELIO"
+      "id": 146265,
+      "name": "Importar_26072025_2131"
     },
     {
-      "id": 195871,
-      "name": "Llamada Proper Rentas"
+      "id": 146269,
+      "name": "Importar_26072025_2135"
     },
     {
-      "id": 141782,
-      "name": "llamadahecha"
+      "id": 146273,
+      "name": "Importar_26072025_2138"
     },
     {
-      "id": 216211,
-      "name": "Luis-breña"
+      "id": 146277,
+      "name": "Importar_26072025_2142"
     },
     {
-      "id": 186047,
-      "name": "LUNES"
+      "id": 146285,
+      "name": "Importar_27072025_1128"
     },
     {
-      "id": 226787,
-      "name": "MARCO-BARRANCO"
+      "id": 146289,
+      "name": "Importar_27072025_1139"
     },
     {
-      "id": 226029,
-      "name": "MARCO-CARRION"
+      "id": 146305,
+      "name": "Importar_27072025_1919"
     },
     {
-      "id": 219733,
-      "name": "MARCOS"
+      "id": 131351,
+      "name": "Importar_28022025_1618"
     },
     {
-      "id": 230251,
-      "name": "MARCOS-HELIO"
+      "id": 131355,
+      "name": "Importar_28022025_1627"
     },
     {
-      "id": 258950,
-      "name": "MASIVO 24.03 - 2"
+      "id": 131373,
+      "name": "Importar_28022025_1746"
     },
     {
-      "id": 258952,
-      "name": "MASIVO 24.03 - G1"
+      "id": 131377,
+      "name": "Importar_28022025_1810"
     },
     {
-      "id": 258964,
-      "name": "MASIVO 24.03 - G2"
+      "id": 131383,
+      "name": "Importar_28022025_1812"
     },
     {
-      "id": 259040,
-      "name": "MASIVO 24.03 - G2.1"
+      "id": 146349,
+      "name": "Importar_28072025_1157"
     },
     {
-      "id": 259050,
-      "name": "MASIVO 24.03 - G4"
+      "id": 149329,
+      "name": "Incompleto"
     },
     {
-      "id": 258932,
-      "name": "MASIVO 25.03"
+      "id": 167699,
+      "name": "INFLUENCERS 15-01-2026"
     },
     {
-      "id": 256810,
-      "name": "MASIVO EVENTO 25 FEB"
+      "id": 169237,
+      "name": "JULIO2026"
     },
     {
-      "id": 194081,
-      "name": "MasivoDz"
+      "id": 167357,
+      "name": "Jumper"
     },
     {
-      "id": 194089,
-      "name": "MasivoEleana"
+      "id": 170579,
+      "name": "junio"
     },
     {
-      "id": 194087,
-      "name": "MasivoElena"
+      "id": 169235,
+      "name": "JUNIO2026"
     },
     {
-      "id": 194083,
-      "name": "MasivoGermain"
+      "id": 167355,
+      "name": "Kidzania"
     },
     {
-      "id": 194079,
-      "name": "MasivoLeidy"
+      "id": 156143,
+      "name": "llamar el 16/09/2025"
     },
     {
-      "id": 233615,
-      "name": "MASIVOLEIDY2025"
+      "id": 167185,
+      "name": "LUNES 12 12:00 PM"
     },
     {
-      "id": 194077,
-      "name": "MasivoYanery"
+      "id": 120835,
+      "name": "MABLESA"
     },
     {
-      "id": 183889,
-      "name": "mayo workshop"
+      "id": 167433,
+      "name": "MARINA ARAUCO"
     },
     {
-      "id": 191885,
-      "name": "medios/altos"
+      "id": 161003,
+      "name": "Marzo 2026"
     },
     {
-      "id": 246909,
-      "name": "META_ADS"
+      "id": 168683,
+      "name": "marzo 2027"
     },
     {
-      "id": 253952,
-      "name": "meta_ads_form"
+      "id": 156865,
+      "name": "MARZO2026"
     },
     {
-      "id": 186049,
-      "name": "MIERCOLES"
+      "id": 171333,
+      "name": "marzo2027"
     },
     {
-      "id": 242197,
-      "name": "MODOSUPP"
+      "id": 169255,
+      "name": "mayo 2025"
     },
     {
-      "id": 213189,
-      "name": "no asignados"
+      "id": 168631,
+      "name": "mayo 2027"
     },
     {
-      "id": 192229,
-      "name": "NO CONTESTO"
+      "id": 159973,
+      "name": "MAYO2026"
     },
     {
-      "id": 187095,
-      "name": "NO INTERESADO"
+      "id": 167485,
+      "name": "MIERCOLES 14 16:00"
     },
     {
-      "id": 187091,
-      "name": "NO RESPONDIO"
+      "id": 155137,
+      "name": "Miriam Man"
     },
     {
-      "id": 226125,
-      "name": "NO SE ENCONTRO"
+      "id": 169477,
+      "name": "MLA"
     },
     {
-      "id": 213653,
-      "name": "novo-dz"
+      "id": 168295,
+      "name": "no"
     },
     {
-      "id": 213657,
-      "name": "novo-eleana"
+      "id": 154081,
+      "name": "NOV 2025"
     },
     {
-      "id": 213655,
-      "name": "novo-elena"
+      "id": 161023,
+      "name": "nov 2026"
     },
     {
-      "id": 213659,
-      "name": "novo-joaquin"
+      "id": 162287,
+      "name": "NOVIEM"
     },
     {
-      "id": 213651,
-      "name": "novo-leidy"
+      "id": 155249,
+      "name": "OCTUBRE 2025"
     },
     {
-      "id": 213661,
-      "name": "novo-luis"
+      "id": 159531,
+      "name": "octubre 2026"
     },
     {
-      "id": 213649,
-      "name": "novo3"
+      "id": 154965,
+      "name": "Octubre Semana 1"
     },
     {
-      "id": 225781,
-      "name": "NUEVO"
+      "id": 155447,
+      "name": "Octubre Semana 2"
     },
     {
-      "id": 141784,
-      "name": "onhold"
+      "id": 155645,
+      "name": "Octubre Semana 3"
     },
     {
-      "id": 216201,
-      "name": "OP.BREÑA"
+      "id": 157141,
+      "name": "Octubre Semana 4"
     },
     {
-      "id": 226779,
-      "name": "OPOR.INV.BARRANCO"
+      "id": 168775,
+      "name": "octubre2026"
     },
     {
-      "id": 225993,
-      "name": "OPOR.INV.CARRION"
+      "id": 168233,
+      "name": "paseo"
     },
     {
-      "id": 186051,
-      "name": "OTRA FECHA"
+      "id": 164837,
+      "name": "PASEO 15:00 PM"
     },
     {
-      "id": 141780,
-      "name": "p.abordaje"
+      "id": 156379,
+      "name": "PASEO CURSO"
     },
     {
-      "id": 203849,
-      "name": "PAD"
+      "id": 154005,
+      "name": "PENDIENTE RESERVA"
     },
     {
-      "id": 203809,
-      "name": "PAD.MEDIO-ALTO"
+      "id": 165511,
+      "name": "PTEALTO LASERENA"
     },
     {
-      "id": 203671,
-      "name": "PADOVA"
+      "id": 165507,
+      "name": "PTEALTO+LASERENA"
     },
     {
-      "id": 203733,
-      "name": "PADOVA.IN"
+      "id": 169027,
+      "name": "Quincena"
     },
     {
-      "id": 199789,
-      "name": "PERSONAL"
+      "id": 166945,
+      "name": "Reunión 12 enero 10:00 am"
     },
     {
-      "id": 192225,
-      "name": "PREGUNTAS FRECUENTES"
+      "id": 166917,
+      "name": "reunión 15 de enero"
     },
     {
-      "id": 232005,
-      "name": "PROP.RENTAS"
+      "id": 159371,
+      "name": "REVISAR"
     },
     {
-      "id": 25986,
-      "name": "PROPER"
+      "id": 155343,
+      "name": "Romina"
     },
     {
-      "id": 30200,
-      "name": "Proper"
+      "id": 168527,
+      "name": "Sandra Ravena"
     },
     {
-      "id": 52818,
-      "name": "Proper prueba"
+      "id": 172453,
+      "name": "SEEN"
     },
     {
-      "id": 134683,
-      "name": "Proper Rentas"
+      "id": 159707,
+      "name": "Seguimiento de cita"
     },
     {
-      "id": 246911,
-      "name": "PROPER_INVERSIONES"
+      "id": 168275,
+      "name": "sep 2026"
     },
     {
-      "id": 160065,
-      "name": "PROPERBOT1"
+      "id": 169233,
+      "name": "SEPT2026"
     },
     {
-      "id": 160061,
-      "name": "PROPIETARIO"
+      "id": 154371,
+      "name": "Septiembre Semana 1"
     },
     {
-      "id": 225239,
-      "name": "propietarios"
+      "id": 154373,
+      "name": "Septiembre Semana 2"
     },
     {
-      "id": 136525,
-      "name": "Proyecto"
+      "id": 154379,
+      "name": "Septiembre Semana 3"
     },
     {
-      "id": 203841,
-      "name": "PRUEBA"
+      "id": 154381,
+      "name": "Septiembre Semana 4"
     },
     {
-      "id": 203839,
-      "name": "PRUEBAS"
+      "id": 169067,
+      "name": "SEPTIEMBRE2026"
     },
     {
-      "id": 211255,
-      "name": "REFERIDOS DIC24"
+      "id": 150019,
+      "name": "Sol"
     },
     {
-      "id": 220851,
-      "name": "rentas"
+      "id": 162309,
+      "name": "STILL ALIVE"
     },
     {
-      "id": 234301,
-      "name": "RENTAS"
+      "id": 162563,
+      "name": "su"
     },
     {
-      "id": 236527,
-      "name": "RENTAS IA - HORARIO INDICADO"
+      "id": 162565,
+      "name": "sur"
     },
     {
-      "id": 236525,
-      "name": "RENTAS IA - INTERESADO"
+      "id": 154953,
+      "name": "tag realizado"
     },
     {
-      "id": 240607,
-      "name": "RENTAS IA - MODO"
-    },
-    {
-      "id": 243359,
-      "name": "RETAILSUPP"
-    },
-    {
-      "id": 32395,
-      "name": "S1"
-    },
-    {
-      "id": 33442,
-      "name": "S10"
-    },
-    {
-      "id": 33448,
-      "name": "S11"
-    },
-    {
-      "id": 33450,
-      "name": "S12"
-    },
-    {
-      "id": 33456,
-      "name": "S13"
-    },
-    {
-      "id": 33458,
-      "name": "S14"
-    },
-    {
-      "id": 33460,
-      "name": "S15"
-    },
-    {
-      "id": 33462,
-      "name": "S16"
-    },
-    {
-      "id": 33464,
-      "name": "S17"
-    },
-    {
-      "id": 33470,
-      "name": "S18"
-    },
-    {
-      "id": 33474,
-      "name": "S19"
-    },
-    {
-      "id": 33406,
-      "name": "S2"
-    },
-    {
-      "id": 33476,
-      "name": "S20"
-    },
-    {
-      "id": 33480,
-      "name": "S21"
-    },
-    {
-      "id": 33484,
-      "name": "S22"
-    },
-    {
-      "id": 33488,
-      "name": "S23"
-    },
-    {
-      "id": 33496,
-      "name": "S24"
-    },
-    {
-      "id": 33494,
-      "name": "S25"
-    },
-    {
-      "id": 33500,
-      "name": "S26"
-    },
-    {
-      "id": 33502,
-      "name": "S27"
-    },
-    {
-      "id": 33504,
-      "name": "S28"
-    },
-    {
-      "id": 208597,
-      "name": "S29"
-    },
-    {
-      "id": 33412,
-      "name": "S3"
-    },
-    {
-      "id": 33414,
-      "name": "S4"
-    },
-    {
-      "id": 33416,
-      "name": "S5"
-    },
-    {
-      "id": 33418,
-      "name": "S6"
-    },
-    {
-      "id": 33422,
-      "name": "S7"
-    },
-    {
-      "id": 33424,
-      "name": "S8"
-    },
-    {
-      "id": 33432,
-      "name": "S9"
-    },
-    {
-      "id": 231439,
-      "name": "SANTA_BEATRIZ_10JULIO"
-    },
-    {
-      "id": 187087,
-      "name": "SEG"
-    },
-    {
-      "id": 187079,
-      "name": "SEG - 10D"
-    },
-    {
-      "id": 192215,
-      "name": "SEG - 12H"
-    },
-    {
-      "id": 187081,
-      "name": "SEG - 13D"
-    },
-    {
-      "id": 192221,
-      "name": "SEG - 168H"
-    },
-    {
-      "id": 187083,
-      "name": "SEG - 16D"
-    },
-    {
-      "id": 187075,
-      "name": "SEG - 1D"
-    },
-    {
-      "id": 192217,
-      "name": "SEG - 24H"
-    },
-    {
-      "id": 187073,
-      "name": "SEG - 3D"
-    },
-    {
-      "id": 190479,
-      "name": "SEG - 45D"
-    },
-    {
-      "id": 187085,
-      "name": "SEG - 5H"
-    },
-    {
-      "id": 190481,
-      "name": "SEG - 60D"
-    },
-    {
-      "id": 192219,
-      "name": "SEG - 72H"
-    },
-    {
-      "id": 187077,
-      "name": "SEG - 7D"
-    },
-    {
-      "id": 186059,
-      "name": "SEG-10H"
-    },
-    {
-      "id": 186065,
-      "name": "SEG-1S"
-    },
-    {
-      "id": 186061,
-      "name": "SEG-24H"
-    },
-    {
-      "id": 186055,
-      "name": "SEG-45MIN"
-    },
-    {
-      "id": 186053,
-      "name": "SEG-5H"
-    },
-    {
-      "id": 186063,
-      "name": "SEG-72H"
-    },
-    {
-      "id": 186057,
-      "name": "SEG-H5"
-    },
-    {
-      "id": 170181,
-      "name": "seg.rentas"
-    },
-    {
-      "id": 40632,
-      "name": "Seguimiento S1"
-    },
-    {
-      "id": 219731,
-      "name": "SHARON"
-    },
-    {
-      "id": 226785,
-      "name": "SHARON-BARRANCO"
-    },
-    {
-      "id": 226027,
-      "name": "SHARON-CARRION"
-    },
-    {
-      "id": 230249,
-      "name": "SHARON-HELIO"
-    },
-    {
-      "id": 186067,
-      "name": "SIN RESPUESTA"
-    },
-    {
-      "id": 31748,
-      "name": "Site request"
-    },
-    {
-      "id": 34574,
-      "name": "Solicitud de la página web"
-    },
-    {
-      "id": 210133,
-      "name": "sorteo"
-    },
-    {
-      "id": 52820,
-      "name": "Sprueba1"
-    },
-    {
-      "id": 52822,
-      "name": "Sprueba2"
-    },
-    {
-      "id": 52824,
-      "name": "Sprueba3"
-    },
-    {
-      "id": 244825,
-      "name": "st"
-    },
-    {
-      "id": 237703,
-      "name": "stop"
-    },
-    {
-      "id": 236411,
-      "name": "stop_ai"
-    },
-    {
-      "id": 245043,
+      "id": 172083,
       "name": "TEST"
     },
     {
-      "id": 158835,
-      "name": "Última reacción: Buena"
+      "id": 171471,
+      "name": "Urgencia 2 (09/03)"
     },
     {
-      "id": 158833,
-      "name": "Última reacción: Mala"
+      "id": 171473,
+      "name": "Urgencia 3 (9/03)"
     },
     {
-      "id": 158831,
-      "name": "Última reacción: Neutral"
+      "id": 150031,
+      "name": "Vanesa Padron"
     },
     {
-      "id": 88836,
-      "name": "Webinar"
+      "id": 149133,
+      "name": "Vannia"
     },
     {
-      "id": 88850,
-      "name": "Webinar Link"
-    },
-    {
-      "id": 231617,
-      "name": "WK-JUL-25-DZ"
-    },
-    {
-      "id": 231621,
-      "name": "WK-JUL-25-ELENA"
-    },
-    {
-      "id": 231619,
-      "name": "WK-JUL-25-LEIDY"
-    },
-    {
-      "id": 231623,
-      "name": "WK-JUL-25-MARCOS"
-    },
-    {
-      "id": 231625,
-      "name": "WK-JUL-25-SHAROM"
+      "id": 169355,
+      "name": "VETADA"
     }
   ]
 }

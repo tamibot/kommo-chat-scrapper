@@ -29,6 +29,7 @@ class KommoDB:
             db_url = env.get('DATABASE_URL', '')
         self.conn = psycopg2.connect(db_url)
         self.conn.autocommit = False
+        self.conn.autocommit = False
 
     def commit(self):
         self.conn.commit()
@@ -37,6 +38,12 @@ class KommoDB:
         self.conn.close()
 
     # ── Contacts ─────────────────────────────────────────────────────
+
+    def _safe_rollback(self):
+        try:
+            self.conn.rollback()
+        except:
+            pass
 
     def upsert_contacts(self, contacts: Dict[int, dict]):
         cur = self.conn.cursor()
@@ -381,6 +388,10 @@ class KommoDB:
 
     def detect_no_reply_chats(self, chat_date: date):
         """Detect chats where the last N messages are all OUT with no IN response."""
+        try:
+            self.conn.rollback()
+        except:
+            pass
         cur = self.conn.cursor()
         # Find chats where last message direction is OUT and there are multiple consecutive OUTs
         cur.execute("""

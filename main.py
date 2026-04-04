@@ -111,7 +111,7 @@ def scrape_chats(args, output_dir: str):
     logger.info("=== Scraping chat messages via browser ===")
 
     scraper = KommoChatScraper(
-        subdomain="propertamibotcom",
+        subdomain="tu-dominio",
         headless=args.headless,
         chrome_profile_path=args.chrome_profile,
     )
