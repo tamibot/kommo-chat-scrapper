@@ -241,14 +241,20 @@ def collect_targets_via_api(target_date, filter_mode='conversations'):
             for e in events:
                 lid = e.get('entity_id')
                 if lid not in leads:
-                    leads[lid] = {'talk_ids': set(), 'in': 0, 'out': 0, 'contact_id': None}
+                    leads[lid] = {'talk_ids': {}, 'in': 0, 'out': 0, 'contact_id': None, 'origins': set()}
                 if e['type'] == 'incoming_chat_message':
                     leads[lid]['in'] += 1
                 else:
                     leads[lid]['out'] += 1
                 va = e.get('value_after', [{}])
-                if va and va[0].get('message', {}).get('talk_id'):
-                    leads[lid]['talk_ids'].add(va[0]['message']['talk_id'])
+                if va and va[0].get('message'):
+                    msg = va[0]['message']
+                    tid = msg.get('talk_id')
+                    origin = msg.get('origin', '')
+                    if tid:
+                        leads[lid]['talk_ids'][tid] = origin  # talk_id -> origin mapping
+                        if origin:
+                            leads[lid]['origins'].add(origin)
                 emb = e.get('_embedded', {}).get('entity', {})
                 if emb.get('linked_talk_contact_id'):
                     leads[lid]['contact_id'] = emb['linked_talk_contact_id']
@@ -290,17 +296,20 @@ def collect_targets_via_api(target_date, filter_mode='conversations'):
             include = True
 
         if include:
-            # Use the most recent talk_id for this lead
-            for tid in act['talk_ids']:
+            # Use the most recent talk_id for this lead (highest talk_id)
+            talk_items = sorted(act['talk_ids'].items(), key=lambda x: int(x[0]), reverse=True)
+            if talk_items:
+                tid, origin = talk_items[0]
                 targets.append({
                     'talk_id': str(tid),
                     'lead_id': str(lid),
                     'contact_id': act['contact_id'],
+                    'origin': origin,  # waba, instagram_business, tiktok_kommo, facebook
+                    'origins_all': list(act['origins']),  # all channels this lead uses
                     'in_events': act['in'],
                     'out_events': act['out'],
                     'category': category,
                 })
-                break  # One target per lead (most recent talk)
 
     print(f"    Events: {page} pages | Leads: {len(leads)} | Conv: {stats['conversations']} | "
           f"Pending: {stats['pending']} | Follow-up: {stats['follow_up']} | Masivo: {stats['masivo']}")
@@ -539,7 +548,13 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
         results.append({
             'talk_id': t['talk_id'],
             'lead_id': t['lead_id'],
+            'contact_id': t.get('contact_id'),
             'chat_date': str(chat_date),
+            'origin': t.get('origin', ''),
+            'origins_all': t.get('origins_all', []),
+            'category': t.get('category', ''),
+            'in_events': t.get('in_events', 0),
+            'out_events': t.get('out_events', 0),
             'conversation_ids': data['conversation_ids'],
             'msg_count': data['msg_count'],
             'analytics': analytics,
