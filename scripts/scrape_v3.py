@@ -57,15 +57,13 @@ return (function() {
     for (var i = 0; i < notes.length; i++) {
         var n = notes[i];
 
-        // === DIRECTION: check for outgoing marker OR incoming class ===
-        var isOut = n.querySelector('.feed-note__talk-outgoing') !== null;
-        var isIn = n.querySelector('.feed-note-incoming') !== null;
-        if (!isOut && !isIn) {
-            // Fallback: check parent js-note for incoming class
-            var jsNote = n.querySelector('.js-note');
-            if (jsNote && jsNote.className.indexOf('incoming') >= 0) isIn = true;
-        }
-        var dir = isOut ? 'OUT' : 'IN';
+        // === DIRECTION: use feed-note CSS classes ===
+        // Kommo adds 'feed-note-incoming' to the inner .feed-note for client messages
+        // For outgoing (bot/agent), the .feed-note does NOT have 'feed-note-incoming'
+        // The .feed-note__talk-outgoing block is a CONVERSATION FOOTER (not per-message direction)
+        var feedNote = n.querySelector('.feed-note.feed-note-external');
+        var hasIncoming = feedNote && feedNote.className.indexOf('feed-note-incoming') >= 0;
+        var dir = hasIncoming ? 'IN' : 'OUT';
 
         // === TIMESTAMP: works for both IN and OUT ===
         var dateEl = n.querySelector('.js-feed-note__date, .feed-note__date');
@@ -87,13 +85,23 @@ return (function() {
         var statusEl = n.querySelector('.message_delivery-status_checkmark, .feed-note__delivery-status');
         var deliveryStatus = statusEl ? statusEl.textContent.trim() : '';
 
-        // === MESSAGE TEXT ===
-        var msgEl = n.querySelector('.feed-note__message_paragraph');
-        var msg = msgEl ? msgEl.textContent.substring(0, 1500) : '';
+        // === MESSAGE TEXT: join ALL paragraph elements (some msgs have multiple) ===
+        var msgParts = n.querySelectorAll('.feed-note__message_paragraph');
+        var msg = '';
+        if (msgParts.length > 0) {
+            var texts = [];
+            msgParts.forEach(function(p) {
+                // Skip quoted/reply text (inside quotation containers)
+                if (!p.closest('.quotation__message-text')) {
+                    texts.push(p.textContent.trim());
+                }
+            });
+            msg = texts.join('\\n').substring(0, 2000);
+        }
 
         // === BOT DETECTION: only on OUT messages ===
         var isBot = false; var botName = '';
-        if (isOut) {
+        if (dir === 'OUT') {
             var authorLower = author.toLowerCase();
             if (authorLower.indexOf('salesbot') >= 0) {
                 isBot = true;
@@ -108,7 +116,7 @@ return (function() {
 
         // === SENDER TYPE: improved logic ===
         var senderType;
-        if (isOut) {
+        if (dir === 'OUT') {
             if (isBot) {
                 senderType = 'bot';
             } else if (author === 'WhatsApp Business' || author === 'TikTok') {
