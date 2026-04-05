@@ -80,6 +80,25 @@ Scrapper de chats de Kommo CRM con enfoque hibrido: API v4 + Selenium browser au
 - Conversaciones reales (IN+OUT) ~300/dia
 - Envios masivos: dias con 4,000+ leads (solo OUT 1-2 msgs = follow-up bot)
 
+## Clasificacion de leads por Events API
+- Conversation (IN+OUT): leads con mensajes entrantes Y salientes -> SCRAPE
+- Pending (solo IN): cliente escribio, sin respuesta -> SCRAPE
+- Follow-up (1-2 OUT): bot de seguimiento automatico -> SKIP
+- Masivo (3+ OUT sin IN): campana masiva -> SKIP
+
+## Deteccion de direccion (DOM)
+- IN: clase CSS `feed-note-incoming` en el elemento `.feed-note`
+- OUT: NO tiene `feed-note-incoming`
+- NOTA: mensajes de agente via WhatsApp Business aparecen como `feed-note-incoming`
+  en el DOM de Kommo. Es una limitacion del rendering, no del scraper.
+- Bot detection: solo aplica a mensajes OUT. Patrones: "SalesBot", "Tami Bot", generico "bot"
+- Sender types: contact (IN), bot (OUT+bot), agent (OUT+humano), system (OUT+WhatsApp Business)
+
+## Origin/Canal de cada chat
+- Se obtiene del Events API: value_after[0].message.origin
+- Valores: waba, instagram_business, tiktok_kommo, facebook
+- NO se obtiene del DOM (no hay indicador de canal en el HTML)
+
 ## Login Selenium (sin 2FA)
 - Usuario: soporte.corretaje@proper.com.pe
 - Session dir: /tmp/kommo_scraper_session
