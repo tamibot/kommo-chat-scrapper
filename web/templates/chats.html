@@ -11,7 +11,7 @@
             <option value="{{ d.chat_date }}" {% if d.chat_date|string == current_date %}selected{% endif %}>{{ d.chat_date }}</option>
             {% endfor %}
         </select>
-        <a href="https://tu-dominio.kommo.com/chats/" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-box-arrow-up-right"></i></a>
+        <a href="{{ kommo_base_url }}/chats/" target="_blank" class="btn btn-sm btn-outline-primary"><i class="bi bi-box-arrow-up-right"></i></a>
     </div>
 </div>
 
@@ -66,7 +66,7 @@
                         <td><span class="badge badge-human">{{ c.total_human }}</span></td>
                         <td><small>{{ c.responsible_user_name or '-' }}</small></td>
                         <td onclick="event.stopPropagation()">
-                            <a href="https://tu-dominio.kommo.com/leads/detail/{{ c.lead_id }}" target="_blank" class="btn btn-sm btn-outline-secondary py-0 px-1" title="Ver en Kommo"><i class="bi bi-box-arrow-up-right"></i></a>
+                            <a href="{{ kommo_base_url }}/leads/detail/{{ c.lead_id }}" target="_blank" class="btn btn-sm btn-outline-secondary py-0 px-1" title="Ver en Kommo"><i class="bi bi-box-arrow-up-right"></i></a>
                         </td>
                     </tr>
                     {% endfor %}

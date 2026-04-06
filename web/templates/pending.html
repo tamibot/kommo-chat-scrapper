@@ -57,7 +57,7 @@
                         <td>{% if c.total_human > 0 %}<span class="badge badge-human">{{ c.total_human }}</span>{% else %}<span class="badge bg-danger text-white">0</span>{% endif %}</td>
                         <td><small>{{ c.responsible_user_name or '-' }}</small></td>
                         <td onclick="event.stopPropagation()">
-                            <a href="https://tu-dominio.kommo.com/leads/detail/{{ c.lead_id }}" target="_blank" class="btn btn-sm btn-outline-secondary py-0 px-1"><i class="bi bi-box-arrow-up-right"></i></a>
+                            <a href="{{ kommo_base_url }}/leads/detail/{{ c.lead_id }}" target="_blank" class="btn btn-sm btn-outline-secondary py-0 px-1"><i class="bi bi-box-arrow-up-right"></i></a>
                         </td>
                     </tr>
                     {% endfor %}

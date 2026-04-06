@@ -102,6 +102,13 @@ def set_setting(key, value):
     """, (key, value))
 
 
+@app.context_processor
+def inject_kommo_url():
+    """Inject kommo_base_url into all templates from settings or env."""
+    url = get_setting('kommo_base_url') or os.environ.get('KOMMO_BASE_URL', '')
+    return {'kommo_base_url': url.rstrip('/')}
+
+
 # ── Routes ───────────────────────────────────────────────────────────
 
 @app.route('/')

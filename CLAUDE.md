@@ -157,3 +157,18 @@ python scripts/scrape_v3.py --date previous_week   # semana pasada (7 dias)
 - `/settings` - Config con validacion de token API
 - `/api/health` - Health check JSON
 - `/api/validate-token` - Validar token API
+
+## URL Dinamica en Templates
+- `web/app.py` tiene un context_processor que inyecta `kommo_base_url` en todos los templates
+- Se lee de `kommo_app_settings` (clave `kommo_base_url`) o de env var `KOMMO_BASE_URL`
+- Los templates usan `{{ kommo_base_url }}/leads/detail/...` en lugar de dominio hardcodeado
+
+## Estado de la DB (2026-04-06)
+| Fecha      | Chats | Mensajes | IN   | OUT  | Bot  | Humano | Pendientes |
+|------------|-------|----------|------|------|------|--------|-----------|
+| 2026-03-29 | 110   | 2,251    | 1089 | 1162 | 591  | 571    | 23        |
+| 2026-03-30 | 331   | 12,118   | 6354 | 5764 | 875  | 4889   | 123       |
+| 2026-04-02 | 10    | 265      | 133  | 132  | 48   | 84     | 3         |
+
+- Dias pendientes por scrapear: 2026-03-28, 2026-03-31, 2026-04-01, 2026-04-03, 2026-04-04, 2026-04-05
+- Total en DB: 597 leads, 588 contactos, 1387 cambios de etapa, 5582 eventos, 209 no-reply
