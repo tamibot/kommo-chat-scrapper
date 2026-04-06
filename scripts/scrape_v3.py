@@ -30,6 +30,10 @@ from selenium.common.exceptions import WebDriverException
 from src.kommo.enrichment import KommoEnrichment
 from src.kommo.database import KommoDB
 
+# Force stdout flush for real-time output in background tasks
+import functools
+print = functools.partial(print, flush=True)
+
 # ── Config ───────────────────────────────────────────────────────────
 ENV = {}
 with open(os.path.join(os.path.dirname(__file__), '..', '.env')) as f:
@@ -163,9 +167,26 @@ def create_driver():
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1920,1080")
     options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-background-networking")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     d = webdriver.Chrome(options=options)
-    d.set_page_load_timeout(30)
+    d.set_page_load_timeout(20)
+    d.set_script_timeout(15)
+    return d
+
+
+def restart_driver(driver):
+    """Kill and recreate driver when it hangs."""
+    try:
+        driver.quit()
+    except Exception:
+        pass
+    time.sleep(2)
+    d = create_driver()
+    # Re-login
+    if not login(d):
+        raise RuntimeError("Cannot re-login after driver restart")
     return d
 
 
@@ -363,8 +384,9 @@ def collect_targets(driver, date_preset, status, target_date=None):
     """)
 
 
-def extract_chat_robust(driver, talk_id, lead_id, max_retries=2):
-    """Extract chat with retries and error recovery."""
+def extract_chat_robust(driver, talk_id, lead_id, max_retries=3):
+    """Extract chat with retries, timeouts, and error recovery.
+    Returns None if driver needs restart (caller should handle)."""
     for attempt in range(max_retries):
         try:
             url = f"https://{SUBDOMAIN}.kommo.com/chats/{talk_id}/leads/detail/{lead_id}"
@@ -372,28 +394,41 @@ def extract_chat_robust(driver, talk_id, lead_id, max_retries=2):
             delay = random.uniform(MIN_DELAY, MAX_DELAY)
             time.sleep(delay)
 
-            # Expand collapsed messages (up to 5 rounds)
-            for _ in range(5):
-                expanded = driver.execute_script("""
-                    var c=0;
-                    document.querySelectorAll('a,span,div').forEach(function(el){
-                        if(el.innerText && el.innerText.trim().match(/^Más \\d+ de \\d+$/)){el.click();c++;}
-                    });
-                    return c;
-                """)
+            # Step 1: Expand ALL collapsed messages first (most important)
+            for round_num in range(5):
+                try:
+                    expanded = driver.execute_script("""
+                        var c=0;
+                        document.querySelectorAll('a,span,div').forEach(function(el){
+                            if(el.innerText && el.innerText.trim().match(/^Más \\d+ de \\d+$/)){el.click();c++;}
+                        });
+                        return c;
+                    """)
+                except Exception:
+                    break
                 if expanded:
                     time.sleep(EXPAND_WAIT)
                 else:
                     break
 
+            # Step 2: Extract all messages
             result = driver.execute_script(JS_EXTRACT)
             if result and result.get('messages') is not None:
                 return result
             return {'messages': [], 'conversation_ids': [], 'msg_count': 0}
 
         except WebDriverException as e:
+            err_msg = str(e)[:80]
+            if 'timeout' in err_msg.lower() or 'session' in err_msg.lower():
+                # Driver is dead, signal caller to restart
+                return None  # None = needs driver restart
             if attempt < max_retries - 1:
                 time.sleep(3)
+            else:
+                return {'messages': [], 'conversation_ids': [], 'msg_count': 0}
+        except Exception as e:
+            if attempt < max_retries - 1:
+                time.sleep(2)
             else:
                 return {'messages': [], 'conversation_ids': [], 'msg_count': 0}
 
@@ -530,21 +565,32 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
         driver.quit()
         return None
 
-    print(f"[3/6] Scraping {total} chats...")
+    print(f"[3/6] Scraping {total} chats...", flush=True)
     results = []
     total_msgs = 0
     errors = 0
+    driver_restarts = 0
 
     for idx in range(total):
         t = targets[idx]
         data = extract_chat_robust(driver, t['talk_id'], t['lead_id'])
+
+        # Handle driver crash/timeout: restart and retry
+        if data is None:
+            print(f"  Driver timeout at chat {idx+1}, restarting...", flush=True)
+            driver = restart_driver(driver)
+            driver_restarts += 1
+            # Retry this chat once
+            data = extract_chat_robust(driver, t['talk_id'], t['lead_id'])
+            if data is None:
+                data = {'messages': [], 'conversation_ids': [], 'msg_count': 0}
+                errors += 1
+
         analytics = compute_analytics(data['messages'])
         total_msgs += data['msg_count']
         if data['msg_count'] == 0:
             errors += 1
 
-        # Use the filter date (the day we're scraping) as chat_date
-        # This is correct because we filter by day, so the chat had activity on this day
         results.append({
             'talk_id': t['talk_id'],
             'lead_id': t['lead_id'],
@@ -566,9 +612,12 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
             bot = sum(r['analytics']['bot_count'] for r in results)
             hum = sum(r['analytics']['human_count'] for r in results)
             rate = (idx+1) / elapsed * 60
-            print(f"  [{idx+1}/{total}] {total_msgs} msgs (B:{bot} H:{hum}) | {elapsed:.0f}s | {rate:.0f}/min | err:{errors}")
+            print(f"  [{idx+1}/{total}] {total_msgs} msgs (B:{bot} H:{hum}) | {elapsed:.0f}s | {rate:.0f}/min | err:{errors} restart:{driver_restarts}", flush=True)
 
-    driver.quit()
+    try:
+        driver.quit()
+    except Exception:
+        pass
 
     # PHASE 2: Enrichment
     leads_map = {}
