@@ -125,7 +125,7 @@ def index():
 
     today_status = query("""
         SELECT attention_status, COUNT(*) as cnt
-        FROM kommo_chats WHERE chat_date = (SELECT MAX(chat_date) FROM kommo_chats)
+        FROM kommo_chats
         GROUP BY attention_status
     """)
 
@@ -149,11 +149,11 @@ def index():
         WHERE is_bot=true AND bot_name != '' GROUP BY bot_name ORDER BY cnt DESC LIMIT 8
     """)
 
-    # Top agents
+    # Top responsible users (from leads, not message authors which can be contact names)
     top_agents = query("""
-        SELECT author, COUNT(*) as cnt FROM kommo_messages
-        WHERE sender_type='agent' AND author != '' AND author != 'WhatsApp Business'
-        GROUP BY author ORDER BY cnt DESC LIMIT 8
+        SELECT responsible_user_name as author, COUNT(*) as cnt FROM kommo_leads
+        WHERE responsible_user_name IS NOT NULL AND responsible_user_name != ''
+        GROUP BY responsible_user_name ORDER BY cnt DESC LIMIT 8
     """)
 
     # Pipeline distribution
