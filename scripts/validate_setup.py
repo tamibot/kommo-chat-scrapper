@@ -60,7 +60,7 @@ def main():
 
     # 2. Python dependencies
     print("\n[2/6] Python dependencies")
-    deps = {'selenium': 'selenium', 'psycopg2': 'psycopg2-binary'}
+    deps = {'selenium': 'selenium', 'psycopg2': 'psycopg2-binary', 'flask': 'flask'}
     for module, pip_name in deps.items():
         try:
             __import__(module)

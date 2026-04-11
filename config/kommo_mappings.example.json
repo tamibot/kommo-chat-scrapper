@@ -1,0 +1,33 @@
+{
+  "account": {
+    "id": 12345678,
+    "name": "Tu Empresa",
+    "subdomain": "tu-subdominio",
+    "amojo_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "pipelines": {
+    "PIPELINE_ID": {
+      "name": "Nombre del Pipeline",
+      "sort": 1,
+      "is_main": true,
+      "stages": {
+        "STAGE_ID": {
+          "name": "Nombre de Etapa",
+          "sort": 10,
+          "color": "#99ccff"
+        }
+      }
+    }
+  },
+  "lead_custom_fields": {},
+  "contact_custom_fields": {},
+  "users": {
+    "USER_ID": {
+      "name": "Nombre Usuario",
+      "email": "usuario@empresa.com"
+    }
+  },
+  "channels": [],
+  "tags": [],
+  "_note": "Este archivo se genera automaticamente con: python scripts/setup_account.py"
+}

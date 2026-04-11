@@ -43,7 +43,9 @@ with open(os.path.join(os.path.dirname(__file__), '..', '.env')) as f:
             k, v = line.split('=', 1); ENV[k.strip()] = v.strip()
 
 SESSION_DIR = '/tmp/kommo_scraper_session'
-SUBDOMAIN = 'propertamibotcom'
+# Extract subdomain from KOMMO_BASE_URL (e.g. https://miempresa.kommo.com -> miempresa)
+_base_url = ENV.get('KOMMO_BASE_URL', '')
+SUBDOMAIN = _base_url.replace('https://', '').replace('http://', '').split('.')[0] if _base_url else 'tu-dominio'
 
 # ── Anti-ban config ──────────────────────────────────────────────────
 MIN_DELAY = 1.5       # min seconds between chat navigations
