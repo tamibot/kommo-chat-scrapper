@@ -50,3 +50,5 @@ flowchart TD
    > **¿Para qué sirve?:** ¿No quieres codear? Aquí yace el Sistema Estructural de un **Prompt**. Cópialo, dáselo a Claude/Gemini, y él levantará toda esta red en tu máquina automáticamente preguntándote exclusivamente por las contraseñas.
 9. **[09_onboarding_guide.md](./09_onboarding_guide.md)** ⭐ EMPIEZA AQUÍ
    > **¿Para qué sirve?:** Guía paso a paso desde cero hasta producción. Explica qué credenciales necesitas, cómo obtener cada una, en qué orden ejecutar todo, y cómo verificar que funciona. Incluye troubleshooting de reCAPTCHA, Chrome headless, y token expirado.
+10. **[10_project_status.md](./10_project_status.md)** 📊 ESTADO ACTUAL
+    > **¿Para qué sirve?:** Muestra el estado actual del proyecto: qué días están scrapeados, cuántos registros hay en cada tabla, bugs corregidos, arquitectura del sistema, credenciales configuradas, y próximos pasos pendientes.
