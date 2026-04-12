@@ -120,6 +120,16 @@ Causa: muchos intentos de login headless seguidos activan captcha
 - Selenium solo se importa cuando se necesita
 - Rate limit API: max 6 req/s (7/s es el limite de Kommo)
 
+## Agentes de Automatizacion (.claude/agents/)
+- `new-client-setup` - Guia interactiva para onboarding de nuevo cliente (pide credenciales, valida, deploya, scrapea)
+- `daily-scrape` - Ejecuta scrape diario con pre-flight checks y post-flight validation
+- `scraper-validator` - Valida resultados del scraper (IN/OUT, bot detection, DB consistency)
+
+## Scripts de Validacion
+- `scripts/health_check.py` - 26 verificaciones del sistema completo (env, deps, Chrome, API, DB, web, login)
+- `scripts/validate_setup.py` - 6 verificaciones basicas para setup inicial
+- `scripts/setup_account.py` - Discovery de cuenta (pipelines, campos, usuarios, canales, tags)
+
 ## Comandos utiles
 ```bash
 # Setup inicial

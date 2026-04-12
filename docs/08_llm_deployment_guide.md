@@ -16,23 +16,57 @@ ACCIÓN INMEDIATA:
 Me acabo de descargar el repositorio 'Kommo Chat Scraper Híbrido V4'. Necesito que orquestes un despliegue impecable siguiendo estas directivas secuenciales:
 
 1. COMPRENSIÓN DOCUMENTAL
-Lee el archivo `/docs/00_master_index.md`. Entiende la arquitectura "API-First" vs "Selenium Edge". Toma consciencia de que la base de datos funciona con lógica UPSERT para evitar duplicados y el uso de un Virtual DOM de bypass para la extracción de mensajería analítica.
+Lee el archivo `/CLAUDE.md` y `/docs/09_onboarding_guide.md`. Entiende la arquitectura "API-First + Selenium" híbrida. La base de datos funciona con lógica UPSERT y el scraper usa un acumulador virtual DOM para extraer mensajes de chat.
 
-2. MATRIZ DE REQUISITOS (SETUP INTELIGENTE)
-Lee cuidadosamente `/docs/01_requirements_setup.md` y prepara los comandos de entorno (Instalación de requisitos pip y brew). 
-IMPORTANTE: El código no tiene variables quemadas (es 100% agnóstico). Pregúntame, sin asumir nada, por mis 5 credenciales exactas para tu `.env`: 
-- KOMMO_BASE_URL (URL base de mi empresa).
-- KOMMO_ACCESS_TOKEN.
-- KOMMO_LOGIN_EMAIL.
-- KOMMO_LOGIN_PASSWORD.
-- DATABASE_URL (URI de acceso a mi PostgreSQL).
+2. RECOLECCIÓN DE CREDENCIALES (ANTES DE TODO)
+Pregúntame por mis 5 credenciales, una por una, explicando para qué sirve cada una:
+- KOMMO_BASE_URL (URL de mi cuenta Kommo, ej: https://miempresa.kommo.com)
+- KOMMO_ACCESS_TOKEN (Token API v4 de Kommo)
+- KOMMO_LOGIN_EMAIL (Usuario sin 2FA para el scraper)
+- KOMMO_LOGIN_PASSWORD (Contraseña del usuario)
+- DATABASE_URL (PostgreSQL connection string)
 
-Advierte en tu respuesta que mi cuenta KOMMO_LOGIN_EMAIL NO PUEDE tener activa la verificación en dos pasos (2FA), de lo contrario Selenium fallará.
+ADVERTENCIA CRÍTICA: La cuenta KOMMO_LOGIN_EMAIL NO PUEDE tener verificación en dos pasos (2FA). Si la tiene, Selenium se congelará.
 
-3. ORQUESTACIÓN DE ARRANQUE
-Una vez me ayudes a fijar los secretos en un `.env` válido y tengas listo Python:
-A) Invoca primeramente el script `python3 scripts/extract_mappings.py` para mapear dinámicamente las etapas e IDs de mi cuenta.
-B) Dispara la extracción principal ejecutando `python3 scripts/scrape_v3.py --date yesterday`.
+3. CONFIGURACIÓN
+A) Crear `.env` con las credenciales
+B) Ejecutar `pip install -r requirements.txt`
 
-Confírmame que entendiste y pregúntame por las credenciales.
+4. DISCOVERY DE CUENTA
+Ejecutar `python scripts/setup_account.py` para mapear pipelines, campos, usuarios y canales.
+
+5. VALIDACIÓN COMPLETA
+Ejecutar `python scripts/health_check.py` y verificar que los 26 checks pasen.
+
+6. DEPLOY WEB (ANTES DE SCRAPEAR)
+Guíame para desplegar el dashboard web en Railway ANTES de empezar a scrapear datos.
+
+7. TEST INICIAL
+Ejecutar `python scripts/scrape_v3.py --max-chats 5` y verificar en la web que los datos se ven bien.
+
+8. SCRAPE COMPLETO
+Solo después de verificar que todo funciona, ejecutar `python scripts/scrape_v3.py --date yesterday`
+
+9. VERIFICACIÓN FINAL
+Ejecutar `python scripts/health_check.py` nuevamente para confirmar que todo está operativo.
+
+Confírmame que entendiste y empieza pidiendo las credenciales.
 ```
+
+---
+
+## Agentes Disponibles (.claude/agents/)
+
+Si usas Claude Code, el proyecto incluye agentes especializados:
+
+| Agente | Cuándo usarlo |
+|--------|--------------|
+| `new-client-setup` | Onboarding de un nuevo cliente desde cero |
+| `daily-scrape` | Scrape diario con pre/post validación |
+| `scraper-validator` | Verificar calidad de datos después de un scrape |
+
+### Cómo invocar un agente en Claude Code:
+Los agentes se activan automáticamente cuando describes la tarea. Por ejemplo:
+- "Setup a new Kommo client" → activa `new-client-setup`
+- "Run the daily scrape with validation" → activa `daily-scrape`
+- "Validate the last scrape results" → activa `scraper-validator`
