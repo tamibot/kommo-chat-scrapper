@@ -1,0 +1,30 @@
+[
+  {
+    "domain": ".propertamibotcom.kommo.com",
+    "httpOnly": true,
+    "name": "csrf_token",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": true,
+    "value": "def50200ca01593a7aba809ac320ac95347f671a50f9e08dc729e43bc2fe33c17bb8c3a61cb39ff5814340e2f457ca4b87f3e8d7cf781fc078c90e1aa75e421ca4028cc618df05eb46dee72731d1f2684ac07d1c5d965e92c9adaba08f9e4fb3688b39401e842d2085f85d7b5fd679475d3c7c565e3756cb5d04b5c6368852dd8db92210822292486a9335a95c34d48d35dcb95bbe48ed25e37aaf35cee022499994dcc8190eef036b74d2fbcba9cbf2e9bb6e18cd3a633be7719b51785e9243a16fc9221c8564a117287f5b92e229db88f0043e57c483b8ea8455d709f6cca5c1ec653b54dcdf8f6c5ba534676a128e745f83e3401663c7a593ea5acd6b43a9ac8548d65a79d20766eb0f"
+  },
+  {
+    "domain": "propertamibotcom.kommo.com",
+    "expiry": 1775693994,
+    "httpOnly": false,
+    "name": "last_login",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "tamibotperu@gmail.com"
+  },
+  {
+    "domain": ".kommo.com",
+    "httpOnly": true,
+    "name": "session_id",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": true,
+    "value": "1nqg5te601petsu607mkoed8v8"
+  }
+]

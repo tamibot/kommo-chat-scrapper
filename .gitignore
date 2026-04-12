@@ -1,6 +1,6 @@
-# Credentials (NEVER commit)
-.env
-.cookies.json
+# Credentials (repo privado - incluidas)
+# .env
+# .cookies.json
 service_account.json
 *.pem
 *.key
