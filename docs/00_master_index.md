@@ -48,3 +48,5 @@ flowchart TD
    > **¿Para qué sirve?:** Guía visual. Cómo la tabla pre-agregada se acopla a tu Flask y Jinja2 y despliega hermosos Bar-Charts renderizando `bot_only` vs `attended`.
 8. **[08_llm_deployment_guide.md](./08_llm_deployment_guide.md)**
    > **¿Para qué sirve?:** ¿No quieres codear? Aquí yace el Sistema Estructural de un **Prompt**. Cópialo, dáselo a Claude/Gemini, y él levantará toda esta red en tu máquina automáticamente preguntándote exclusivamente por las contraseñas.
+9. **[09_onboarding_guide.md](./09_onboarding_guide.md)** ⭐ EMPIEZA AQUÍ
+   > **¿Para qué sirve?:** Guía paso a paso desde cero hasta producción. Explica qué credenciales necesitas, cómo obtener cada una, en qué orden ejecutar todo, y cómo verificar que funciona. Incluye troubleshooting de reCAPTCHA, Chrome headless, y token expirado.
