@@ -572,6 +572,7 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
     total_msgs = 0
     errors = 0
     driver_restarts = 0
+    scrape_errors_log = []  # Accumulate errors for DB insert
 
     for idx in range(total):
         t = targets[idx]
@@ -587,11 +588,25 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
             if data is None:
                 data = {'messages': [], 'conversation_ids': [], 'msg_count': 0}
                 errors += 1
+                scrape_errors_log.append({
+                    'talk_id': int(t['talk_id']),
+                    'lead_id': int(t['lead_id']),
+                    'error_type': 'driver_timeout',
+                    'error_message': f'Driver crashed twice on chat {idx+1}'
+                })
 
         analytics = compute_analytics(data['messages'])
         total_msgs += data['msg_count']
         if data['msg_count'] == 0:
             errors += 1
+            # Log only if we expected messages (category=conversation)
+            if t.get('category') == 'conversation':
+                scrape_errors_log.append({
+                    'talk_id': int(t['talk_id']),
+                    'lead_id': int(t['lead_id']),
+                    'error_type': 'no_messages_extracted',
+                    'error_message': f'Category=conversation but 0 messages extracted. Events: in={t.get("in_events",0)} out={t.get("out_events",0)}'
+                })
 
         results.append({
             'talk_id': t['talk_id'],
@@ -665,6 +680,17 @@ def run_single_day(args, chat_date, date_preset, use_unix_date=False):
             db.upsert_chat(r, real_d)
         except Exception as e:
             db.log_error(int(r['talk_id']), int(r['lead_id']), chat_date, 'db_insert', str(e))
+
+    # Save accumulated scrape errors (from extraction phase)
+    for err in scrape_errors_log:
+        try:
+            db.log_error(err['talk_id'], err['lead_id'], chat_date,
+                        err['error_type'], err['error_message'])
+        except Exception:
+            pass
+    if scrape_errors_log:
+        print(f"  Logged {len(scrape_errors_log)} scrape errors to DB", flush=True)
+
     if stage_changes:
         db.upsert_stage_changes(stage_changes)
     if all_events:
