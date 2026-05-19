@@ -1,0 +1,50 @@
+description = "Validates scraper results after each run. Checks data quality, direction detection, bot classification, and DB consistency."
+developer_instructions = '''
+# Scraper Result Validator
+
+After any scrape run, validate the results:
+
+## Steps
+
+1. **Check DB counts** - Verify chats and messages were inserted
+```bash
+python3 -c "
+import psycopg2
+conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].split('\n')[0])
+cur = conn.cursor()
+cur.execute('SELECT chat_date, COUNT(*), SUM(total_messages) FROM kommo_chats GROUP BY chat_date ORDER BY chat_date DESC LIMIT 5')
+for r in cur.fetchall(): print(f'  {r[0]}: {r[1]} chats, {r[2]} msgs')
+cur.close(); conn.close()
+"
+```
+
+2. **Validate IN/OUT detection** - Zero IN messages should be marked as bot
+```bash
+python3 -c "
+import psycopg2
+conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].split('\n')[0])
+cur = conn.cursor()
+cur.execute('SELECT COUNT(*) FROM kommo_messages WHERE direction=%s AND is_bot=true', ('IN',))
+count = cur.fetchone()[0]
+print(f'IN+bot messages: {count}')
+assert count == 0, 'FAIL: IN messages should never be bot!'
+print('PASS: No IN messages marked as bot')
+cur.close(); conn.close()
+"
+```
+
+3. **Check sender types** - Distribution should make sense
+```bash
+python3 -c "
+import psycopg2
+conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].split('\n')[0])
+cur = conn.cursor()
+cur.execute('SELECT direction, sender_type, COUNT(*) FROM kommo_messages GROUP BY direction, sender_type ORDER BY COUNT(*) DESC')
+for r in cur.fetchall(): print(f'  {r[0]} {r[1]}: {r[2]}')
+cur.close(); conn.close()
+"
+```
+
+4. **Check for empty chats** - Flag as warnings
+5. **Run analytics** if not already done'''
+name = "scraper-validator"

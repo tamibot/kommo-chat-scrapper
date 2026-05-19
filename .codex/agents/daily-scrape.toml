@@ -1,0 +1,99 @@
+description = "Runs the daily scrape with pre-flight checks and post-flight validation. Use for daily automated scraping."
+developer_instructions = '''
+# Daily Scrape Agent
+
+Runs the complete daily scrape pipeline with validation.
+
+## Pre-flight Checks
+
+1. **Verify login works**
+```bash
+python3 -c "
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+import time
+options = Options()
+options.add_argument('--user-data-dir=/tmp/kommo_scraper_session')
+options.add_argument('--profile-directory=Scraper')
+options.add_argument('--headless=new')
+options.add_argument('--no-sandbox')
+options.add_experimental_option('excludeSwitches', ['enable-automation'])
+d = webdriver.Chrome(options=options)
+d.get(open('.env').read().split('KOMMO_BASE_URL=')[1].split('\n')[0])
+time.sleep(4)
+ok = 'Authorization' not in d.title and 'Autorización' not in d.title
+if not ok:
+    # Try login
+    env = {}
+    for line in open('.env'):
+        if '=' in line and not line.startswith('#'):
+            k,v = line.strip().split('=',1)
+            env[k] = v
+    d.find_element(By.CSS_SELECTOR,'input[type=\"text\"]').send_keys(env['KOMMO_LOGIN_EMAIL'])
+    d.find_element(By.CSS_SELECTOR,'input[type=\"password\"]').send_keys(env['KOMMO_LOGIN_PASSWORD'])
+    d.find_element(By.CSS_SELECTOR,'button[type=\"submit\"]').click()
+    time.sleep(6)
+    ok = 'Authorization' not in d.title
+print('Login:', 'OK' if ok else 'FAILED')
+d.quit()
+"
+```
+
+2. **Check DB connectivity**
+```bash
+python3 -c "
+import psycopg2
+conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].split('\n')[0])
+print('DB: OK')
+conn.close()
+"
+```
+
+## Execute Scrape
+
+```bash
+python scripts/scrape_v3.py --date yesterday
+```
+
+## Post-flight Validation
+
+1. Verify new data was inserted
+2. Run analytics pipeline
+3. Check 0 IN+bot messages
+4. Verify web dashboard updated
+
+```bash
+python3 -c "
+import psycopg2, sys
+sys.path.insert(0, '.')
+from src.kommo.analytics import run_all_analytics
+import logging
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+conn = psycopg2.connect(open('.env').read().split('DATABASE_URL=')[1].split('\n')[0])
+run_all_analytics(conn)
+
+cur = conn.cursor()
+cur.execute('SELECT chat_date, COUNT(*), SUM(total_messages) FROM kommo_chats GROUP BY chat_date ORDER BY chat_date DESC LIMIT 3')
+print('Latest data:')
+for r in cur.fetchall(): print(f'  {r[0]}: {r[1]} chats, {r[2]} msgs')
+
+# Validate
+cur.execute('SELECT COUNT(*) FROM kommo_messages WHERE direction=%s AND is_bot=true', ('IN',))
+in_bot = cur.fetchone()[0]
+print(f'IN+bot: {in_bot} {\"PASS\" if in_bot == 0 else \"FAIL\"} ')
+
+cur.close()
+conn.close()
+"
+```
+
+## Error Recovery
+
+If scrape fails:
+1. Check if reCAPTCHA: `rm -rf /tmp/kommo_scraper_session` and retry
+2. Check if Chrome hung: `pkill -f chromedriver && pkill -f kommo_scraper`
+3. Check API rate limit: wait 60 seconds and retry
+4. If persistent: run `python scripts/health_check.py` for full diagnosis'''
+name = "daily-scrape"
